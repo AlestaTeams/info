@@ -39,20 +39,14 @@
     .grid-auto{display:grid; gap:24px; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));}
     .section-title{font-weight:800; margin-bottom:18px;}
     .section-sub{color:var(--text-1); margin-bottom:32px;}
-    /* Team */
     .avatar{width:84px; height:84px; border-radius:50%; object-fit:cover; border:2px solid rgba(255,255,255,0.25);}
     .role{color:var(--accent); font-weight:600;}
-    /* Sponsors */
     .logo-tile{display:flex; align-items:center; justify-content:center; min-height:120px; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.18); border-radius:14px;}
     .logo-tile img{max-height:64px; opacity:0.9;}
-    /* Footer */
     footer{border-top:1px solid rgba(255,255,255,0.12); padding:24px 0; color:var(--text-1);}
-    /* Subtle animations */
     [data-raise]{transition:transform .25s ease, box-shadow .25s ease;}
     [data-raise]:hover{transform:translateY(-4px);}
-    /* Code-ish accent bar */
     .accent-bar{height:2px; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:var(--shadow-neon);}
-    /* Smooth scroll */
     html{scroll-behavior:smooth;}
   </style>
 </head>
@@ -95,68 +89,80 @@
     <div class="container">
       <h2 class="section-title">Hakkımızda</h2>
       <p class="section-sub">Alesta Takımı, 2019 yılında Adana Fen Lisesi’nde kurulan bir teknoloji ve mühendislik takımıdır. Takımımız, lise öğrencilerini bir araya getirerek insansız su altı araçları (AUV) alanında proje geliştirmeye ve yarışmalara katılmaya odaklanmaktadır.</p>
-      <p class="section-sub">Amacımız, gençlerin mühendislik, robotik ve yazılım konularında bilgi ve becerilerini geliştirmelerini sağlamak, aynı zamanda disiplinlerarası bir ekip çalışması ortamı sunmaktır. Takım üyelerimiz, tasarım, üretim ve test süreçlerinde aktif rol alarak, hem teorik bilgilerini pratiğe dönüştürür hem de proje yönetimi ve takım çalışması deneyimi kazanırlar.</p>
-      <p class="section-sub">Alesta Takımı, ulusal ve uluslararası yarışmalarda Türkiye’yi temsil ederek, öğrencilerimizin yeteneklerini ve takım ruhunu geliştirmeyi hedeflemektedir. Sosyal medya ve web platformlarımız aracılığıyla projelerimizi paylaşarak gençlerin STEM alanına ilgisini artırmayı da önemsiyoruz.</p>
-      <div class="grid-auto">
-        <div class="card-glass p-4" data-raise>
-          <h5 class="fw-bold">Vizyon</h5>
-          <p>Su altı teknolojileri ve AUV sistemleri alanında sürdürülebilir bir başarı kültürü oluşturmak.</p>
-          <p>Lise öğrencilerini yenilikçi projeler geliştirmeye teşvik ederek, geleceğin mühendislerini yetiştirmek.</p>
-          <p>Takımın bilgi ve deneyim birikimini paylaşarak STEM kültürünün yayılmasına katkı sağlamak.</p>
-          <span class="badge badge-tech px-3 py-2">ROV - AUV</span>
-        </div>
-        <div class="card-glass p-4" data-raise>
-          <h5 class="fw-bold">Misyon</h5>
-          <p>İhtiyaca göre ölçeklenen, güvenilir ve hızlı sistemler tasarlamak.</p>
-          <p>Öğrencilerimize mühendislik, yazılım ve robotik alanlarında gerçek dünya deneyimi kazandırmak.</p>
-          <p>Yarışmalara katılarak, projelerin uygulanabilirliğini test etmek ve sürekli geliştirmek.</p>
-          <p>İş birliğine dayalı bir çalışma ortamı sağlayarak, takım üyelerinin liderlik, sorumluluk ve iletişim becerilerini desteklemek.</p>
-          <p>Projelerimizi ve başarılarımızı paylaşarak, diğer öğrenciler için ilham kaynağı olmak.</p>
-          <span class="badge badge-tech px-3 py-2">Araştırma - Gelişirme</span>
-        </div>
-        <div class="card-glass p-4" data-raise>
-          <h5 class="fw-bold">Departmanlar</h5>
-          <p>Yazılım</p>
-          <p>Elektronik</p>
-          <p>Mekanik</p>
-          <p>PR & Social Media</p>
-          <span class="badge badge-tech px-3 py-2">Ekip Çalışması</span>
-        </div>
-      </div>
+      <p class="section-sub">Amacımız, gençlerin mühendislik, robotik ve yazılım konularında bilgi ve becerilerini geliştirmelerini sağlamak, aynı zamanda disiplinlerarası bir ekip çalışması ortamı sunmaktır.</p>
+      <p class="section-sub">Alesta Takımı, ulusal ve uluslararası yarışmalarda Türkiye’yi temsil ederek, öğrencilerimizin yeteneklerini ve takım ruhunu geliştirmeyi hedeflemektedir.</p>
     </div>
   </section>
 
-  <!-- Ödüllerimiz -->
+    <!-- Ödüllerimiz -->
   <section id="awards" class="section">
     <div class="container">
       <h2 class="section-title">Ödüllerimiz</h2>
-      <p class="section-sub">Seçili başarılarımız ve derecelerimiz.</p>
+      <p class="section-sub">Ulusal ve uluslararası yarışmalarda elde ettiğimiz dereceler.</p>
       <div class="grid-auto">
-        <!-- Ödül Kartı -->
+
+        <!-- 2025 -->
         <div class="card-glass p-4" data-raise>
-          <div class="d-flex align-items-center justify-content-between">
-            <h5 class="fw-bold">Yılın Yenilikçi Takımı</h5>
-            <i class="fa-solid fa-trophy text-warning fs-4"></i>
-          </div>
-          <p class="mb-1">Ulusal Teknoloji Fuarı — 2025</p>
-          <small class="text-secondary">Kategori: Ürün Tasarımı</small>
+          <h5 class="fw-bold">2025</h5>
+          <ul class="mb-0">
+            <li>Singapore AUV Challenge - Finalist (Tek Türk ve Lise Takımı)</li>
+            <li>1 Idea 1 World - Altın Madalya</li>
+            <li>TEKNOFEST İnsansız Su Altı Sistemleri İleri Kategori - Finalist (Tek Lise Takımı)</li>
+            <li>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori - Finalist</li>
+          </ul>
         </div>
+
+        <!-- 2024 -->
         <div class="card-glass p-4" data-raise>
-          <div class="d-flex align-items-center justify-content-between">
-            <h5 class="fw-bold">Hızlı Prototip Ödülü</h5>
-            <i class="fa-solid fa-bolt fs-4" style="color:#ff3864"></i>
-          </div>
-          <p class="mb-1">DevFest — 2024</p>
-          <small class="text-secondary">Kategori: Yazılım</small>
+          <h5 class="fw-bold">2024</h5>
+          <ul class="mb-0">
+            <li>Singapore AUV Challenge - World 4 & Fastest AUV (Tek Türk ve Lise Takımı) & "Breaking The Surface" konferansına davet</li>
+            <li>TEKNOFEST İnsansız Su Altı Sistemleri İleri Kategori - 5. (Tek Lise Takımı)</li>
+            <li>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori - 4. & En İyi Takım Ruhu Ödülü</li>
+          </ul>
         </div>
+
+        <!-- 2023 -->
         <div class="card-glass p-4" data-raise>
-          <div class="d-flex align-items-center justify-content-between">
-            <h5 class="fw-bold">UX Mükemmellik</h5>
-            <i class="fa-solid fa-star text-info fs-4"></i>
-          </div>
-          <p class="mb-1">Design Sprint — 2023</p>
-          <small class="text-secondary">Kategori: Deneyim Tasarımı</small>
+          <h5 class="fw-bold">2023</h5>
+          <ul class="mb-0">
+            <li>Steam Azerbaijan Festival Deep Dive World 1</li>
+            <li>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori - 2. & En Özgün Yazılım Ödülü</li>
+          </ul>
         </div>
+
+        <!-- 2022 -->
+        <div class="card-glass p-4" data-raise>
+          <h5 class="fw-bold">2022</h5>
+          <ul class="mb-0">
+            <li>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori - 2.</li>
+          </ul>
+        </div>
+
+        <!-- 2021 -->
+        <div class="card-glass p-4" data-raise>
+          <h5 class="fw-bold">2021</h5>
+          <ul class="mb-0">
+            <li>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori Finalist</li>
+          </ul>
+        </div>
+
+        <!-- 2020 -->
+        <div class="card-glass p-4" data-raise>
+          <h5 class="fw-bold">2020</h5>
+          <ul class="mb-0">
+            <li>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori Finalist</li>
+          </ul>
+        </div>
+
+        <!-- 2019 -->
+        <div class="card-glass p-4" data-raise>
+          <h5 class="fw-bold">2019</h5>
+          <ul class="mb-0">
+            <li>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori Finalist</li>
+          </ul>
+        </div>
+
       </div>
     </div>
   </section>
@@ -203,7 +209,6 @@
             </div>
           </div>
         </div>
-        <!-- Gerektikçe daha fazla araç ekleyin -->
       </div>
     </div>
   </section>
@@ -214,38 +219,77 @@
       <h2 class="section-title">Kadromuz</h2>
       <p class="section-sub">Çekirdek ekip ve sorumluluklar.</p>
       <div class="grid-auto">
-        <!-- Üye Kartı -->
+
+        <!-- Team Captain -->
         <div class="card-glass p-4" data-raise>
           <div class="d-flex align-items-center gap-3">
-            <img class="avatar" src="assets/team/mehmet.jpg" alt="Üye" />
+            <img class="avatar" src="mulac.jpg" alt="Mehmet Ulaç Girgin" />
             <div>
-              <h6 class="fw-bold mb-1">Mehmet</h6>
-              <div class="role">Teknik Lider</div>
-              <small class="text-secondary">Backend/Frontend, sistem tasarımı</small>
+              <h6 class="fw-bold mb-1">Mehmet Ulaç Girgin</h6>
+              <div class="role">Team Captain</div>
             </div>
           </div>
         </div>
+
+        <!-- Head of Software -->
         <div class="card-glass p-4" data-raise>
           <div class="d-flex align-items-center gap-3">
-            <img class="avatar" src="assets/team/uye2.jpg" alt="Üye" />
+            <img class="avatar" src="mustafa.jpg" alt="Mustafa Kahramanoğulları" />
             <div>
-              <h6 class="fw-bold mb-1">Üye Adı</h6>
-              <div class="role">Görüntü İşleme</div>
-              <small class="text-secondary">OpenCV, veri boru hattı</small>
+              <h6 class="fw-bold mb-1">Mustafa Kahramanoğulları</h6>
+              <div class="role">Head of Software</div>
             </div>
           </div>
         </div>
+
+        <!-- Head of Electronic -->
         <div class="card-glass p-4" data-raise>
           <div class="d-flex align-items-center gap-3">
-            <img class="avatar" src="assets/team/uye3.jpg" alt="Üye" />
+            <img class="avatar" src="kagan.jpg" alt="Kağan Kaya" />
             <div>
-              <h6 class="fw-bold mb-1">Üye Adı</h6>
-              <div class="role">UI/UX Tasarım</div>
-              <small class="text-secondary">Arayüz, prototipleme</small>
+              <h6 class="fw-bold mb-1">Kağan Kaya</h6>
+              <div class="role">Head of Electronic</div>
             </div>
           </div>
         </div>
-        <!-- Ekip genişledikçe ekleyin -->
+
+        <!-- Head of Mecanic & PR -->
+        <div class="card-glass p-4" data-raise>
+          <div class="d-flex align-items-center gap-3">
+            <img class="avatar" src="buglem.jpg" alt="Buğlem Nisan Ekinci" />
+            <div>
+              <h6 class="fw-bold mb-1">Buğlem Nisan Ekinci</h6>
+              <div class="role">Head of Mecanic & PR</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Members -->
+        <div class="card-glass p-4" data-raise>
+          <h6 class="fw-bold mb-1">Emre Alperen</h6>
+          <div class="role">Member of Software</div>
+        </div>
+
+        <div class="card-glass p-4" data-raise>
+          <h6 class="fw-bold mb-1">Ulaş Doruk Seyfettinoğlu</h6>
+          <div class="role">Member of Software</div>
+        </div>
+
+        <div class="card-glass p-4" data-raise>
+          <h6 class="fw-bold mb-1">Yiğit Köylü</h6>
+          <div class="role">Member of Electronic</div>
+        </div>
+
+        <div class="card-glass p-4" data-raise>
+          <h6 class="fw-bold mb-1">Derin Nergiz</h6>
+          <div class="role">Member of Mecanic</div>
+        </div>
+
+        <div class="card-glass p-4" data-raise>
+          <h6 class="fw-bold mb-1">Beyzanur Dizman</h6>
+          <div class="role">Member of PR</div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -257,15 +301,15 @@
       <p class="section-sub">Bizi destekleyen kurumlar.</p>
       <div class="grid-auto">
         <div class="logo-tile" data-raise>
-          <img src="assets/sponsors/sponsor1.png" alt="Sponsor 1">
+          <img src="sponsor1.png" alt="Sponsor 1">
         </div>
         <div class="logo-tile" data-raise>
-          <img src="assets/sponsors/sponsor2.png" alt="Sponsor 2">
+          <img src="sponsor2.png" alt="Sponsor 2">
         </div>
         <div class="logo-tile" data-raise>
-          <img src="assets/sponsors/sponsor3.png" alt="Sponsor 3">
+          <img src="sponsor3.png" alt="Sponsor 3">
         </div>
-        <!-- Daha fazla sponsor -->
+        <!-- Daha fazla sponsor eklenebilir -->
       </div>
     </div>
   </section>
@@ -311,6 +355,7 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <div class="container d-flex justify-content-between align-items-center">
       <small>© 2025 ALESTA TEAMS</small>
