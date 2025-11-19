@@ -18,12 +18,12 @@
       --card-border:rgba(255,255,255,0.15);
       --text-0:#e6e6e6;
       --text-1:#93a4b0;
-      --accent:#00d1ff;
+      --accent:#007bff; /* tek mavi tonu */
       --accent-2:#ff3864;
-      --shadow-neon:0 0 24px rgba(0,209,255,0.25);
+      --shadow-neon:0 0 24px rgba(0,123,255,0.25);
     }
     html,body{background:radial-gradient(1200px 800px at 10% 10%, #0d141b 0%, var(--bg-0) 35%), linear-gradient(180deg, var(--bg-0), var(--bg-1)); color:var(--text-0); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
-    .brand-glow{color:var(--accent); text-shadow:0 0 12px rgba(0,209,255,0.6);}
+    .brand-glow{color:var(--accent); text-shadow:0 0 12px rgba(0,123,255,0.6);}
     .navbar{backdrop-filter:saturate(140%) blur(8px); background-color:rgba(10,14,18,0.6);}
     .nav-link{font-weight:600;}
     .nav-link.active{color:var(--accent) !important;}
@@ -31,11 +31,11 @@
     .hero{min-height:72vh; display:grid; place-items:center; text-align:center; position:relative; overflow:hidden;}
     .hero h1{font-weight:800; letter-spacing:0.5px;}
     .hero p{color:var(--text-1);}
-    .btn-neon{border:1px solid var(--accent); color:var(--text-0); box-shadow:var(--shadow-neon); transition:transform .2s ease, box-shadow .2s ease; background:linear-gradient(180deg, rgba(0,209,255,0.08), rgba(0,209,255,0.02));}
-    .btn-neon:hover{transform:translateY(-2px); box-shadow:0 0 32px rgba(0,209,255,0.45);}
+    .btn-neon{border:1px solid var(--accent); color:var(--text-0); box-shadow:var(--shadow-neon); transition:transform .2s ease, box-shadow .2s ease; background:linear-gradient(180deg, rgba(0,123,255,0.08), rgba(0,123,255,0.02));}
+    .btn-neon:hover{transform:translateY(-2px); box-shadow:0 0 32px rgba(0,123,255,0.45); background-color:#0056b3; border-color:#0056b3;}
     .card-glass{background:var(--card-glass); border:1px solid var(--card-border); backdrop-filter:blur(10px); border-radius:16px;}
     .card-glass:hover{border-color:rgba(255,255,255,0.28);}
-    .badge-tech{background:rgba(0,209,255,0.15); color:var(--accent); border:1px solid rgba(0,209,255,0.35);}
+    .badge-tech{background:rgba(0,123,255,0.15); color:var(--accent); border:1px solid rgba(0,123,255,0.35);}
     .grid-auto{display:grid; gap:24px; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));}
     .section-title{font-weight:800; margin-bottom:18px;}
     .section-sub{color:var(--text-1); margin-bottom:32px;}
@@ -51,15 +51,18 @@
   </style>
 </head>
 <body>
-  
+  <!-- Buradan sonrası senin verdiğin HTML yapısı aynı kalıyor -->
+  <!-- Navbar, Hero, About, Awards, Tools, Team, Sponsors, Contact, Footer -->
+</body>
+</html>
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg fixed-top" style="padding-top:16px; padding-bottom:16px;">
   <div class="container-fluid">
-    
     <!-- Logo + Yazı -->
     <a class="navbar-brand fw-bold d-flex align-items-center" href="#hero" style="margin-left:24px;">
-      <img src="alesta.png" alt="Alesta Logo" width="32" height="28" style="margin-right:8px;">
-      <span class="brand-glow">ALESTA TEAMS</span>
+      <img src="alesta.png" alt="Alesta Logo" width="28" height="28" style="margin-right:8px;">
+      <span style="color:#007bff;">ALESTA TEAMS</span>
     </a>
 
     <!-- Menü -->
@@ -67,19 +70,19 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div id="nav" class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto" style="margin-right:32px;"> <!-- menüleri sağdan biraz içeri al -->
+      <ul class="navbar-nav ms-auto" style="margin-right:32px;">
         <li class="nav-item"><a class="nav-link" href="#about">Hakkımızda</a></li>
-        <li class="nav-item"><a class="nav-link" href="#awards">Başarılarımız</a></li>
+        <li class="nav-item"><a class="nav-link" href="#awards">Ödüllerimiz</a></li>
         <li class="nav-item"><a class="nav-link" href="#tools">Araçlarımız</a></li>
         <li class="nav-item"><a class="nav-link" href="#team">Kadromuz</a></li>
         <li class="nav-item"><a class="nav-link" href="#sponsors">Sponsorlarımız</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">İletişim</a></li>
       </ul>
     </div>
-
   </div>
   <div class="accent-bar"></div>
 </nav>
+
 
 
 <!-- Hero -->
