@@ -51,15 +51,22 @@
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#hero"><span class="brand-glow">ALESTA</span> TEAMS</a>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+
+    <!-- Sol taraf: Küçük logo + yazı + menü -->
+    <div class="d-flex align-items-center">
+      <!-- Küçük logo + yazı -->
+      <a class="navbar-brand fw-bold d-flex align-items-center me-3" href="#hero">
+        <img src="assets/logo/alesta-small.png" alt="Alesta Logo" style="height:32px; margin-right:8px;">
+        <span class="brand-glow">ALESTA TEAMS</span>
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Menüyü Aç">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div id="nav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-2"> <!-- yazıları hafif sola kaydırmak için -->
           <li class="nav-item"><a class="nav-link" href="#about">Hakkımızda</a></li>
           <li class="nav-item"><a class="nav-link" href="#awards">Ödüllerimiz</a></li>
           <li class="nav-item"><a class="nav-link" href="#tools">Araçlarımız</a></li>
@@ -69,16 +76,22 @@
         </ul>
       </div>
     </div>
-    <div class="accent-bar"></div>
-  </nav>
+
+    <!-- Sağ taraf: Büyük logo -->
+    <div class="navbar-logo">
+      <img src="assets/logo/alesta-big.png" alt="Alesta Logo" class="alesta-logo">
+    </div>
+  </div>
+  <div class="accent-bar"></div>
+</nav>
 
   <!-- Hero -->
   <header id="hero" class="hero section">
     <div class="container">
-      <h1 class="display-4">Teknolojiyi <span class="brand-glow">Hızlandıran</span> Takım</h1>
-      <p class="lead mt-2">ALESTA TEAMS — modern mühendislik, hızlı iterasyon ve net sonuçlar. Koyu temada, ileri düzey tasarım.</p>
+      <h1 class="display-4">Ready <span class="brand-glow">and</span> Alert</h1>
+      <p class="lead mt-2">ALESTA TEAMS - Hazır ve Tetikte</p>
       <div class="mt-3 d-flex gap-3 justify-content-center">
-        <a href="#about" class="btn btn-neon btn-lg"><i class="fa-solid fa-rocket me-2"></i> Keşfet</a>
+        <a href="#about" class="btn btn-neon btn-lg"><i class="fa-solid fa-rocket me-2"></i> Biz Kimiz?</a>
         <a href="#contact" class="btn btn-outline-light btn-lg"><i class="fa-regular fa-envelope me-2"></i> İletişime Geç</a>
       </div>
     </div>
