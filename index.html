@@ -56,9 +56,8 @@
 <nav class="navbar navbar-expand-lg fixed-top">
   <div class="container-fluid">
     <!-- Logo + Yazı -->
-    <a class="navbar-brand fw-bold d-flex align-items-center" href="#hero">
-      <!-- Küçük logo -->
-      <img src="alesta.png" alt="Alesta Logo" width="32" height="28" style="margin-right:8px;">
+    <a class="navbar-brand fw-bold d-flex align-items-center ms-2" href="#hero">
+      <img src="alesta.png" alt="Alesta Logo" width="28" height="28" style="margin-right:8px;">
       <span class="brand-glow">ALESTA TEAMS</span>
     </a>
 
@@ -67,7 +66,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div id="nav" class="collapse navbar-collapse justify-content-end">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav me-2"> <!-- menüleri bir tık sola almak için me-2 -->
         <li class="nav-item"><a class="nav-link" href="#about">Hakkımızda</a></li>
         <li class="nav-item"><a class="nav-link" href="#awards">Ödüllerimiz</a></li>
         <li class="nav-item"><a class="nav-link" href="#tools">Araçlarımız</a></li>
@@ -80,11 +79,12 @@
   <div class="accent-bar"></div>
 </nav>
 
+
 <!-- Hero -->
 <header id="hero" class="hero section text-center d-flex align-items-center justify-content-center">
   <div class="container">
     <!-- Logo -->
-    <img src="assets/logo/alesta.png" alt="Alesta Logo" width="240" style="max-width:100%; margin-bottom:20px;">
+    <img src="alesta.png" alt="Alesta Logo" width="240" style="max-width:100%; margin-bottom:20px;">
 
     <!-- Yazılar -->
     <h1 class="display-4">Ready <span class="brand-glow">and</span> Alert</h1>
@@ -118,9 +118,9 @@
   <div class="container">
     <h2 class="section-title">Ödüllerimiz</h2>
     <p class="section-sub">Ulusal ve uluslararası yarışmalarda elde ettiğimiz dereceler.</p>
-    <div class="grid-auto">
 
-      <!-- 2025 -->
+    <!-- 2025 -->
+    <div class="d-flex flex-wrap justify-content-center gap-4 mb-4">
       <div class="card-glass p-4" data-raise>
         <h5 class="fw-bold">2025</h5>
         <p>Singapore AUV Challenge - Finalist (Tek Türk ve Lise Takımı)</p>
@@ -137,8 +137,14 @@
         <h5 class="fw-bold">2025</h5>
         <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori - Finalist</p>
       </div>
+      <div class="card-glass p-4" data-raise>
+        <h5 class="fw-bold">2025</h5>
+        <p>Steam Azerbaijan Festival Deep Dive - World 2 (in 2 Stages) - Best Engineering Solution Award</p>
+      </div>
+    </div>
 
-      <!-- 2024 -->
+    <!-- 2024 -->
+    <div class="d-flex flex-wrap justify-content-center gap-4 mb-4">
       <div class="card-glass p-4" data-raise>
         <h5 class="fw-bold">2024</h5>
         <p>Singapore AUV Challenge - World 4 & Fastest AUV (Tek Türk ve Lise Takımı) & "Breaking The Surface" konferansına davet</p>
@@ -151,8 +157,10 @@
         <h5 class="fw-bold">2024</h5>
         <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori - 4. & En İyi Takım Ruhu Ödülü</p>
       </div>
+    </div>
 
-      <!-- 2023 -->
+    <!-- 2023 -->
+    <div class="d-flex flex-wrap justify-content-center gap-4 mb-4">
       <div class="card-glass p-4" data-raise>
         <h5 class="fw-bold">2023</h5>
         <p>Steam Azerbaijan Festival Deep Dive World 1</p>
@@ -161,35 +169,38 @@
         <h5 class="fw-bold">2023</h5>
         <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori - 2. & En Özgün Yazılım Ödülü</p>
       </div>
+    </div>
 
-      <!-- 2022 -->
+    <!-- 2022 -->
+    <div class="d-flex flex-wrap justify-content-center gap-4 mb-4">
       <div class="card-glass p-4" data-raise>
         <h5 class="fw-bold">2022</h5>
         <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori - 2.</p>
       </div>
+    </div>
 
-      <!-- 2021 -->
+    <!-- 2021 -->
+    <div class="d-flex flex-wrap justify-content-center gap-4 mb-4">
       <div class="card-glass p-4" data-raise>
         <h5 class="fw-bold">2021</h5>
         <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori Finalist</p>
       </div>
+    </div>
 
-      <!-- 2020 -->
+    <!-- 2020 & 2019 -->
+    <div class="d-flex flex-wrap justify-content-center gap-4 mb-4">
       <div class="card-glass p-4" data-raise>
         <h5 class="fw-bold">2020</h5>
         <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori Finalist</p>
       </div>
-
-      <!-- 2019 -->
       <div class="card-glass p-4" data-raise>
         <h5 class="fw-bold">2019</h5>
         <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori Finalist</p>
       </div>
-
     </div>
+
   </div>
 </section>
-
 
   <!-- Araçlarımız -->
   <section id="tools" class="section">
@@ -241,7 +252,6 @@
 <section id="team" class="section">
   <div class="container text-center">
     <h2 class="section-title">Kadromuz</h2>
-    <p class="section-sub">Çekirdek ekip ve sorumluluklar.</p>
 
     <!-- 1. Satır: Captain + Advisor -->
     <div class="d-flex justify-content-center gap-4 mb-4 flex-wrap">
@@ -350,7 +360,7 @@
             <ul class="list-unstyled mb-3">
               <li class="mb-2"><i class="fa-brands fa-github me-2"></i> github.com/alesta-teams</li>
               <li class="mb-2"><i class="fa-brands fa-linkedin me-2"></i> linkedin.com/company/alesta</li>
-              <li class="mb-2"><i class="fa-solid fa-instagram me-2"></i> @alesta_teams</li>
+              <li class="mb-2"><i class="fa-solid fa-insta me-2"></i> @alesta_teams</li>
             </ul>
             <h6 class="fw-bold">Adres</h6>
             <p class="mb-0 text-secondary">Adana, Türkiye</p>
