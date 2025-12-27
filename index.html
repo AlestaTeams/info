@@ -411,24 +411,55 @@
 
 <!-- Sponsorlarımız -->
 <section id="sponsors" class="section">
-  <div class="container">
-    <h2 class="section-title">Sponsorlarımız</h2>
-    <p class="section-sub">Bizi destekleyen kurumlar.</p>
-    <div class="grid-auto">
-      <div class="logo-tile" data-raise>
-        <img src="sponsor1.png" alt="Sponsor 1">
+  <div class="container text-center">
+
+    <!-- Ana Sponsorlar -->
+    <h2 class="section-title">Ana Sponsorlarımız</h2>
+
+    <div class="d-flex justify-content-center gap-5 mb-5 flex-wrap">
+
+      <!-- Ana Sponsor 1 -->
+      <div class="logo-tile d-flex align-items-center justify-content-center"
+           style="width:300px; height:100px;">
+        <img src="dizmanlar.png"
+             alt="Ana Sponsor 1"
+             style="max-width:100%; max-height:100%; object-fit:contain;">
       </div>
-      <div class="logo-tile" data-raise>
-        <img src="sponsor2.png" alt="Sponsor 2">
+
+      <!-- Ana Sponsor 2 -->
+      <div class="logo-tile d-flex align-items-center justify-content-center"
+           style="width:300px; height:100px;">
+        <img src="isken.png"
+             alt="Ana Sponsor 2"
+             style="max-width:100%; max-height:100%; object-fit:contain;">
       </div>
-      <div class="logo-tile" data-raise>
-        <img src="sponsor3.png" alt="Sponsor 3">
-      </div>
-      <!-- Daha fazla sponsor eklenebilir -->
+
     </div>
+
+    <!-- Diğer Sponsorlar -->
+    <h3 class="section-title fs-4 mb-3">Diğer Sponsorlarımız</h3>
+
+    <!-- Akan Sponsorlar (3 Logo Aynı Anda) -->
+    <div id="sponsorCarousel"
+         class="carousel slide"
+         data-bs-ride="carousel"
+         data-bs-interval="2500">
+
+      <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center align-items-center gap-5">
+            <img src="teknik metal.png" style="height:90px; object-fit:contain;" alt="Sponsor">
+            <img src="bm.png" style="height:90px; object-fit:contain;" alt="Sponsor">
+            <img src="paşa.png" style="height:90px; object-fit:contain;" alt="Sponsor">
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
-
 
 <!-- İletişim -->
 <section id="contact" class="section">
