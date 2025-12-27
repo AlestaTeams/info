@@ -48,6 +48,105 @@
     [data-raise]:hover{transform:translateY(-4px);}
     .accent-bar{height:2px; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:var(--shadow-neon);}
     html{scroll-behavior:smooth;}
+
+
+
+/* Container ortalanmış */
+.awards-list {
+  max-width: 10000px; 
+  margin: 0 auto;
+  padding: 40px 16px;
+}
+
+/* Yıllar kartları */
+.award-year-card {
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: 16px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(0,123,255,0.02), rgba(0,123,255,0.05));
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  position: relative;
+}
+
+.award-year-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px rgba(0,123,255,0.35);
+  background: rgba(0,123,255,0.15);
+}
+
+/* Ödül detayları - timeline çubuğu ve noktası */
+.award-details {
+  position: relative;
+  margin-left: 40px;  /* soldan boşluk, timeline çizgisi için */
+  padding-left: 20px;
+  border-left: 2px solid rgba(0,123,255,0.25);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    max-height 0.55s cubic-bezier(.4,0,.2,1),
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.award-details.open {
+  max-height: 1200px;
+  opacity: 1;
+  transform: translateY(0);
+  filter: drop-shadow(0 0 18px rgba(0,123,255,0.15));
+}
+
+/* Ödül kartları dikdörtgen stilinde (sadece ödüller) */
+.award-details .card-glass {
+  position: relative;
+  background: rgba(0,123,255,0.05);
+  border: 1px solid rgba(0,123,255,0.2);
+  border-radius: 12px; /* dikdörtgen şeklinde */
+  padding: 16px 20px;
+  margin-bottom: 14px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* Timeline noktası / soldan çıkan çubuk */
+.award-details .card-glass::before {
+  content: "";
+  position: absolute;
+  left: -38px;
+  top: 50%;
+  transform: translateY(-50%) scaleX(0);
+  transform-origin: right center;
+  width: 20px;   /* çıkan çubuğun uzunluğu */
+  height: 2px;
+  background: rgba(0,123,255,0.8);
+  border-radius: 1px;
+  box-shadow: 0 0 6px rgba(0,123,255,0.6);
+  transition: transform 0.4s cubic-bezier(.4,0,.2,1), opacity 0.4s ease;
+  opacity: 0;
+}
+
+/* Hover veya touch durumunda timeline çubuğu çıkıyor */
+.award-details .card-glass.hover::before {
+  transform: translateY(-50%) scaleX(1);
+  opacity: 1;
+}
+
+.award-details .card-glass:hover {
+  transform: translateX(6px);
+  border-color: rgba(0,123,255,0.45);
+  box-shadow: 0 0 28px rgba(0,123,255,0.25);
+}
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.arrow.rotate {
+  transform: rotate(180deg);
+}
+
   </style>
 </head>
 <body>
@@ -124,165 +223,130 @@
   </section>
 
 <!-- Ödüllerimiz -->
-<section id="awards" class="section">
-  <div class="container">
-    <h2 class="section-title">Başarılarımız</h2>
-    <p class="section-sub">Ulusal ve uluslararası yarışmalarda elde ettiğimiz dereceler.</p>
+<div class="container">
+<h2 class="section-title">Başarılarımız</h2>
+<div class="awards-list">
 
-    <!-- Satır 1: 2025 -->
-    <div class="d-flex flex-wrap justify-content-center gap-4 mb-4">
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2025 🏆🛠️</h5>
-        <p>Steam Azerbaijan Festival Deep Dive - World 2 (in 2 Stages) - Best Engineering Solution Award</p>
-      </div>
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2025 🏅🌊</h5>
-        <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori - Finalist</p>
-      </div>
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2025 🏅🌊</h5>
-        <p>TEKNOFEST İnsansız Su Altı Sistemleri İleri Kategori - Finalist (Tek Lise Takımı)</p>
-      </div>
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2025 🌍🧠</h5>
-        <p>1 Idea 1 World - Altın Madalya</p>
-      </div>
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2025 🌍🚀</h5>
-        <p>Singapore AUV Challenge - Finalist (Tek Türk ve Lise Takımı)</p>
-      </div>
+  <!-- 2025 -->
+  <div class="card-glass p-3 award-year-card" onclick="toggleAwards('y2025')">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="m-0 fw-bold text-primary">2025 </h5>
+      <i class="fa-solid fa-chevron-down arrow" id="arrow-y2025"></i>
     </div>
-
-    <!-- Satır 2: 2024 -->
-    <div class="d-flex flex-wrap justify-content-center gap-4 mb-4">
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2024 🏅🌊</h5>
-        <p>TEKNOFEST İnsansız Su Altı Sistemleri İleri Kategori - 5. (Tek Lise Takımı)</p>
-      </div>
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2024 🏅🌊</h5>
-        <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori - 4. & En İyi Takım Ruhu Ödülü</p>
-      </div>
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2024 🌍🚀</h5>
-        <p>Singapore AUV Challenge - World 4 & Fastest AUV (Tek Türk ve Lise Takımı) & "Breaking The Surface" konferansına davet</p>
-      </div>
-    </div>
-
-    <!-- Satır 3: 2023 -->
-    <div class="d-flex flex-wrap justify-content-center gap-4 mb-4">
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2023 🏆🛠️</h5>
-        <p>Steam Azerbaijan Festival Deep Dive World 1</p>
-      </div>
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2023 🏅🌊</h5>
-        <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori - 2. & En Özgün Yazılım Ödülü</p>
-      </div>
-    </div>
-
-    <!-- Satır 4: 2022 + 2021 -->
-    <div class="d-flex flex-wrap justify-content-center gap-4 mb-4">
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2022 🏅🌊</h5>
-        <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori - 2.</p>
-      </div>
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2021 🏅🌊</h5>
-        <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori Finalist</p>
-      </div>
-    </div>
-
-    <!-- Satır 5: 2020 + 2019 -->
-    <div class="d-flex flex-wrap justify-content-center gap-4 mb-4">
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2020 🏅🌊</h5>
-        <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori Finalist</p>
-      </div>
-      <div class="card-glass p-4" data-raise style="background:rgba(255,255,255,0.05);">
-        <h5 class="fw-bold">2019 🏅🌊</h5>
-        <p>TEKNOFEST İnsansız Su Altı Sistemleri Temel Kategori Finalist</p>
-      </div>
-    </div>
-
   </div>
-</section>
+
+  <div class="award-details" id="y2025">
+    <div class="card-glass p-3 mb-2">🏆 Steam Azerbaijan Festival Deep Dive – World 2<br><span class="text-secondary">Best Engineering Solution</span></div>
+    <div class="card-glass p-3 mb-2">🏅 TEKNOFEST – Temel Kategori<br><span class="text-secondary">Finalist</span></div>
+    <div class="card-glass p-3 mb-2">🏅 TEKNOFEST – İleri Kategori<br><span class="text-secondary">Finalist (Tek Lise Takımı)</span></div>
+    <div class="card-glass p-3 mb-2">🌍 1 Idea 1 World<br><span class="text-secondary">Altın Madalya</span></div>
+    <div class="card-glass p-3 mb-2">🚀 Singapore AUV Challenge<br><span class="text-secondary">Finalist</span></div>
+  </div>
+
+  <!-- 2024 -->
+  <div class="card-glass p-3 award-year-card" onclick="toggleAwards('y2024')">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="m-0 fw-bold text-primary">2024</h5>
+      <i class="fa-solid fa-chevron-down arrow" id="arrow-y2024"></i>
+    </div>
+  </div>
+
+  <div class="award-details" id="y2024">
+    <div class="card-glass p-3 mb-2">🌊 TEKNOFEST – İleri Kategori<br><span class="text-secondary">5. (Tek Lise Takımı)</span></div>
+  </div>
+
+  <!-- 2023 -->
+  <div class="card-glass p-3 award-year-card" onclick="toggleAwards('y2023')">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="m-0 fw-bold text-primary">2023</h5>
+      <i class="fa-solid fa-chevron-down arrow" id="arrow-y2023"></i>
+    </div>
+  </div>
+
+  <div class="award-details" id="y2023">
+    <div class="card-glass p-3 mb-2">🏆 Steam Azerbaijan Festival Deep Dive<br><span class="text-secondary">World 1</span></div>
+  </div>
+
+  <!-- 2022 -->
+  <div class="card-glass p-3 award-year-card" onclick="toggleAwards('y2022')">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="m-0 fw-bold text-primary">2022</h5>
+      <i class="fa-solid fa-chevron-down arrow" id="arrow-y2022"></i>
+    </div>
+  </div>
+
+  <div class="award-details" id="y2022">
+    <div class="card-glass p-3 mb-2">🌊 TEKNOFEST İSAS<br><span class="text-secondary">2.</span></div>
+  </div>
+
+</div>
 
 
-<!-- Araçlarımız -->
+
+
+
+<!-- ARAÇLAR -->
 <section id="tools" class="section">
   <div class="container">
-    <h2 class="section-title">Araçlarımız</h2>
-    <p class="section-sub">Ürettiğimiz AUV ve ROV sistemleri.</p>
+    <h2 class="fw-bold mb-4">Araçlarımız</h2>
 
-    <!-- Satır 2: ÇÖY -->
-    <div class="d-flex align-items-center gap-4 mb-4 card-glass p-4" data-raise>
-      <img src="2.png" alt="ÇÖY Aracı" style="width:180px; border-radius:12px;">
-      <div>
-        <h5 class="fw-bold">ÇÖY</h5>
-        <p class="mb-1"><strong>Üretim:</strong> 2025 — <strong>Kullanım:</strong> Günümüzde aktif</p>
-        <p class="mb-1">Katıldığı Yarışmalar: 🏅 Teknofest 2025 İleri Kategori, 🏆 STEAM Azerbaijan Festival 2025</p>
-        <p class="text-secondary">⚙️ Alüminyum döküm üretildi, 🌊 200 metreye kadar sızdırmazlık sağlayabiliyor.</p>
-      </div>
+    <!-- ÇÖY -->
+    <div class="card-glass p-4 mb-4 d-flex gap-4 position-relative" style="min-height:220px">
+      <img src="2.png" width="180" style="border-radius:12px">
+      <h5 class="fw-bold">ÇÖY<br><br><p class="text-secondary"><em>Aracımız hakkında detaylara ulaşmak için tıklayınız.</em></p></h5>
+      <a href="aracsiteleri/coy.html" class="btn btn-neon position-absolute bottom-0 end-0 m-4">
+        <i class="fa-solid fa-info me-2"></i> Detaylar
+      </a>
     </div>
 
-    <!-- Satır 3: DERİN -->
-    <div class="d-flex align-items-center gap-4 mb-4 card-glass p-4" data-raise>
-      <img src="3.png" alt="DERİN Aracı" style="width:180px; border-radius:12px;">
-      <div>
-        <h5 class="fw-bold">DERİN</h5>
-        <p class="mb-1"><strong>Üretim:</strong> 2024 — <strong>Kullanım:</strong> 2025’e kadar</p>
-        <p class="mb-1">Katıldığı Yarışmalar: 🏅 Teknofest 2024 İleri Kategori, 🌍 Singapore AUV Challenge, 🌍 1 Idea 1 World, 🏅 Teknofest 2025 Temel Kategori</p>
-        <p class="text-secondary">🔧 Sürekli geliştirilen yapıya sahip, 6-7-8 motor frameleri ile kullanıldı. Gövdesi 2 pleksiglass tüp ve CNC kesimli alüminyum parçadan oluşmaktadır.</p>
-      </div>
+    <!-- DERİN -->
+    <div class="card-glass p-4 mb-4 d-flex gap-4 position-relative" style="min-height:220px">
+      <img src="3.png" width="180" style="border-radius:12px">
+      <h5 class="fw-bold">DERİN<br><br><p class="text-secondary"><em>Aracımız hakkında detaylara ulaşmak için tıklayınız.</em></p></h5>
+      <a href="aracsiteleri/derin.html" class="btn btn-neon position-absolute bottom-0 end-0 m-4">
+        <i class="fa-solid fa-info me-2"></i> Detaylar
+      </a>
     </div>
 
-    <!-- Satır 4: FIRTINA -->
-    <div class="d-flex align-items-center gap-4 mb-4 card-glass p-4" data-raise>
-      <img src="4.png" alt="FIRTINA Aracı" style="width:180px; border-radius:12px;">
-      <div>
-        <h5 class="fw-bold">FIRTINA</h5>
-        <p class="mb-1"><strong>Üretim:</strong> 2023 — <strong>Kullanım:</strong> 2023-2024</p>
-        <p class="mb-1">Katıldığı Yarışmalar: 🏅 Teknofest 2024, 🌍 1 Idea 1 World</p>
-        <p class="text-secondary">⚙️ CNC kesim yöntemi ile üretilmiş dayanıklı gövdeye sahip.</p>
-      </div>
+    <!-- FIRTINA -->
+    <div class="card-glass p-4 mb-4 d-flex gap-4 position-relative" style="min-height:220px">
+      <img src="4.png" width="180" style="border-radius:12px">
+      <h5 class="fw-bold">FIRTINA<br><br><p class="text-secondary"><em>Aracımız hakkında detaylara ulaşmak için tıklayınız.</em></p></h5>
+      <a href="aracsiteleri/firtina.html" class="btn btn-neon position-absolute bottom-0 end-0 m-4">
+        <i class="fa-solid fa-info me-2"></i> Detaylar
+      </a>
     </div>
 
-    <!-- Satır 5: GÜMEÇ -->
-    <div class="d-flex align-items-center gap-4 mb-4 card-glass p-4" data-raise>
-      <img src="5.png" alt="GÜMEÇ Aracı" style="width:180px; border-radius:12px;">
-      <div>
-        <h5 class="fw-bold">GÜMEÇ</h5>
-        <p class="mb-1"><strong>Üretim:</strong> 2022 — <strong>Kullanım:</strong> 2023</p>
-        <p class="mb-1">Katıldığı Yarışmalar: 🏆 Steam Azerbaijan Festival, 🌍 Singapore AUV Challenge, 🏅 Teknofest 2023</p>
-        <p class="text-secondary">🔧 Güçlü gövde yapısı ve modüler tasarım ile üretildi.</p>
-      </div>
+    <!-- GÜMEÇ -->
+    <div class="card-glass p-4 mb-4 d-flex gap-4 position-relative" style="min-height:220px">
+      <img src="5.png" width="180" style="border-radius:12px">
+      <h5 class="fw-bold">GÜMEÇ<br><br><p class="text-secondary"><em>Aracımız hakkında detaylara ulaşmak için tıklayınız.</em></p></h5>
+      <a href="aracsiteleri/gumec.html" class="btn btn-neon position-absolute bottom-0 end-0 m-4">
+        <i class="fa-solid fa-info me-2"></i> Detaylar
+      </a>
     </div>
 
-    <!-- Satır 6: ALESTAROV 2 -->
-    <div class="d-flex align-items-center gap-4 mb-4 card-glass p-4" data-raise>
-      <img src="6.png" alt="ALESTAROV 2 Aracı" style="width:180px; border-radius:12px;">
-      <div>
-        <h5 class="fw-bold">ALESTAROV 2</h5>
-        <p class="mb-1"><strong>Üretim:</strong> 2021 — <strong>Kullanım:</strong> 2022</p>
-        <p class="mb-1">Özellikler: ⚙️ 4 motora sahip, motorlara bağlı sistem sayesinde eksenler değiştirilebiliyor.</p>
-        <p class="text-secondary">🔧 Yenilikçi motor eksen sistemi ile deneysel bir tasarım.</p>
-      </div>
+    <!-- ALESTAROV 2 -->
+    <div class="card-glass p-4 mb-4 d-flex gap-4 position-relative" style="min-height:220px">
+      <img src="6.png" width="180" style="border-radius:12px">
+      <h5 class="fw-bold">ALESTAROV 2<br><br><p class="text-secondary"><em>Aracımız hakkında detaylara ulaşmak için tıklayınız.</em></p></h5>
+      <a href="aracsiteleri/alestarov2.html" class="btn btn-neon position-absolute bottom-0 end-0 m-4">
+        <i class="fa-solid fa-info me-2"></i> Detaylar
+      </a>
     </div>
 
-    <!-- Satır 7: ALESTAROV -->
-    <div class="d-flex align-items-center gap-4 mb-4 card-glass p-4" data-raise>
-      <img src="7.png" alt="ALESTAROV Aracı" style="width:180px; border-radius:12px;">
-      <div>
-        <h5 class="fw-bold">ALESTAROV</h5>
-        <p class="mb-1"><strong>Üretim:</strong> 2020 — <strong>Kullanım:</strong> 2021</p>
-        <p class="mb-1">Takımın ilk araçlarından biri.</p>
-        <p class="text-secondary">⚙️ Basit ve kullanışlı yapısı ile başlangıç aşamasında önemli rol oynadı.</p>
-      </div>
+    <!-- ALESTAROV -->
+    <div class="card-glass p-4 mb-4 d-flex gap-4 position-relative" style="min-height:220px">
+      <img src="7.png" width="180" style="border-radius:12px">
+      <h5 class="fw-bold">ALESTAROV<br><br><p class="text-secondary"><em>Aracımız hakkında detaylara ulaşmak için tıklayınız.</em></p></h5>
+      <a href="aracsiteleri/alestarov.html" class="btn btn-neon position-absolute bottom-0 end-0 m-4">
+        <i class="fa-solid fa-info me-2"></i> Detaylar
+      </a>
     </div>
 
   </div>
 </section>
+
 
 
 <!-- Kadromuz -->
@@ -347,53 +411,21 @@
 
 <!-- Sponsorlarımız -->
 <section id="sponsors" class="section">
-  <div class="container text-center">
-
-    <!-- Ana Sponsorlar -->
-    <h2 class="section-title">Ana Sponsorlarımız</h2>
-
-    <div class="d-flex justify-content-center gap-5 mb-5 flex-wrap">
-
-      <!-- Ana Sponsor 1 -->
-      <div class="logo-tile d-flex align-items-center justify-content-center"
-           style="width:300px; height:180px;">
-        <img src="dizmanlar.png"
-             alt="Ana Sponsor 1"
-             style="max-width:100%; max-height:100%; object-fit:contain;">
+  <div class="container">
+    <h2 class="section-title">Sponsorlarımız</h2>
+    <p class="section-sub">Bizi destekleyen kurumlar.</p>
+    <div class="grid-auto">
+      <div class="logo-tile" data-raise>
+        <img src="sponsor1.png" alt="Sponsor 1">
       </div>
-
-      <!-- Ana Sponsor 2 -->
-      <div class="logo-tile d-flex align-items-center justify-content-center"
-           style="width:300px; height:180px;">
-        <img src="isken.png"
-             alt="Ana Sponsor 2"
-             style="max-width:100%; max-height:100%; object-fit:contain;">
+      <div class="logo-tile" data-raise>
+        <img src="sponsor2.png" alt="Sponsor 2">
       </div>
-
+      <div class="logo-tile" data-raise>
+        <img src="sponsor3.png" alt="Sponsor 3">
+      </div>
+      <!-- Daha fazla sponsor eklenebilir -->
     </div>
-
-    <!-- Diğer Sponsorlar -->
-    <h3 class="section-title fs-4 mb-3">Diğer Sponsorlarımız</h3>
-
-    <!-- Akan Sponsorlar (3 Logo Aynı Anda) -->
-    <div id="sponsorCarousel"
-         class="carousel slide"
-         data-bs-ride="carousel"
-         data-bs-interval="2500">
-
-      <div class="carousel-inner">
-
-        <!-- Slide 1 -->
-        <div class="carousel-item active">
-          <div class="d-flex justify-content-center align-items-center gap-5">
-            <img src="teknik metal.png" style="height:90px; object-fit:contain;" alt="Sponsor">
-            <img src="bm.png" style="height:90px; object-fit:contain;" alt="Sponsor">
-            <img src="paşa.png" style="height:90px; object-fit:contain;" alt="Sponsor">
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -491,6 +523,29 @@
       });
       activateLink(current);
     });
+    function toggleAwards(id) {
+      const details = document.getElementById(id);
+      const arrow = document.getElementById('arrow-' + id);
+
+      const isOpen = details.classList.contains('open');
+
+      if (isOpen) {
+        details.classList.remove('open');
+        arrow.classList.remove('rotate');
+      } else {
+        details.classList.add('open');
+        arrow.classList.add('rotate');
+      }
+    }
+    document.querySelectorAll('.award-details .card-glass').forEach(card => {
+      card.addEventListener('mouseenter', () => card.classList.add('hover'));
+      card.addEventListener('mouseleave', () => card.classList.remove('hover'));
+      card.addEventListener('touchstart', () => {
+        card.classList.toggle('hover');
+      });
+    });
+
+</script>
   </script>
 </body>
 </html>
