@@ -11,7 +11,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x28" href="alesta.png">
-  
   <style>
     :root{
       --bg-0:#0b0f14;
@@ -25,51 +24,166 @@
       --shadow-neon:0 0 24px rgba(0,123,255,0.25);
     }
     html,body{background:radial-gradient(1200px 800px at 10% 10%, #0d141b 0%, var(--bg-0) 35%), linear-gradient(180deg, var(--bg-0), var(--bg-1)); color:var(--text-0); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
-    
-    /* Navbar */
-    .navbar{backdrop-filter:saturate(140%) blur(8px); background-color:rgba(10,14,18,0.85); border-bottom: 1px solid rgba(255,255,255,0.1);}
-    .nav-link{font-weight:600; transition: color 0.3s;}
-    .nav-link:hover, .nav-link.active{color:var(--accent) !important;}
-    
-    /* Genel Yapı */
+    .navbar{backdrop-filter:saturate(140%) blur(8px); background-color:rgba(10,14,18,0.6);}
+    .nav-link{font-weight:600;}
+    .nav-link.active{color:var(--accent) !important;}
     .section{padding:80px 0;}
-    .hero{min-height:85vh; display:grid; place-items:center; text-align:center; position:relative; overflow:hidden;}
+    .hero{min-height:72vh; display:grid; place-items:center; text-align:center; position:relative; overflow:hidden;}
     .hero h1{font-weight:800; letter-spacing:0.5px;}
-    
-    /* Neon Butonlar */
     .btn-neon{border:1px solid var(--accent); color:var(--text-0); box-shadow:var(--shadow-neon); transition:transform .2s ease, box-shadow .2s ease; background:linear-gradient(180deg, rgba(0,123,255,0.08), rgba(0,123,255,0.02));}
-    .btn-neon:hover{transform:translateY(-2px); box-shadow:0 0 32px rgba(0,123,255,0.45); background-color:#0056b3; border-color:#0056b3; color: white;}
-    
-    /* Kartlar */
-    .card-glass{background:var(--card-glass); border:1px solid var(--card-border); backdrop-filter:blur(10px); border-radius:16px; height: 100%; transition: transform 0.3s ease, border-color 0.3s ease;}
-    .card-glass:hover { transform: translateY(-5px); border-color: var(--accent); }
-    
-    .section-title{font-weight:800; margin-bottom:18px; text-transform: uppercase; letter-spacing: 1px;}
-    .section-sub{color:var(--text-1); margin-bottom:32px; line-height: 1.6;}
-    .role{color:var(--accent); font-weight:600; font-size: 0.9rem;}
-    
-    /* Bootstrap Accordion Özelleştirme (JS kullanmamak için) */
-    .accordion-item { background-color: transparent; border: none; margin-bottom: 1rem; }
-    .accordion-button { background-color: rgba(255,255,255,0.05); color: var(--text-0); border-radius: 12px !important; border: 1px solid var(--card-border); box-shadow: none !important; font-weight: bold; }
-    .accordion-button:not(.collapsed) { background-color: rgba(0,123,255,0.15); color: var(--accent); border-color: var(--accent); box-shadow: var(--shadow-neon) !important; }
-    .accordion-button::after { filter: invert(1) grayscale(100%) brightness(200%); }
-    .accordion-body { background-color: rgba(0,0,0,0.2); border-radius: 0 0 12px 12px; border: 1px solid var(--card-border); border-top: none; padding: 20px; }
-
-    footer{border-top:1px solid rgba(255,255,255,0.12); padding:40px 0; color:var(--text-1); background-color: var(--bg-1);}
-    .accent-bar{height:2px; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:var(--shadow-neon); width: 100%; position: absolute; bottom: 0;}
+    .btn-neon:hover{transform:translateY(-2px); box-shadow:0 0 32px rgba(0,123,255,0.45); background-color:#0056b3; border-color:#0056b3;}
+    .card-glass{background:var(--card-glass); border:1px solid var(--card-border); backdrop-filter:blur(10px); border-radius:16px;}
+    .grid-auto{display:grid; gap:24px; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));}
+    .section-title{font-weight:800; margin-bottom:18px;}
+    .section-sub{color:var(--text-1); margin-bottom:32px;}
+    .role{color:var(--accent); font-weight:600;}
+    .logo-tile{display:flex; align-items:center; justify-content:center; min-height:120px; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.18); border-radius:14px;}
+    .logo-tile img{max-height:64px; opacity:0.9;}
+    footer{border-top:1px solid rgba(255,255,255,0.12); padding:24px 0; color:var(--text-1);}
+    [data-raise]{transition:transform .25s ease, box-shadow .25s ease;}
+    [data-raise]:hover{transform:translateY(-4px);}
+    .accent-bar{height:2px; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:var(--shadow-neon);}
     html{scroll-behavior:smooth;}
+
+    /* Awards Styles */
+    .awards-list { max-width: 1000px; margin: 0 auto; padding: 40px 16px; }
+    .award-year-card {
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+      margin-bottom: 16px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, rgba(0,123,255,0.02), rgba(0,123,255,0.05));
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .award-year-card:hover { transform: translateY(-4px); box-shadow: 0 0 20px rgba(0,123,255,0.35); background: rgba(0,123,255,0.15); }
+    .award-details {
+      position: relative;
+      margin-left: 40px;
+      padding-left: 20px;
+      border-left: 2px solid rgba(0,123,255,0.25);
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: max-height 0.55s cubic-bezier(.4,0,.2,1), opacity 0.35s ease, transform 0.35s ease;
+    }
+    .award-details.open { max-height: 2000px; opacity: 1; transform: translateY(0); }
+    
+    .award-item-content { display: flex; align-items: center; gap: 20px; }
+    .award-img-wrapper {
+      width: 120px;
+      height: 80px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.2);
+    }
+    .award-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+    .award-details .card-glass:hover img { transform: scale(1.1); }
+    
+    .award-details .card-glass {
+      position: relative;
+      background: rgba(0,123,255,0.05);
+      border: 1px solid rgba(0,123,255,0.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+      transition: all 0.25s ease;
+    }
+    .arrow { transition: transform 0.3s ease; }
+    .arrow.rotate { transform: rotate(180deg); }
+
+    @media (max-width: 576px) {
+      .award-item-content { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .award-img-wrapper { width: 100%; height: 120px; }
+  
+    }
+    /* Gallery */
+.gallery-item {
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img {
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px rgba(0,123,255,0.35);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+/* Lightbox */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(0,123,255,0.4);
+}
+    /* Frame Style Gallery */
+
+.gallery-frame {
+  padding: 12px;
+  background: #0d1b2a;
+  border-radius: 18px;
+  border: 2px solid rgba(255,193,7,0.4);
+  box-shadow: 0 0 15px rgba(255,193,7,0.15);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery-frame img {
+  border-radius: 12px;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-frame:hover {
+  transform: translateY(-6px);
+  border-color: #ffc107;
+  box-shadow: 0 0 25px rgba(255,193,7,0.4);
+}
+
+.gallery-frame:hover img {
+  transform: scale(1.05);
+}
+
   </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top" style="padding-top:16px; padding-bottom:16px;">
   <div class="container-fluid">
     <a class="navbar-brand fw-bold d-flex align-items-center" href="#hero" style="margin-left:24px;">
       <img src="alesta.png" alt="Alesta Logo" width="32" height="28" style="margin-right:8px;">
       <span style="color:#ffffff;">ALESTA TEAMS</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" style="border-color:rgba(255,255,255,0.5);">
-      <span class="navbar-toggler-icon" style="filter:invert(1);"></span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
     </button>
     <div id="nav" class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto" style="margin-right:32px;">
@@ -85,55 +199,55 @@
   <div class="accent-bar"></div>
 </nav>
 
-<header id="hero" class="hero section">
+<header id="hero" class="hero section text-center d-flex align-items-center justify-content-center">
   <div class="container">
-    <img src="alesta.png" alt="Alesta Logo" width="240" style="max-width:80%; margin-bottom:20px; filter: drop-shadow(0 0 30px rgba(0,123,255,0.3));">
-    <h1 class="display-4 mb-2">
+    <img src="alesta.png" alt="Alesta Logo" width="240" style="max-width:100%; margin-bottom:20px;">
+    <h1 class="display-4">
       <span style="color:#ffffff;">ALESTA TEAMS</span> 
     </h1>
-    <h4 style="color:#007bff; font-family:'JetBrains Mono', monospace;">Ready and Alert</h4> 
-    <div class="mt-5 d-flex gap-3 justify-content-center flex-wrap">
-      <a href="#about" class="btn btn-neon btn-lg px-4"><i class="fa-solid fa-rocket me-2"></i> Biz Kimiz?</a>
-      <a href="#contact" class="btn btn-outline-light btn-lg px-4"><i class="fa-regular fa-envelope me-2"></i> İletişime Geç</a>
+    <span style="color:#007bff;">Ready and Alert</span> 
+    <div class="mt-3 d-flex gap-3 justify-content-center">
+      <a href="#about" class="btn btn-neon btn-lg"><i class="fa-solid fa-rocket me-2"></i> Biz Kimiz?</a>
+      <a href="#contact" class="btn btn-outline-light btn-lg"><i class="fa-regular fa-envelope me-2"></i> İletişime Geç</a>
     </div>
   </div>
 </header>
 
 <section id="about" class="section">
   <div class="container">
-    <h2 class="section-title mb-4">Hakkımızda</h2>
-    <div class="card-glass p-4 mb-4">
-      <p class="section-sub mb-3">
-        ALESTA; 2019 yılından beri su altı teknolojileri alanlarında projeler geliştiren bir öğrenci takımıdır. İlerleyen yıllarda robolig, sanayi dijital teknolojileri gibi alanlarda da takımlar kurulmuş ve takımın gelişmesine katkı sağlanmıştır. Kurulduğumuz günden bu yana her yıl kendini yenileyen, özgün tasarımlar ortaya koyan ve ulusal ile uluslararası yarışmalarda ülkemizi temsil eden sürdürülebilir bir yapı inşa ettik.
-      </p>
-      <p class="section-sub mb-0">
-        Takımımız çalışmalarını mekanik, elektronik, yazılım ve tasarım alanlarında organize bir sistemle yürütür. Kendi araçlarımızı tasarlar, elektronik kartlarımızı kendimiz üretir, yazılım ve yapay zekâ altyapılarımızı yine kendi geliştirdiğimiz sistemler üzerine kurarız.
-      </p>
-    </div>
 
-    <div class="row g-4">
+    <h2 class="section-title mb-3">Hakkımızda</h2>
+
+    <p class="section-sub mb-3">
+      ALESTA; 2019 yılından beri su altı teknolojileri alanlarında projeler geliştiren bir öğrenci takımıdır. İlerleyen yıllarda robolig, sanayi dijital teknolojileri gibi alanlarda da takımlar kurulmuş ve takımın gelişmesine katkı sağlanmıştır. Kurulduğumuz günden bu yana her yıl kendini yenileyen, özgün tasarımlar ortaya koyan ve ulusal ile uluslararası yarışmalarda ülkemizi temsil eden sürdürülebilir bir yapı inşa ettik. Disiplinli çalışma anlayışımız, güçlü takım ruhumuz ve sürekli gelişim hedefimizle yalnızca bugünü değil, geleceği de planlayan bir ekip kültürü oluşturduk. Adana Fen Lisesi ve Seyhan Gençlik Merkezi ortaklığında çalışmalar yaparak yurtdışı ve TEKNOFEST gibi birçok yarışmaya katılarak kendimizi geliştiriyor ve takımımızı büyütüyoruz.
+    
+
+    <p class="section-sub mb-4">
+    Takımımız çalışmalarını mekanik, elektronik, yazılım ve tasarım alanlarında organize bir sistemle yürütür. Kendi araçlarımızı tasarlar, elektronik kartlarımızı kendimiz üretir, yazılım ve yapay zekâ altyapılarımızı yine kendi geliştirdiğimiz sistemler üzerine kurarız. Bu süreç bize sadece teknik kazanımlar değil; problem çözme, birlikte üretme ve proje yönetimi becerileri de kazandırır. Amacımız yarışmalarda derece elde etmenin ötesinde, kalıcı bir üretim kültürü oluşturarak yeni katılan öğrencilerin proje geliştirebildiği, öğrendiklerini aktarabildiği ve sürekli büyüyen bir teknoloji ekosistemi kurmaktır.
+    </p>
+
+    <!-- KUTULAR -->
+    <div class="row g-4 px-2">
+
       <div class="col-md-6">
-        <div class="card-glass p-4 h-100">
-          <div class="d-flex align-items-center mb-3">
-            <i class="fa-solid fa-graduation-cap fa-2x text-primary me-3"></i>
-            <h5 class="fw-bold text-primary m-0">ALESTA Akademi</h5>
-          </div>
+        <div class="border border-primary rounded-4 p-4 h-100">
+          <h5 class="fw-bold text-primary mb-3">ALESTA Akademi</h5>
           <p class="mb-0 text-secondary">
             ALESTA Akademi, takımın sürdürülebilirliğini sağlayan eğitim ve mentörlük sistemidir.
             Takıma katılmak isteyen öğrenciler temel elektronik, yazılım, mekanik tasarım ve 
-            proje yönetimi eğitimleri alır.
+            proje yönetimi eğitimleri alır. Süreci tamamlayan öğrenciler aktif projelerde görev almaya başlar.
           </p>
         </div>
       </div>
+
       <div class="col-md-6">
-        <div class="card-glass p-4 h-100">
-          <div class="d-flex align-items-center mb-3">
-            <i class="fa-solid fa-eye fa-2x text-primary me-3"></i>
-            <h5 class="fw-bold text-primary m-0">Vizyon & Misyon</h5>
-          </div>
+        <div class="border border-primary rounded-4 p-4 h-100">
+          <h5 class="fw-bold text-primary mb-3">Vizyon & Misyon</h5>
           <p class="mb-0 text-secondary">
             Vizyonumuz, sürdürülebilir bir teknoloji kültürü oluşturarak ulusal ve uluslararası 
             arenada ülkemizi temsil eden öncü bir öğrenci takımı olmaktır.
+            Misyonumuz ise gençlere üretim odaklı düşünme becerisi kazandırmak ve 
+            teknoloji geliştirme ekosistemini sürekli canlı tutmaktır.
           </p>
         </div>
       </div>
@@ -141,357 +255,772 @@
   </div>
 </section>
 
+
 <section id="awards" class="section">
   <div class="container">
-    <h2 class="section-title mb-4">Başarılarımız</h2>
-    
-    <div class="accordion" id="awardsAccordion">
-      
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#award2025" aria-expanded="true">
-            <i class="fa-solid fa-trophy me-2"></i> 2025 Sezonu
-          </button>
-        </h2>
-        <div id="award2025" class="accordion-collapse collapse show" data-bs-parent="#awardsAccordion">
-          <div class="accordion-body">
-            <div class="mb-4">
-              <h6 class="fw-bold text-light"><i class="fa-solid fa-rocket text-danger me-2"></i>TEKNOFEST Su Altı Sistemleri</h6>
-              <ul class="text-secondary">
+    <h2 class="section-title">Başarılarımız</h2>
+
+    <div class="awards-list">
+
+      <!-- 2025 -->
+      <div class="card-glass p-3 award-year-card">
+        <h5 class="m-0 fw-bold text-primary">2025</h5>
+      </div>
+
+      <div class="award-details open">
+
+        <!-- TEKNOFEST -->
+        <div class="card-glass p-4 mb-3">
+          <div class="row align-items-center">
+            <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+              <img src="teknofest.png" class="img-fluid" style="max-width:90px;">
+            </div>
+            <div class="col-12 col-md-9">
+              <h6 class="fw-bold">
+                <a href="https://www.teknofest.org/" target="_blank" class="text-decoration-none text-primary">
+                  🚀 TEKNOFEST Su Altı Sistemleri Yarışmaları
+                </a>
+              </h6>
+              <ul>
                 <li>🏅 Temel ve İleri kategori finalistliği</li>
                 <li>🎓 Üniversiteler arasında yarışan tek lise takımı</li>
               </ul>
             </div>
-            <div class="mb-4">
-              <h6 class="fw-bold text-light"><i class="fa-solid fa-globe text-success me-2"></i>STEAM Azerbaijan Festival</h6>
-              <ul class="text-secondary">
+          </div>
+        </div>
+
+        <!-- STEAM Azerbaijan -->
+        <div class="card-glass p-4 mb-3">
+          <div class="row align-items-center">
+            <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+              <img src="saf25.png" class="img-fluid" style="max-width:90px;">
+            </div>
+            <div class="col-12 col-md-9">
+              <h6 class="fw-bold">
+                <a href="https://saf.steam.edu.az/en" target="_blank" class="text-decoration-none text-primary">
+                  🌍 STEAM Azerbaijan Festival
+                </a>
+              </h6>              <ul>
                 <li>🥈 İki farklı kategoride Dünya 2.liği</li>
                 <li>🏆 Best Engineering Solution Ödülü</li>
               </ul>
             </div>
-            <div class="mb-4">
-              <h6 class="fw-bold text-light"><i class="fa-regular fa-lightbulb text-warning me-2"></i>1 Idea 1 World</h6>
-              <ul class="text-secondary">
-                <li>🥇 Altın Madalya (33 ülke arasından)</li>
+          </div>
+        </div>
+
+        <!-- 1 Idea 1 World -->
+        <div class="card-glass p-4 mb-3">
+          <div class="row align-items-center">
+            <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+              <img src="1idea1world.png" class="img-fluid" style="max-width:90px;">
+            </div>
+            <div class="col-12 col-md-9">
+              <h6 class="fw-bold">
+                <a href="https://www.1i1w.com/" target="_blank" class="text-decoration-none text-primary">
+                  🌟 1 Idea 1 World – Küresel İnovasyon Yarışması
+                </a>
+              </h6>
+              <ul>
+                <li>🥇 Altın Madalya (33 ülke)</li>
               </ul>
             </div>
-             <div>
-                <h6 class="fw-bold text-light"><i class="fa-solid fa-robot text-info me-2"></i>Singapore AUV Challenge (SAUVC)</h6>
-                <ul class="text-secondary">
-                  <li>🏅 Finalistlik – Üniversiteler arasında yarışan tek Türk ve tek lise takımı</li>
-                </ul>
-              </div>
           </div>
         </div>
-      </div>
 
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#award2024">
-            <i class="fa-solid fa-medal me-2"></i> 2024 Sezonu
-          </button>
-        </h2>
-        <div id="award2024" class="accordion-collapse collapse" data-bs-parent="#awardsAccordion">
-          <div class="accordion-body">
-             <div class="mb-4">
-                <h6 class="fw-bold text-light">🚀 TEKNOFEST Su Altı Sistemleri</h6>
-                <ul class="text-secondary">
-                  <li>🏅 Lise kategorisi Türkiye 4.lüğü</li>
-                  <li>🤝 En İyi Takım Ruhu Ödülü</li>
-                  <li>🎓 Üniversite kategorisi Türkiye 5.liği</li>
-                </ul>
-              </div>
-              <div>
-                <h6 class="fw-bold text-light">🤖 SAUVC (Singapur)</h6>
-                <ul class="text-secondary">
-                  <li>🏅 Dünya 4.lüğü – Tek Türk ve tek lise takımı</li>
-                  <li>⚡ Dünyanın En Hızlı AUV Aracı Ödülü</li>
-                </ul>
-              </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#award2023">
-            <i class="fa-solid fa-award me-2"></i> 2023 Sezonu
-          </button>
-        </h2>
-        <div id="award2023" class="accordion-collapse collapse" data-bs-parent="#awardsAccordion">
-          <div class="accordion-body">
-            <div class="mb-4">
-                <h6 class="fw-bold text-light">🚀 TEKNOFEST Su Altı Sistemleri</h6>
-                <ul class="text-secondary">
-                  <li>🥈 Türkiye 2.liği</li>
-                  <li>💻 En Özgün Yazılım Ödülü</li>
-                </ul>
+        <!-- SAUVC -->
+        <div class="card-glass p-4 mb-3">
+          <div class="row align-items-center">
+            <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+              <img src="sauvc.png" class="img-fluid" style="max-width:90px;">
             </div>
-            <div>
-                <h6 class="fw-bold text-light">🌍 STEAM Azerbaijan Festival</h6>
-                <ul class="text-secondary">
-                    <li>🥇 Deep Dive kategorisi Dünya 1.liği</li>
-                </ul>
+            <div class="col-12 col-md-9">
+              <h6 class="fw-bold">
+                <a href="https://sauvc.org/" target="_blank" class="text-decoration-none text-primary">
+                  🤖 Singapore Autonomous Underwater Vehicle Challenge (SAUVC)
+                </a>
+              </h6>
+              <ul>
+                <li>🏅 Finalistlik – Üniversiteler arasında yarışan tek Türk ve tek lise takımı</li>
+              </ul>
             </div>
           </div>
         </div>
+
       </div>
 
+      <!-- 2024 -->
+      <div class="card-glass p-3 award-year-card" onclick="toggleAwards('y2024')">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="m-0 fw-bold text-primary">2024</h5>
+          <i class="fa-solid fa-chevron-down arrow" id="arrow-y2024"></i>
+        </div>
+      </div>
+
+      <div class="award-details" id="y2024">
+
+        <!-- TEKNOFEST 2024 -->
+        <div class="card-glass p-4 mb-3">
+          <div class="row align-items-center">
+            <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+              <img src="teknofest.png" class="img-fluid" style="max-width:90px;">
+            </div>
+            <div class="col-12 col-md-9">
+              <h6 class="fw-bold">
+                <a href="https://www.teknofest.org/" target="_blank" class="text-decoration-none text-primary">
+                  🚀 TEKNOFEST Su Altı Sistemleri Yarışmaları
+                </a>
+              </h6>              <ul>
+                <li>🏅 Lise kategorisi Türkiye 4.lüğü</li>
+                <li>🤝 En İyi Takım Ruhu Ödülü</li>
+                <li>🎓 Üniversite kategorisi Türkiye 5.liği</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SAUVC 2024 -->
+        <div class="card-glass p-4 mb-3">
+          <div class="row align-items-center">
+            <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+              <img src="sauvc.png" class="img-fluid" style="max-width:90px;">
+            </div>
+            <div class="col-12 col-md-9">
+              <h6 class="fw-bold">
+                <a href="https://sauvc.org/" target="_blank" class="text-decoration-none text-primary">
+                  🤖 Singapore Autonomous Underwater Vehicle Challenge (SAUVC)
+                </a>
+              </h6>              <ul>
+                <li>🏅 Dünya 4.lüğü – Tek Türk ve tek lise takımı</li>
+                <li>⚡ Dünyanın En Hızlı AUV Aracı Ödülü</li>
+                <li>🌊 Breaking the Surface konferans daveti (Hırvatistan)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 2023 -->
+      <div class="card-glass p-3 award-year-card" onclick="toggleAwards('y2023')">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="m-0 fw-bold text-primary">2023</h5>
+          <i class="fa-solid fa-chevron-down arrow" id="arrow-y2023"></i>
+        </div>
+      </div>
+
+      <div class="award-details" id="y2023">
+
+        <div class="card-glass p-4 mb-3">
+          <div class="row align-items-center">
+            <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+              <img src="teknofest.png" class="img-fluid" style="max-width:90px;">
+            </div>
+            <div class="col-12 col-md-9">
+              <h6 class="fw-bold">
+                <a href="https://www.teknofest.org/" target="_blank" class="text-decoration-none text-primary">
+                  🚀 TEKNOFEST Su Altı Sistemleri Yarışmaları
+                </a>
+              </h6>              <ul>
+                <li>🥈 Türkiye 2.liği</li>
+                <li>💻 En Özgün Yazılım Ödülü</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-glass p-4 mb-3">
+          <div class="row align-items-center">
+            <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+              <img src="saf23.png" class="img-fluid" style="max-width:90px;">
+            </div>
+            <div class="col-12 col-md-9">
+              <h6 class="fw-bold">
+                <a href="https://saf.steam.edu.az/en" target="_blank" class="text-decoration-none text-primary">
+                  🌍 STEAM Azerbaijan Festival
+                </a>
+              </h6>
+              <ul>
+                <li>🥇 Deep Dive kategorisi Dünya 1.liği</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 2022 -->
+      <div class="card-glass p-3 award-year-card" onclick="toggleAwards('y2022')">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="m-0 fw-bold text-primary">2022</h5>
+          <i class="fa-solid fa-chevron-down arrow" id="arrow-y2022"></i>
+        </div>
+      </div>
+
+      <div class="award-details" id="y2022">
+
+        <div class="card-glass p-4 mb-3">
+          <div class="row align-items-center">
+            <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+              <img src="teknofest.png" class="img-fluid" style="max-width:90px;">
+            </div>
+            <div class="col-12 col-md-9">
+              <h6 class="fw-bold">
+                <a href="https://www.teknofest.org/" target="_blank" class="text-decoration-none text-primary">
+                  🚀 TEKNOFEST Su Altı Sistemleri Yarışmaları
+                </a>
+              </h6>              <ul>
+                <li>🥈 Türkiye 2.liği</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 2021–2019 -->
+      <div class="card-glass p-3 award-year-card" onclick="toggleAwards('y2019')">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="m-0 fw-bold text-primary">2021 – 2019</h5>
+          <i class="fa-solid fa-chevron-down arrow" id="arrow-y2019"></i>
+        </div>
+      </div>
+
+      <div class="award-details" id="y2019">
+
+        <div class="card-glass p-4 mb-3">
+          <div class="row align-items-center">
+            <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+              <img src="teknofest.png" class="img-fluid" style="max-width:90px;">
+            </div>
+            <div class="col-12 col-md-9">
+              <h6 class="fw-bold">
+                <a href="https://www.teknofest.org/" target="_blank" class="text-decoration-none text-primary">
+                  🚀 TEKNOFEST Su Altı Sistemleri Yarışmaları
+                </a>
+              </h6>              <ul>
+                <li>🏅 2019 – 2021 | Her yıl finalistlik</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="vehicles" class="section">
   <div class="container">
-    <h2 class="section-title mb-4">Araçlarımız</h2>
-    <div class="row g-4">
-      
-      <div class="col-lg-6">
-        <div class="card-glass p-3 d-flex align-items-center gap-3">
-          <img src="2.png" width="120" style="border-radius:12px; object-fit:cover;" alt="ÇÖY">
-          <div class="flex-grow-1">
-            <h5 class="fw-bold mb-1">ÇÖY</h5>
-            <a href="https://alestateams.github.io/vehicles/#coy" class="btn btn-sm btn-neon mt-1">İncele</a>
-          </div>
-        </div>
+    <h2 class="fw-bold mb-4">Araçlarımız</h2>
+    
+    <div class="p-4 mb-4 d-flex gap-4 position-relative align-items-center flex-wrap" style="background-color:#0d1b2a; border-radius:16px;">
+      <img src="2.png" width="180" style="border-radius:12px" alt="ÇÖY">
+      <div class="flex-grow-1">
+        <h5 class="fw-bold">ÇÖY</h5>
+        <p class="text-secondary"><em>Aracımız hakkında detaylara ulaşmak için tıklayınız.</em></p>
       </div>
-      
-       <div class="col-lg-6">
-        <div class="card-glass p-3 d-flex align-items-center gap-3">
-          <img src="3.png" width="120" style="border-radius:12px; object-fit:cover;" alt="EŞŞEK">
-          <div class="flex-grow-1">
-            <h5 class="fw-bold mb-1">EŞŞEK</h5>
-            <a href="https://alestateams.github.io/vehicles/#eşşek" class="btn btn-sm btn-neon mt-1">İncele</a>
-          </div>
-        </div>
-      </div>
+      <a href="https://alestateams.github.io/vehicles/#coy" class="btn btn-neon">Detaylar</a>
+    </div>
 
-       <div class="col-lg-6">
-        <div class="card-glass p-3 d-flex align-items-center gap-3">
-          <img src="4.png" width="120" style="border-radius:12px; object-fit:cover;" alt="BİSKÜVİ">
-          <div class="flex-grow-1">
-            <h5 class="fw-bold mb-1">BİSKÜVİ</h5>
-            <a href="https://alestateams.github.io/vehicles/#bisküvi" class="btn btn-sm btn-neon mt-1">İncele</a>
-          </div>
-        </div>
+    <div class="p-4 mb-4 d-flex gap-4 position-relative align-items-center flex-wrap" style="background-color:#0d1b2a; border-radius:16px;">
+      <img src="3.png" width="180" style="border-radius:12px" alt="EŞŞEK">
+      <div class="flex-grow-1">
+        <h5 class="fw-bold">EŞŞEK</h5>
+        <p class="text-secondary"><em>Aracımız hakkında detaylara ulaşmak için tıklayınız.</em></p>
       </div>
+      <a href="https://alestateams.github.io/vehicles/#eşşek" class="btn btn-neon">Detaylar</a>
+    </div>
 
-      <div class="col-lg-6">
-        <div class="card-glass p-3 d-flex align-items-center gap-3">
-          <img src="6.png" width="120" style="border-radius:12px; object-fit:cover;" alt="ALESTAROV 2">
-          <div class="flex-grow-1">
-            <h5 class="fw-bold mb-1">ALESTAROV 2</h5>
-            <a href="https://alestateams.github.io/vehicles/#alestarov2" class="btn btn-sm btn-neon mt-1">İncele</a>
-          </div>
-        </div>
+    <div class="p-4 mb-4 d-flex gap-4 position-relative align-items-center flex-wrap" style="background-color:#0d1b2a; border-radius:16px;">
+      <img src="4.png" width="180" style="border-radius:12px" alt="BİSKÜVİ">
+      <div class="flex-grow-1">
+        <h5 class="fw-bold">BİSKÜVİ</h5>
+        <p class="text-secondary"><em>Aracımız hakkında detaylara ulaşmak için tıklayınız.</em></p>
       </div>
+      <a href="https://alestateams.github.io/vehicles/#bisküvi" class="btn btn-neon">Detaylar</a>
+    </div>
 
+    <div class="p-4 mb-4 d-flex gap-4 position-relative align-items-center flex-wrap" style="background-color:#0d1b2a; border-radius:16px;">
+      <img src="5.png" width="180" style="border-radius:12px" alt="GÜMEÇ">
+      <div class="flex-grow-1">
+        <h5 class="fw-bold">GÜMEÇ</h5>
+        <p class="text-secondary"><em>Aracımız hakkında detaylara ulaşmak için tıklayınız.</em></p>
+      </div>
+      <a href="https://alestateams.github.io/vehicles/#gumeç" class="btn btn-neon">Detaylar</a>
+    </div>
+
+    <div class="p-4 mb-4 d-flex gap-4 position-relative align-items-center flex-wrap" style="background-color:#0d1b2a; border-radius:16px;">
+      <img src="6.png" width="180" style="border-radius:12px" alt="ALESTAROV 2">
+      <div class="flex-grow-1">
+        <h5 class="fw-bold">ALESTAROV 2</h5>
+        <p class="text-secondary"><em>Aracımız hakkında detaylara ulaşmak için tıklayınız.</em></p>
+      </div>
+      <a href="https://alestateams.github.io/vehicles/#alestarov2" class="btn btn-neon">Detaylar</a>
+    </div>
+
+    <div class="p-4 mb-4 d-flex gap-4 position-relative align-items-center flex-wrap" style="background-color:#0d1b2a; border-radius:16px;">
+      <img src="7.png" width="180" style="border-radius:12px" alt="ALESTAROV">
+      <div class="flex-grow-1">
+        <h5 class="fw-bold">ALESTAROV</h5>
+        <p class="text-secondary"><em>Aracımız hakkında detaylara ulaşmak için tıklayınız.</em></p>
+      </div>
+      <a href="https://alestateams.github.io/vehicles/#alestarov" class="btn btn-neon">Detaylar</a>
     </div>
   </div>
 </section>
 
 <section id="members" class="section">
   <div class="container">
-    <h2 class="section-title text-center mb-5">Kadromuz</h2>
+    <h2 class="section-title text-center">Kadromuz</h2>
 
-    <div class="row justify-content-center g-4 mb-5">
-        <div class="col-md-4 col-lg-3">
-            <div class="card-glass p-4 text-center">
-                <div class="mb-3"><i class="fa-solid fa-user-tie fa-2x text-primary"></i></div>
-                <h6 class="fw-bold">Osman Onur Dilci</h6>
-                <small class="role">Takım Danışmanı</small>
-            </div>
-        </div>
-        <div class="col-md-4 col-lg-3">
-            <div class="card-glass p-4 text-center border-primary">
-                <div class="mb-3"><i class="fa-solid fa-crown fa-2x text-warning"></i></div>
-                <h6 class="fw-bold">Mehmet Ulaç Girgin</h6>
-                <small class="role">Takım Kaptanı</small>
-            </div>
-        </div>
-        <div class="col-md-4 col-lg-3">
-            <div class="card-glass p-4 text-center">
-                <div class="mb-3"><i class="fa-solid fa-user-tie fa-2x text-primary"></i></div>
-                <h6 class="fw-bold">Sinan Çakıcı</h6>
-                <small class="role">Takım Danışmanı</small>
-            </div>
-        </div>
+    <!-- ÜST YÖNETİM -->
+    <div class="d-flex justify-content-center gap-4 mb-4 flex-wrap text-center">
+
+      <div class="card-glass p-4" data-raise style="min-width:220px;">
+        <h6 class="fw-bold mb-1">Osman Onur Dilci</h6>
+        <div class="role">Takım Danışmanı</div>
+      </div>
+
+      <div class="card-glass p-4 border border-light" data-raise style="min-width:220px;">
+        <h6 class="fw-bold mb-1">Mehmet Ulaç Girgin</h6>
+        <div class="role">Takım Kaptanı</div>
+      </div>
+
+      <div class="card-glass p-4" data-raise style="min-width:220px;">
+        <h6 class="fw-bold mb-1">Sinan Çakıcı</h6>
+        <div class="role">Takım Danışmanı</div>
+      </div>
+
     </div>
 
-    <h4 class="text-center text-secondary mb-4 fs-5"><i class="fa-solid fa-layer-group me-2"></i>Birim Kaptanları</h4>
-    <div class="row justify-content-center g-4 mb-5">
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="card-glass p-3 text-center">
-                <h6 class="fw-bold mb-1">Mustafa Kahramanoğulları</h6>
-                <div class="text-muted small">Yazılım Kaptanı</div>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="card-glass p-3 text-center">
-                <h6 class="fw-bold mb-1">Kağan Kaya</h6>
-                <div class="text-muted small">Elektronik Kaptanı</div>
-            </div>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="card-glass p-3 text-center">
-                <h6 class="fw-bold mb-1">Buğlem Nisan Ekinci</h6>
-                <div class="text-muted small">PR & Mekanik Kaptanı</div>
-            </div>
-        </div>
+    <!-- BÖLÜM KAPTANLARI -->
+    <div class="d-flex justify-content-center gap-4 mb-4 flex-wrap text-center">
+
+      <div class="card-glass p-4 border border-light" data-raise style="min-width:220px;">
+        <h6 class="fw-bold mb-1">Mustafa Kahramanoğulları</h6>
+        <div class="role">Yazılım Bölüm Kaptanı</div>
+      </div>
+
+      <div class="card-glass p-4 border border-light" data-raise style="min-width:220px;">
+        <h6 class="fw-bold mb-1">Kağan Kaya</h6>
+        <div class="role">Elektronik Bölüm Kaptanı</div>
+      </div>
+
+      <div class="card-glass p-4 border border-light" data-raise style="min-width:220px;">
+        <h6 class="fw-bold mb-1">Buğlem Nisan Ekinci</h6>
+        <div class="role">PR ve Mekanik Bölüm Kaptanı</div>
+      </div>
+
     </div>
 
-    <h4 class="text-center text-secondary mb-4 fs-5"><i class="fa-solid fa-users me-2"></i>Takım Üyeleri</h4>
-    <div class="row justify-content-center g-3">
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card-glass p-3 text-center h-100">
-                <div class="fw-bold small">Emre Alperen</div>
-                <div class="text-muted" style="font-size:0.75rem;">Yazılım</div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card-glass p-3 text-center h-100">
-                <div class="fw-bold small">Ulaş D. Seyfettinoğlu</div>
-                <div class="text-muted" style="font-size:0.75rem;">Yazılım</div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card-glass p-3 text-center h-100">
-                <div class="fw-bold small">Yiğit Köylü</div>
-                <div class="text-muted" style="font-size:0.75rem;">Elektronik</div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card-glass p-3 text-center h-100">
-                <div class="fw-bold small">Derin Nergiz</div>
-                <div class="text-muted" style="font-size:0.75rem;">Mekanik</div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3 col-lg-2">
-            <div class="card-glass p-3 text-center h-100">
-                <div class="fw-bold small">Beyzanur Dizman</div>
-                <div class="text-muted" style="font-size:0.75rem;">PR</div>
-            </div>
-        </div>
+    <!-- ÜYELER -->
+    <div class="d-flex justify-content-center gap-4 flex-wrap text-center">
+
+      <div class="card-glass p-4 border border-primary" data-raise style="min-width:200px;">
+        <h6 class="fw-bold mb-1">Emre Alperen</h6>
+        <div class="role">Yazılım Bölümü Üyesi</div>
+      </div>
+
+      <div class="card-glass p-4 border border-primary" data-raise style="min-width:200px;">
+        <h6 class="fw-bold mb-1">Ulaş Doruk Seyfettinoğlu</h6>
+        <div class="role">Yazılım Bölümü Üyesi</div>
+      </div>
+
+      <div class="card-glass p-4 border border-primary" data-raise style="min-width:200px;">
+        <h6 class="fw-bold mb-1">Yiğit Köylü</h6>
+        <div class="role">Elektronik Bölümü Üyesi</div>
+      </div>
+
+      <div class="card-glass p-4 border border-primary" data-raise style="min-width:200px;">
+        <h6 class="fw-bold mb-1">Derin Nergiz</h6>
+        <div class="role">Mekanik Bölümü Üyesi</div>
+      </div>
+
+      <div class="card-glass p-4 border border-primary" data-raise style="min-width:200px;">
+        <h6 class="fw-bold mb-1">Beyzanur Dizman</h6>
+        <div class="role">PR Bölümü Üyesi</div>
+      </div>
+
     </div>
 
-    <div class="accordion mt-5" id="alumniAccordion">
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#alumniList">
-                <i class="fa-solid fa-user-graduate me-2"></i> Mezunlarımız
-              </button>
-            </h2>
-            <div id="alumniList" class="accordion-collapse collapse" data-bs-parent="#alumniAccordion">
-              <div class="accordion-body">
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <h6 class="text-primary fw-bold">2025 Mezunları</h6>
-                        <ul class="list-unstyled text-secondary small">
-                            <li>Eren Özcan</li>
-                            <li>Eslem Sena Kanat</li>
-                            <li>Hacer Şeker</li>
-                            <li>Alya Erteni</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <h6 class="text-primary fw-bold">2024 Mezunları</h6>
-                        <ul class="list-unstyled text-secondary small">
-                            <li>Pelinsu Loğoğlu</li>
-                            <li>Can Koç</li>
-                            <li>Ömer Aybars Çelebi</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <h6 class="text-primary fw-bold">Geçmiş Dönem</h6>
-                        <ul class="list-unstyled text-secondary small">
-                            <li>Ömer Raif Özoğlu</li>
-                            <li>İsmet Kaan Çal</li>
-                            <li>Mehmet Kağan Şanverdi</li>
-                            <li>Doruk Efe Fırat</li>
-                            <li>Ayşe Nur Kılıç</li>
-                            <li>İlbey Fatih Şahin</li>
-                        </ul>
-                    </div>
-                </div>
-              </div>
-            </div>
+    <!-- MEZUNLAR -->
+    <div class="awards-list w-100 mt-5">
+
+      <div class="card-glass p-4 award-year-card w-100" onclick="toggleAwards('m2024')">
+        <div class="d-flex justify-content-between align-items-center px-2">
+          <h4 class="m-0 fw-bold text-primary">Mezunlar</h4>
+          <i class="fa-solid fa-chevron-down arrow fs-4" id="arrow-m2024"></i>
+        </div>
+      </div>
+
+      <div class="award-details text-start" id="m2024">
+
+        <div class="card-glass p-4 mb-3">
+
+          <div class="mb-4">
+            <h6 class="fw-bold text-primary">Takım Danışmanı</h6>
+            <div>İsmail Akdaş</div>
           </div>
+
+          <hr style="opacity:0.1;">
+
+          <div class="mb-4">
+            <h6 class="fw-bold text-primary">2025</h6>
+            <div>Eren Özcan</div>
+            <div>Eslem Sena Kanat</div>
+            <div>Hacer Şeker</div>
+            <div>Alya Erteni</div>
+          </div>
+
+          <hr style="opacity:0.1;">
+
+          <div class="mb-4">
+            <h6 class="fw-bold text-primary">2024</h6>
+            <div>Pelinsu Loğoğlu</div>
+            <div>Can Koç</div>
+            <div>Ömer Aybars Çelebi</div>
+          </div>
+
+          <hr style="opacity:0.1;">
+
+          <div class="mb-4">
+            <h6 class="fw-bold text-primary">2023</h6>
+            <div>Ömer Raif Özoğlu</div>
+            <div>İsmet Kaan Çal</div>
+            <div>Mehmet Kağan Şanverdi</div>
+          </div>
+
+          <hr style="opacity:0.1;">
+
+          <div class="mb-4">
+            <h6 class="fw-bold text-primary">2022</h6>
+            <div>Doruk Efe Fırat</div>
+            <div>Ayşe Nur Kılıç</div>
+          </div>
+
+          <hr style="opacity:0.1;">
+
+          <div>
+            <h6 class="fw-bold text-primary">2021</h6>
+            <div>İlbey Fatih Şahin</div>
+            <div>Musa Topçubaşı</div>
+            <div>Egemen Sarıtekin</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  
+<!--<section id="gallery" class="section">
+  <div class="container">
+    <h2 class="section-title text-center mb-5">Galeri</h2>
+
+    <div class="row g-4">
+
+      <div class="col-md-4 col-6">
+        <div class="gallery-frame">
+          <img src="galeri1.jpg" class="img-fluid" onclick="openLightbox(this.src)">
+        </div>
+      </div>
+
+      <div class="col-md-4 col-6">
+        <div class="gallery-frame">
+          <img src="galeri2.jpg" class="img-fluid" onclick="openLightbox(this.src)">
+        </div>
+      </div>
+
+      <div class="col-md-4 col-6">
+        <div class="gallery-frame">
+          <img src="galeri3.jpg" class="img-fluid" onclick="openLightbox(this.src)">
+        </div>
+      </div>
+
+      <div class="col-md-4 col-6">
+        <div class="gallery-frame">
+          <img src="galeri4.jpg" class="img-fluid" onclick="openLightbox(this.src)">
+        </div>
+      </div>
+
+      <div class="col-md-4 col-6">
+        <div class="gallery-frame">
+          <img src="galeri5.jpg" class="img-fluid" onclick="openLightbox(this.src)">
+        </div>
+      </div>
+
+      <div class="col-md-4 col-6">
+        <div class="gallery-frame">
+          <img src="galeri6.jpg" class="img-fluid" onclick="openLightbox(this.src)">
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
+-->
 
 <section id="sponsors" class="section">
   <div class="container">
+
+    <!-- PAYDAŞLARIMIZ -->
     <h2 class="section-title text-center mb-4">Paydaşlarımız</h2>
-    <div class="d-flex justify-content-center align-items-center gap-5 mb-5 flex-wrap">
-      <img src="afl.png" class="img-fluid" style="height:100px; opacity:0.9;">
-      <i class="fa-solid fa-handshake fa-2x text-secondary"></i>
-      <img src="gsb.png" class="img-fluid" style="height:100px; opacity:0.9;">
+    <div class="d-flex justify-content-center align-items-center gap-4 mb-5 flex-wrap">
+      <img src="afl.png" class="img-fluid" style="max-height:120px; object-fit:contain;">
+      <span style="font-size:2rem;">🤝</span>
+      <img src="gsb.png" class="img-fluid" style="max-height:120px; object-fit:contain;">
     </div>
 
+    <!-- SPONSORLARIMIZ -->
     <h2 class="section-title text-center mb-4">Sponsorlarımız</h2>
     <div class="row justify-content-center g-4">
-      <div class="col-6 col-md-3">
-        <div class="card-glass p-3 d-flex align-items-center justify-content-center" style="min-height:120px;">
-          <img src="atimsan.png" class="img-fluid" style="max-height:80px;" alt="Atımsan">
+
+      <!-- ÜST 4 -->
+      <div class="col-md-3 col-6">
+        <div class="p-4 text-center" style="background-color:#0d1b2a; border:1.5px solid #ffc107; border-radius:16px; height:150px; display:flex; align-items:center; justify-content:center;">
+          <img src="atimsan.png" class="img-fluid" style="max-height:90px; object-fit:contain;">
         </div>
       </div>
-      <div class="col-6 col-md-3">
-        <div class="card-glass p-3 d-flex align-items-center justify-content-center" style="min-height:120px;">
-          <img src="dizmanlar.png" class="img-fluid" style="max-height:80px;" alt="Dizmanlar">
+      <div class="col-md-3 col-6">
+        <div class="p-4 text-center" style="background-color:#0d1b2a; border:1.5px solid #ffc107; border-radius:16px; height:150px; display:flex; align-items:center; justify-content:center;">
+          <img src="dizmanlar.png" class="img-fluid" style="max-height:90px; object-fit:contain;">
         </div>
       </div>
-      <div class="col-6 col-md-3">
-        <div class="card-glass p-3 d-flex align-items-center justify-content-center" style="min-height:120px;">
-          <img src="isken.png" class="img-fluid" style="max-height:80px;" alt="İsken">
+      <div class="col-md-3 col-6">
+        <div class="p-4 text-center" style="background-color:#0d1b2a; border:1.5px solid #ffc107; border-radius:16px; height:150px; display:flex; align-items:center; justify-content:center;">
+          <img src="isken.png" class="img-fluid" style="max-height:90px; object-fit:contain;">
         </div>
       </div>
-      <div class="col-6 col-md-3">
-        <div class="card-glass p-3 d-flex align-items-center justify-content-center" style="min-height:120px;">
-          <img src="bacaksiz.png" class="img-fluid" style="max-height:80px;" alt="Bacaksız">
+      <div class="col-md-3 col-6">
+        <div class="p-4 text-center" style="background-color:#0d1b2a; border:1.5px solid #ffc107; border-radius:16px; height:150px; display:flex; align-items:center; justify-content:center;">
+          <img src="bacaksizlar.png" class="img-fluid" style="max-height:90px; object-fit:contain;">
+        </div>
+      </div>
+
+      <!-- ALT 3 -->
+      <div class="col-md-3 col-6">
+        <div class="p-4 text-center" style="background-color:#0d1b2a; border:1.5px solid #ffffff; border-radius:16px; height:150px; display:flex; align-items:center; justify-content:center;">
+          <img src="teknik metal.png" class="img-fluid" style="max-height:90px; object-fit:contain;">
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="p-4 text-center" style="background-color:#0d1b2a; border:1.5px solid #ffffff; border-radius:16px; height:150px; display:flex; align-items:center; justify-content:center;">
+          <img src="adova.png" class="img-fluid" style="max-height:90px; object-fit:contain;">
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="p-4 text-center" style="background-color:#0d1b2a; border:1.5px solid #ffffff; border-radius:16px; height:150px; display:flex; align-items:center; justify-content:center;">
+          <img src="paşa.png" class="img-fluid" style="max-height:90px; object-fit:contain;">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="section-title mb-5">İletişim</h2>
+    <div class="row g-4">
+      <!-- Form -->
+      <div class="col-md-6">
+        <div class="card-glass p-4 h-100">
+          <form id="contact-form">
+            <div class="mb-3">
+              <label class="form-label">Ad Soyad</label>
+              <input type="text" name="name" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">E-posta</label>
+              <input type="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Mesaj</label>
+              <textarea name="message" class="form-control" rows="4" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-neon">
+              <i class="fa-regular fa-paper-plane me-2"></i> Gönder
+            </button>
+
+            <div id="form-message" class="mt-3"></div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Bağlantılar ve Adres -->
+      <div class="col-md-6">
+        <div class="card-glass p-4 h-100">
+          <h6 class="fw-bold">Bağlantılar</h6>
+          <ul class="list-unstyled mb-3">
+            <li class="mb-2">
+              <i class="fa-brands fa-github me-2"></i>
+              <a href="https://github.com/alesta-teams" target="_blank" class="text-decoration-none text-light">
+                github.com/alesta-teams
+              </a>
+            </li>
+            <li class="mb-2">
+              <i class="fa-brands fa-instagram me-2"></i>
+              <a href="https://instagram.com/alesta_teams" target="_blank" class="text-decoration-none text-light">
+                @alesta_teams
+              </a>
+            </li>
+            <li class="mb-2">
+              <i class="fa-regular fa-envelope me-2"></i>
+              <a href="mailto:alesta.afl@gmail.com" class="text-decoration-none text-light">
+                alesta.afl@gmail.com
+              </a>
+            </li>
+            <li class="mb-2">
+              <i class="fa-brands fa-youtube me-2"></i>
+              <a href="https://www.youtube.com/@alestateams2019" target="_blank" class="text-decoration-none text-light">
+                YouTube Kanalı
+              </a>
+            </li>
+            <li class="mb-2">
+              <i class="fa-brands fa-linkedin me-2"></i>
+              <a href="https://www.linkedin.com/company/alesta-teams/posts/?feedView=all" target="_blank" class="text-decoration-none text-light">
+                LinkedIn Profili
+              </a>
+            </li>
+          </ul>
+
+          <h6 class="fw-bold">Adres</h6>
+          <p class="mb-0 text-secondary">Adana, Türkiye</p>
+          <p class="mb-0 text-secondary small">Ziyapaşa, 67019. Sk. No:4, Seyhan/Adana</p>
+          <p class="mb-0">
+            <a href="https://maps.app.goo.gl/HAFFhedszr9LELV38" target="_blank" class="text-decoration-none text-info">
+              Google Maps'te Görüntüle
+            </a>
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact" class="section" style="background: rgba(0,0,0,0.2);">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">İletişim</h2>
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card-glass p-5 text-center">
-                    <h3 class="fw-bold mb-3">Bizimle İletişime Geçin</h3>
-                    <p class="text-secondary mb-4">Projelerimiz hakkında bilgi almak veya ekibimize katılmak için bize ulaşabilirsiniz.</p>
-                    
-                    <div class="d-flex justify-content-center gap-4 flex-wrap mb-4">
-                        <a href="mailto:iletisim@alestateams.com" class="btn btn-outline-light px-4 py-2">
-                            <i class="fa-solid fa-envelope me-2"></i> Mail Gönder
-                        </a>
-                        <a href="https://instagram.com/alestateams" class="btn btn-neon px-4 py-2">
-                            <i class="fa-brands fa-instagram me-2"></i> Instagram
-                        </a>
-                        <a href="#" class="btn btn-outline-light px-4 py-2">
-                            <i class="fa-brands fa-linkedin me-2"></i> LinkedIn
-                        </a>
-                    </div>
-                    <small class="text-muted">Adana Fen Lisesi / Seyhan Gençlik Merkezi, Adana</small>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<footer class="text-center">
-  <div class="container">
-    <p class="mb-2">&copy; 2025 <strong>ALESTA TEAMS</strong>. Tüm Hakları Saklıdır.</p>
-    <div class="small text-muted">
-        Designed with <i class="fa-solid fa-heart text-danger"></i> by Alesta Yazılım Ekibi
-    </div>
+<footer>
+  <div class="container d-flex justify-content-between align-items-center">
+    <small>© 2026 ALESTA TEAMS</small>
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function toggleAwards(id) {
+  const details = document.getElementById(id);
+  const arrow = document.getElementById('arrow-' + id);
+  if (details.classList.contains('open')) {
+    details.classList.remove('open');
+    arrow.classList.remove('rotate');
+  } else {
+    details.classList.add('open');
+    arrow.classList.add('rotate');
+  }
+}
 
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section, header');
+  const navLinks = document.querySelectorAll('.nav-link');
+  let current = 'hero';
+  sections.forEach(sec => {
+    const top = sec.offsetTop - 150;
+    if (pageYOffset >= top) current = sec.id || 'hero';
+  });
+  navLinks.forEach(l => 
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current)
+  );
+});
+
+function openLightbox(src) {
+  document.getElementById("lightbox").style.display = "flex";
+  document.getElementById("lightbox-img").src = src;
+}
+
+function closeLightbox() {
+  document.getElementById("lightbox").style.display = "none";
+}
+</script>
+
+<div id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img">
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  var form = document.getElementById("contact-form");
+  var messageDiv = document.getElementById("form-message");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    var formData = new FormData(form);
+
+    fetch("https://formspree.io/f/xreakwqn", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Accept": "application/json"
+      }
+    })
+    .then(function (response) {
+      if (response.ok) {
+        messageDiv.innerHTML =
+          "<div class='alert alert-success'>✅ Mesajınız başarıyla gönderildi!</div>";
+        form.reset();
+      } else {
+        messageDiv.innerHTML =
+          "<div class='alert alert-danger'>❌ Bir hata oluştu. Lütfen tekrar deneyin.</div>";
+      }
+    })
+    .catch(function () {
+      messageDiv.innerHTML =
+        "<div class='alert alert-danger'>❌ Sunucuya ulaşılamadı.</div>";
+    });
+  });
+
+});
+</script>
+
+<style>
+@keyframes float1 {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(100px,-80px) scale(1.1); }
+  100% { transform: translate(-80px,100px) scale(0.95); }
+}
+
+@keyframes float2 {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-120px,60px) scale(1.05); }
+  100% { transform: translate(80px,-100px) scale(1); }
+}
+
+@keyframes float3 {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(60px,120px) scale(1.1); }
+  100% { transform: translate(-100px,-60px) scale(0.9); }
+}
+</style>
+<style>
+@keyframes float1 {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(100px,-80px) scale(1.1); }
+  100% { transform: translate(-80px,100px) scale(0.95); }
+}
+
+@keyframes float2 {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-120px,60px) scale(1.05); }
+  100% { transform: translate(80px,-100px) scale(1); }
+}
+</style>
+
+  
 </body>
 </html>
