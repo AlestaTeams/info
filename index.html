@@ -51,6 +51,7 @@
     .scroll-reveal.active { opacity: 1; transform: translate(0, 0); }
 
     /* Sponsor Marquee (Kayan Şerit) */
+/* Sponsor Marquee (Kayan Şerit) */
     .marquee-wrapper {
       width: 100vw;
       max-width: 100%;
@@ -63,40 +64,42 @@
     .marquee-track {
       display: flex;
       width: max-content;
-      animation: scroll 40s linear infinite; /* Logolar arttığı için süreyi biraz uzattım */
+      animation: scroll 40s linear infinite;
     }
     .marquee-track:hover { animation-play-state: paused; }
-    .marquee-item {
-      width: 200px;
-      height: 120px;
-      margin: 0 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--card-glass);
-      border: 1.5px solid rgba(255,255,255,0.15);
-      border-radius: 16px;
-      padding: 20px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .marquee-item {
-      width: 200px;
-      height: 120px;
-      margin: 0 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--card-glass);
-      border: 1.5px solid #ffc107; /* Tüm logolar için sarı çerçeve */
-      border-radius: 16px;
-      padding: 20px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
     
+    .marquee-item {
+      width: 200px;
+      height: 120px;
+      margin: 0 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card-glass);
+      border: 1.5px solid #ffc107 !important; /* Tüm logolara zorunlu sarı çerçeve */
+      border-radius: 16px;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex-shrink: 0; /* KUTULARIN EZİLMESİNİ VE KAYMANIN DURMASINI ENGELLER */
+    }
     .marquee-item:hover {
       transform: translateY(-5px);
-      box-shadow: 0 0 25px rgba(255, 193, 7, 0.4); /* Hoverda parlama efekti */
-      background: rgba(255, 193, 7, 0.05);
+      box-shadow: 0 0 25px rgba(255,193,7,0.4);
+      background: rgba(255,193,7,0.05);
+    }
+    
+    /* Logoların Dışarı Taşmasını Kesin Olarak Engelle */
+    .marquee-item img { 
+      max-width: 150px !important; 
+      max-height: 75px !important; 
+      width: auto;
+      height: auto;
+      object-fit: contain; 
+    }
+    
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     /* Awards Styles */
