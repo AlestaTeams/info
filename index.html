@@ -13,6 +13,32 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x28" href="alesta.png">
   <style>
+    /* Scroll Reveal Animasyonları */
+    .scroll-reveal { 
+      opacity: 0; 
+      transition: all 0.9s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    }
+    
+    /* Soldan Gelenler */
+    .reveal-left { 
+      transform: translateX(-150px); 
+    }
+    
+    /* Sağdan Gelenler */
+    .reveal-right { 
+      transform: translateX(150px); 
+    }
+    
+    /* Olduğu Yerde Belirenler (Fade Up) */
+    .reveal-fade { 
+      transform: translateY(20px); 
+    }
+    
+    /* Aktif Olduğunda (JS Ekleyecek) */
+    .scroll-reveal.active { 
+      opacity: 1; 
+      transform: translate(0, 0); 
+    }
     :root{
       --bg-0:#0b0f14;
       --bg-1:#0e141b;
@@ -837,6 +863,17 @@
     }
   });
 </script>
+// Animasyon Sistemi (Intersection Observer)
+  document.addEventListener("DOMContentLoaded", function () {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 }); // Ekranda %10'u göründüğünde animasyon başlar
 
+    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+  });
 </body>
 </html>
