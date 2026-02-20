@@ -13,32 +13,6 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x28" href="alesta.png">
   <style>
-    /* Scroll Reveal Animasyonları */
-    .scroll-reveal { 
-      opacity: 0; 
-      transition: all 0.9s cubic-bezier(0.25, 0.8, 0.25, 1); 
-    }
-    
-    /* Soldan Gelenler */
-    .reveal-left { 
-      transform: translateX(-150px); 
-    }
-    
-    /* Sağdan Gelenler */
-    .reveal-right { 
-      transform: translateX(150px); 
-    }
-    
-    /* Olduğu Yerde Belirenler (Fade Up) */
-    .reveal-fade { 
-      transform: translateY(20px); 
-    }
-    
-    /* Aktif Olduğunda (JS Ekleyecek) */
-    .scroll-reveal.active { 
-      opacity: 1; 
-      transform: translate(0, 0); 
-    }
     :root{
       --bg-0:#0b0f14;
       --bg-1:#0e141b;
@@ -68,14 +42,12 @@
     .accent-bar{height:2px; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:var(--shadow-neon);}
     html{scroll-behavior:smooth;}
 
-    /* Scroll Animations */
+    /* Scroll Animasyonları */
     .scroll-reveal { opacity: 0; transition: all 0.9s cubic-bezier(0.25, 0.8, 0.25, 1); }
     .reveal-left { transform: translateX(-150px); }
     .reveal-right { transform: translateX(150px); }
     .reveal-fade { transform: translateY(20px); }
-    /* Kadro düşme efekti */
     .reveal-drop { transform: translateY(-50px); transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-    
     .scroll-reveal.active { opacity: 1; transform: translate(0, 0); }
 
     /* Sponsor Marquee (Kayan Şerit) */
@@ -91,7 +63,7 @@
     .marquee-track {
       display: flex;
       width: max-content;
-      animation: scroll 35s linear infinite;
+      animation: scroll 40s linear infinite; /* Logolar arttığı için süreyi biraz uzattım */
     }
     .marquee-track:hover { animation-play-state: paused; }
     .marquee-item {
@@ -187,13 +159,13 @@
   </div>
 </header>
   
-<section id="awards" class="section pt-4 pb-5 scroll-reveal reveal-fade">
+<section id="about" class="section">
   <div class="container">
-    <h2 class="section-title text-center mb-2">
-      <i class="fa-solid fa-trophy me-2 text-primary"></i><span data-i18n="awards-title">Başarılarımız</span>
+    <h2 class="section-title text-center mb-5 scroll-reveal reveal-fade">
+      <i class="fa-solid fa-address-card me-2 text-primary"></i><span data-i18n="about-title">Hakkımızda</span>
     </h2>
 
-    <div class="awards-list" style="padding-top: 0;">
+    <div class="mb-5 scroll-reveal reveal-fade">
       <h5 class="fw-bold text-primary mb-3">
         <i class="fa-solid fa-rocket me-2"></i><span data-i18n="about-subtitle">ALESTA: Fikirden Gerçeğe, Su Altından Geleceğe</span>
       </h5>
@@ -208,7 +180,7 @@
       </p>
     </div>
 
-    <div class="row g-4 px-2">
+    <div class="row g-4">
       
       <div class="col-12 scroll-reveal reveal-fade">
         <div class="border border-primary rounded-4 p-4 shadow-sm h-100" style="background: rgba(255,255,255,0.03);">
@@ -261,14 +233,13 @@
   </div>
 </section>
 
-  
-<section id="awards" class="section pt-4 pb-5 scroll-reveal reveal-fade">
+<section id="awards" class="section">
   <div class="container">
-    <h2 class="section-title text-center mb-5">
+    <h2 class="section-title text-center mb-5 scroll-reveal reveal-fade">
       <i class="fa-solid fa-trophy me-2 text-primary"></i><span data-i18n="awards-title">Başarılarımız</span>
     </h2>
 
-    <div class="awards-list">
+    <div class="awards-list scroll-reveal reveal-fade" style="padding-top: 0;">
       <div class="card-glass p-3 award-year-card" onclick="toggleAwards('y2025')" style="cursor: pointer;">
         <div class="d-flex justify-content-between align-items-center">
           <h5 class="m-0 fw-bold text-primary">2025</h5>
@@ -362,8 +333,8 @@
     <div class="row g-3 justify-content-center">
       
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-left">
-        <div class="p-3 d-flex gap-3 align-items-center card-glass" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
-          <img src="2.png" width="90" style="border-radius:8px; object-fit: cover;">
+        <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
+          <img src="2.png" style="width: 140px; height: 110px; border-radius:8px; object-fit: cover; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">ÇÖY</h6>
             <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-coy-desc">Üretim: 2025 | Günümüzde Aktif</p>
@@ -373,8 +344,8 @@
       </div>
 
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-right">
-        <div class="p-3 d-flex gap-3 align-items-center card-glass" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
-          <img src="3.png" width="90" style="border-radius:8px; object-fit: cover;">
+        <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
+          <img src="3.png" style="width: 140px; height: 110px; border-radius:8px; object-fit: cover; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">FIRTINA</h6>
             <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-firtina-desc">Üretim: 2024 | 2024-2025</p>
@@ -384,8 +355,8 @@
       </div>
 
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-left">
-        <div class="p-3 d-flex gap-3 align-items-center card-glass" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
-          <img src="4.png" width="90" style="border-radius:8px; object-fit: cover;">
+        <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
+          <img src="4.png" style="width: 140px; height: 110px; border-radius:8px; object-fit: cover; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">BİSKÜVİ</h6>
             <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-bisküvi-desc">Üretim: 2023 | 2023-2024</p>
@@ -395,8 +366,8 @@
       </div>
 
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-right">
-        <div class="p-3 d-flex gap-3 align-items-center card-glass" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
-          <img src="5.png" width="90" style="border-radius:8px; object-fit: cover;">
+        <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
+          <img src="5.png" style="width: 140px; height: 110px; border-radius:8px; object-fit: cover; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">GÜMEÇ</h6>
             <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-gumec-desc">Üretim: 2021 | 2022-2024</p>
@@ -406,8 +377,8 @@
       </div>
 
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-left">
-        <div class="p-3 d-flex gap-3 align-items-center card-glass" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
-          <img src="6.png" width="90" style="border-radius:8px; object-fit: cover;">
+        <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
+          <img src="6.png" style="width: 140px; height: 110px; border-radius:8px; object-fit: cover; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">ALESTAROV 2</h6>
             <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-alesta2-desc">Üretim: 2020 | 2020-2021</p>
@@ -417,8 +388,8 @@
       </div>
 
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-right">
-        <div class="p-3 d-flex gap-3 align-items-center card-glass" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
-          <img src="7.png" width="90" style="border-radius:8px; object-fit: cover;">
+        <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
+          <img src="7.png" style="width: 140px; height: 110px; border-radius:8px; object-fit: cover; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">ALESTAROV</h6>
             <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-alesta1-desc">Üretim: 2019 | 2019-2020</p>
@@ -445,6 +416,7 @@
           <i class="fa-solid fa-chalkboard-user me-2"></i><span data-i18n="role-advisors">Danışmanlar</span>
         </button>
       </div>
+    </div>
 
     <div class="collapse mb-5" id="danismanlarCollapse">
       <div class="d-flex justify-content-center gap-3 flex-wrap">
@@ -572,23 +544,27 @@
       <a href="https://www.bacaksizlar.com" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="bacaksizlar.png" alt="Sponsor"></div></a>
       <a href="https://www.teknikmetal.com" target="_blank" class="text-decoration-none"><div class="marquee-item" style="border-color:#ffffff;"><img src="teknik metal.png" alt="Sponsor"></div></a>
       <a href="https://www.adovayuzeyislem.com.tr/" target="_blank" class="text-decoration-none"><div class="marquee-item" style="border-color:#ffffff;"><img src="adova.png" alt="Sponsor"></div></a>
-      <div class="marquee-item"><span class="text-white-50">Sponsor 5</span></div>
-      <div class="marquee-item"><span class="text-white-50">Sponsor 6</span></div>
-      <div class="marquee-item"><span class="text-white-50">Sponsor 7</span></div>
-      <div class="marquee-item"><span class="text-white-50">Sponsor 8</span></div>
-      <div class="marquee-item"><span class="text-white-50">Sponsor 9</span></div>
-      <div class="marquee-item"><span class="text-white-50">Sponsor 10</span></div>
+      
+      <a href="https://www.yeparmakina.com.tr/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="yepar.png" alt="Sponsor"></div></a>
+      <a href="https://www.adanato.org.tr/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="ato.png" alt="Sponsor"></div></a>
+      <a href="https://www.adaso.org.tr/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="adosa.png" alt="Sponsor"></div></a>
+      <a href="https://www.modsan.com/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="modsan.png" alt="Sponsor"></div></a>
+      <a href="https://www.pasareklam.com/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="paşa.png" alt="Sponsor"></div></a>
+      <a href="https://www.isken.com.tr/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="isken.png" alt="Sponsor"></div></a>
+      <a href="https://www.kivanctekstil.com.tr/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="kıvanç.png" alt="Sponsor"></div></a>
 
       <a href="https://www.dizmanlar.com" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="dizmanlar.png" alt="Sponsor"></div></a>
       <a href="https://www.bacaksizlar.com" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="bacaksizlar.png" alt="Sponsor"></div></a>
       <a href="https://www.teknikmetal.com" target="_blank" class="text-decoration-none"><div class="marquee-item" style="border-color:#ffffff;"><img src="teknik metal.png" alt="Sponsor"></div></a>
       <a href="https://www.adovayuzeyislem.com.tr/" target="_blank" class="text-decoration-none"><div class="marquee-item" style="border-color:#ffffff;"><img src="adova.png" alt="Sponsor"></div></a>
-      <div class="marquee-item"><span class="text-white-50">Sponsor 5</span></div>
-      <div class="marquee-item"><span class="text-white-50">Sponsor 6</span></div>
-      <div class="marquee-item"><span class="text-white-50">Sponsor 7</span></div>
-      <div class="marquee-item"><span class="text-white-50">Sponsor 8</span></div>
-      <div class="marquee-item"><span class="text-white-50">Sponsor 9</span></div>
-      <div class="marquee-item"><span class="text-white-50">Sponsor 10</span></div>
+      
+      <a href="https://www.yeparmakina.com.tr/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="yepar.png" alt="Sponsor"></div></a>
+      <a href="https://www.adanato.org.tr/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="ato.png" alt="Sponsor"></div></a>
+      <a href="https://www.adaso.org.tr/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="adosa.png" alt="Sponsor"></div></a>
+      <a href="https://www.modsan.com/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="modsan.png" alt="Sponsor"></div></a>
+      <a href="https://www.pasareklam.com/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="paşa.png" alt="Sponsor"></div></a>
+      <a href="https://www.isken.com.tr/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="isken.png" alt="Sponsor"></div></a>
+      <a href="https://www.kivanctekstil.com.tr/" target="_blank" class="text-decoration-none"><div class="marquee-item"><img src="kıvanç.png" alt="Sponsor"></div></a>
     </div>
   </div>
 </section>
@@ -693,6 +669,8 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
+        } else {
+          entry.target.classList.remove('active'); // Aşağı yukarı her kaydırmada animasyonu tekrar oynatır
         }
       });
     }, { threshold: 0.1 }); // Ekranda %10'u göründüğünde başlar
@@ -864,17 +842,5 @@
     }
   });
 </script>
-// Animasyon Sistemi (Intersection Observer)
-  document.addEventListener("DOMContentLoaded", function () {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, { threshold: 0.1 }); // Ekranda %10'u göründüğünde animasyon başlar
-
-    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
-  });
 </body>
 </html>
