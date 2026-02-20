@@ -899,122 +899,192 @@
 </section>
 
 
-<footer>
-  <div class="container d-flex justify-content-between align-items-center">
-    <small>© 2026 ALESTA TEAMS</small>
+
+<footer class="text-center small">
+  <div class="container">
+    <p class="mb-0">&copy; 2025 Alesta Teams</p>
   </div>
 </footer>
 
+<div id="lightbox" onclick="this.style.display='none'">
+  <img id="lightbox-img" src="">
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-function toggleAwards(id) {
-  const details = document.getElementById(id);
-  const arrow = document.getElementById('arrow-' + id);
-  if (details.classList.contains('open')) {
-    details.classList.remove('open');
-    arrow.classList.remove('rotate');
-  } else {
-    details.classList.add('open');
-    arrow.classList.add('rotate');
+  function openLightbox(src){
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
   }
-}
+  
+  function toggleAwards(id) {
+    const details = document.getElementById(id);
+    const arrow = document.getElementById('arrow-' + id);
+    if(details.classList.contains('open')) {
+      details.classList.remove('open');
+      arrow.classList.remove('rotate');
+    } else {
+      details.classList.add('open');
+      arrow.classList.add('rotate');
+    }
+  }
 
-window.addEventListener('scroll', () => {
-  const sections = document.querySelectorAll('section, header');
-  const navLinks = document.querySelectorAll('.nav-link');
-  let current = 'hero';
-  sections.forEach(sec => {
-    const top = sec.offsetTop - 150;
-    if (pageYOffset >= top) current = sec.id || 'hero';
-  });
-  navLinks.forEach(l => 
-    l.classList.toggle('active', l.getAttribute('href') === '#' + current)
-  );
-});
+  // Çeviri Sistemi
+  let currentLang = 'tr';
+  
+  const translations = {
+    // Navbar
+    'nav-about': { tr: 'Hakkımızda', en: 'About Us' },
+    'nav-awards': { tr: 'Başarılarımız', en: 'Achievements' },
+    'nav-vehicles': { tr: 'Araçlarımız', en: 'Vehicles' },
+    'nav-members': { tr: 'Kadromuz', en: 'Team' },
+    'nav-sponsors': { tr: 'Sponsorlarımız', en: 'Sponsors' },
+    'nav-contact': { tr: 'İletişim', en: 'Contact' },
+    
+    // Hero
+    'hero-slogan': { tr: 'Ready and Alert', en: 'Ready and Alert' },
+    'btn-who': { tr: 'Biz Kimiz?', en: 'Who Are We?' },
+    'btn-contact': { tr: 'İletişime Geç', en: 'Get in Touch' },
 
-function openLightbox(src) {
-  document.getElementById("lightbox").style.display = "flex";
-  document.getElementById("lightbox-img").src = src;
-}
+    // Hakkımızda
+    'about-title': { tr: 'Hakkımızda', en: 'About Us' },
+    'about-subtitle': { tr: 'ALESTA: Fikirden Gerçeğe, Su Altından Geleceğe', en: 'ALESTA: From Idea to Reality, From Underwater to the Future' },
+    'about-p1': { 
+        tr: 'Hikayemiz 2019 yılında, Adana Fen Lisesi\'nde su altı teknolojilerine duyduğumuz merakla başladı. Kurulduğumuz günden bu yana, sürdürülebilirlik temelli takım anlayışımızla her yıl kendimizi geliştiriyor; bilgi birikimimizi yeni nesil ekip üyelerine aktararak güçlü ve kalıcı bir yapı inşa ediyoruz.', 
+        en: 'Our story began in 2019 at Adana Science High School with a curiosity for underwater technologies. Since our inception, we have been improving ourselves every year with a sustainability-based team mentality; we build a strong and lasting structure by transferring our knowledge to the next generation of team members.' 
+    },
+    'about-p2': { 
+        tr: 'Adana Fen Lisesi ve Seyhan Gençlik Merkezi ile yürüttüğümüz ortak çalışmalar sayesinde birçok ulusal ve uluslararası arenada hem takımımızı hem de ülkemizi gururla temsil etmeyi hedefliyoruz. Takım çalışmalarımızı Mekanik, Elektronik, Yazılım ve Medya olmak üzere dört ana departman üzerinden, tam bir uyum içinde yürütüyoruz.', 
+        en: 'Thanks to our joint efforts with Adana Science High School and Seyhan Youth Center, we aim to proudly represent both our team and our country in many national and international arenas. We carry out our team operations in perfect harmony through four main departments: Mechanics, Electronics, Software, and Media.' 
+    },
+    'about-p3': { 
+        tr: 'Su altı kategorisinde başlayan bu yenilirci yolculuğumuz, bugün vizyonumuzu daha da genişleterek Robolig ve sanayide dijital teknolojiler gibi farklı alanlardaki projelerle hız kesmeden devam ediyor.', 
+        en: 'Our innovative journey, which started in the underwater category, continues today without slowing down by expanding our vision with projects in different fields such as Roboleague and digital technologies in industry.' 
+    },
 
-function closeLightbox() {
-  document.getElementById("lightbox").style.display = "none";
-}
-</script>
+    // Akademi
+    'academy-title': { tr: 'ALESTA Akademi', en: 'ALESTA Academy' },
+    'academy-desc': { 
+        tr: 'ALESTA Akademi, sadece bir eğitim programı değil; takımın sürdürülebilirliğini sağlayan bir tecrübe aktarım merkezidir. Burası, teorik bilginin sahada gerçek projelere dönüştüğü ilk duraktır.', 
+        en: 'ALESTA Academy is not just a training program; it is an experience transfer center that ensures the sustainability of the team. This is the first stop where theoretical knowledge turns into real projects in the field.' 
+    },
+    'academy-li1': { 
+        tr: '<strong class="text-white">Eğitim Süreci:</strong> Takımımıza dahil olmak isteyen öğrenci arkadaşlarımız; temel elektronik, yazılım, mekanik tasarım ve proje yönetimi konularında kapsamlı bir hazırlık sürecinden geçer.', 
+        en: '<strong class="text-white">Training Process:</strong> Students who want to join our team go through a comprehensive preparation process covering basic electronics, software, mechanical design, and project management.' 
+    },
+    'academy-li2': { 
+        tr: '<strong class="text-white">Uygulamalı Mentörlük:</strong> Eğitimini başarıyla tamamlayan üyelerimiz, "usta-çırak" hiyerarşisi içinde aktif projelerde görev alarak ALESTA’nın teknik birikimine doğrudan katkı sağlamaya başlar.', 
+        en: '<strong class="text-white">Applied Mentorship:</strong> Members who successfully complete their training begin to contribute directly to ALESTA\'s technical knowledge by taking part in active projects within a "master-apprentice" hierarchy.' 
+    },
 
-<div id="lightbox" onclick="closeLightbox()">
-  <img id="lightbox-img">
-</div>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+    // Misyon Vizyon
+    'mission-title': { tr: 'Misyon', en: 'Mission' },
+    'mission-text': { 
+        tr: 'Milli Teknoloji Hamlesi hedefleri doğrultusunda; otonom sistemler, yapay zeka ve su altı teknolojileri alanlarında yerli mühendislik çözümleri geliştirmektir. Genç beyinlere üretim odaklı bir vizyon ve disiplinli çalışma kültürü kazandırarak, ülkemizin bilimsel kalkınmasına katkı sağlayacak teknik yetkinliği yüksek bireyler yetiştirmeyi temel görevimiz olarak benimsiyoruz. Takım ruhu ve milli teknoloji bilinciyle, mühendislik disiplinini her projemizin merkezine koyarak geleceğin teknolojilerini bugünden inşa etmeye odaklanıyoruz.', 
+        en: 'In line with the National Technology Move goals; to develop domestic engineering solutions in the fields of autonomous systems, artificial intelligence, and underwater technologies. We adopt it as our fundamental duty to raise individuals with high technical competence who will contribute to our country\'s scientific development by providing young minds with a production-oriented vision and a disciplined working culture. With team spirit and national technology awareness, we focus on building the technologies of the future today by putting engineering discipline at the center of every project.' 
+    },
+    'vision-title': { tr: 'Vizyon', en: 'Vision' },
+    'vision-text': { 
+        tr: 'Geliştirdiğimiz otonom teknolojilerle uluslararası arenada gençlerin mühendislik kapasitesini temsil eden ve küresel ölçekte referans alınan öncü bir teknoloji ekosistemi haline gelmektir. ALESTA’nın temelinde yatan AR-GE kültürü, mevcut sistemlerin her yıl yeniden masaya yatırılmasını zorunlu kılar. Gelişimi sürekliliği olan bir operasyon olarak tanımlıyor; her üretim döneminde sistemlerimizi en güncel teknolojilerle optimize ederek otonom dünyada standartları belirleyen ve sınırları zorlayan bir yapı olmayı hedefliyoruz.', 
+        en: 'To become a pioneering technology ecosystem that represents the engineering capacity of youth in the international arena with the autonomous technologies we develop and is taken as a reference on a global scale. The R&D culture underlying ALESTA necessitates the re-evaluation of existing systems every year. We define development as a continuous operation; we aim to be a structure that sets standards and pushes boundaries in the autonomous world by optimizing our systems with the latest technologies in every production period.' 
+    },
 
-  var form = document.getElementById("contact-form");
-  var messageDiv = document.getElementById("form-message");
+    // Awards
+    'awards-title': { tr: 'Başarılarımız', en: 'Achievements' },
+    'award-2025-sauvc': { tr: '🏅 Finalistlik – Üniversiteler arasında yarışan tek Türk ve tek lise takımı', en: '🏅 Finalist – The only Turkish and only high school team competing among universities' },
+    'award-2025-idea': { tr: '🥇 Dünya 1.liği – Altın Madalya & Best Group Ödülü', en: '🥇 World 1st Place – Gold Medal & Best Group Award' },
+    'award-2024-sauvc-1': { tr: '🏅 Dünya 4.lüğü – Tek Türk ve tek lise takımı', en: '🏅 World 4th Place – The only Turkish and only high school team' },
+    'award-2024-sauvc-2': { tr: '⚡ Dünyanın En Hızlı AUV Aracı Ödülü', en: '⚡ World\'s Fastest AUV Award' },
+    'award-2024-sauvc-3': { tr: '🌊 Breaking the Surface konferans daveti (Hırvatistan)', en: '🌊 Invitation to Breaking the Surface conference (Croatia)' },
+    'award-2024-tekno-1': { tr: '🏅 Lise kategorisi Türkiye 4.lüğü', en: '🏅 4th Place in Turkey (High School Category)' },
+    'award-2024-tekno-2': { tr: '🤝 En İyi Takım Ruhu Ödülü', en: '🤝 Best Team Spirit Award' },
+    'award-2024-tekno-3': { tr: '🎓 Üniversite kategorisi Türkiye 5.liği', en: '🎓 5th Place in Turkey (University Category)' },
+    'award-2023-tekno': { tr: '🏆 Türkiye 2.liği', en: '🏆 2nd Place in Turkey' },
+    'award-2022-tekno': { tr: '🏆 Türkiye Şampiyonluğu (1.lik)', en: '🏆 Turkey Championship (1st Place)' },
+    'award-finalist': { tr: '🏅 2019 – 2021 | Her yıl finalistlik', en: '🏅 2019 – 2021 | Finalist every year' },
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+    // Vehicles
+    'vehicles-title': { tr: 'Araçlarımız', en: 'Our Vehicles' },
+    'vehicle-coy-desc': { tr: 'Üretim: 2025 | Kullanım: Günümüzde Aktif', en: 'Production: 2025 | Usage: Currently Active' },
+    'vehicle-firtina-desc': { tr: 'Üretim: 2024 | Kullanım: 2024 - 2025', en: 'Production: 2024 | Usage: 2024 - 2025' },
+    'vehicle-kasirga-desc': { tr: 'Üretim: 2022 | Kullanım: 2022 - 2023', en: 'Production: 2022 | Usage: 2022 - 2023' },
+    'vehicle-alesta-desc': { tr: 'Üretim: 2020 | Kullanım: 2020 - 2021', en: 'Production: 2020 | Usage: 2020 - 2021' },
+    'btn-details': { tr: 'Detaylar', en: 'Details' },
 
-    var formData = new FormData(form);
+    // Members
+    'members-title': { tr: 'Kadromuz', en: 'Team' },
+    'role-advisors': { tr: 'Danışmanlarımız', en: 'Advisors' },
+    'role-advisor-afl': { tr: 'Takım Danışmanı (AFL)', en: 'Team Advisor (AFL)' },
+    'role-advisor-sgm': { tr: 'Takım Danışmanı (SGM)', en: 'Team Advisor (SGM)' },
+    'role-captain': { tr: 'Takım Kaptanı', en: 'Team Captain' },
+    'role-software': { tr: 'Yazılım', en: 'Software' },
+    'role-electronics': { tr: 'Elektronik', en: 'Electronics' },
+    'role-mechanics': { tr: 'Mekanik', en: 'Mechanics' },
+    'role-media': { tr: 'Medya & Tanıtım', en: 'Media & PR' },
+    'role-dept-captain': { tr: 'Departman Kaptanı', en: 'Department Lead' },
+    'role-alumni': { tr: 'Mezunlarımız', en: 'Alumni' },
 
-    fetch("https://formspree.io/f/xreakwqn", {
-      method: "POST",
-      body: formData,
-      headers: {
-        "Accept": "application/json"
+    // Sponsors & Contact
+    'partners-title': { tr: 'Paydaşlarımız', en: 'Partners' },
+    'sponsors-title': { tr: 'Sponsorlarımız', en: 'Sponsors' },
+    'contact-title': { tr: 'İletişim', en: 'Contact' },
+    'form-name': { tr: 'Ad Soyad', en: 'Full Name' },
+    'form-email': { tr: 'E-posta', en: 'Email' },
+    'form-message': { tr: 'Mesaj', en: 'Message' },
+    'form-send': { tr: 'Gönder', en: 'Send' },
+    'contact-links': { tr: 'Bağlantılar', en: 'Links' },
+    'contact-address': { tr: 'Adres', en: 'Address' }
+  };
+
+  function toggleLanguage() {
+    currentLang = currentLang === 'tr' ? 'en' : 'tr';
+    
+    // Buton metnini değiştir
+    const langBtn = document.getElementById('lang-btn');
+    if(langBtn) {
+        langBtn.innerText = currentLang === 'tr' ? 'EN / TR' : 'TR / EN';
+    }
+    
+    // Tüm data-i18n elementlerini gez ve çevir
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[key] && translations[key][currentLang]) {
+        el.innerHTML = translations[key][currentLang];
       }
-    })
-    .then(function (response) {
-      if (response.ok) {
+    });
+  }
+
+  // Form Gönderim (Mevcut Kodun Korunan Kısmı)
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contact-form");
+    const messageDiv = document.getElementById("form-message");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch("https://formspree.io/f/mzzzdnbo", {
+        method: "POST",
+        body: formData,
+        headers: { "Accept": "application/json" },
+      })
+      .then(function (response) {
+        if (response.ok) {
+          messageDiv.innerHTML =
+            "<div class='alert alert-success'>✅ Mesajınız başarıyla gönderildi!</div>";
+          form.reset();
+        } else {
+          messageDiv.innerHTML =
+            "<div class='alert alert-danger'>❌ Bir hata oluştu. Lütfen tekrar deneyin.</div>";
+        }
+      })
+      .catch(function () {
         messageDiv.innerHTML =
-          "<div class='alert alert-success'>✅ Mesajınız başarıyla gönderildi!</div>";
-        form.reset();
-      } else {
-        messageDiv.innerHTML =
-          "<div class='alert alert-danger'>❌ Bir hata oluştu. Lütfen tekrar deneyin.</div>";
-      }
-    })
-    .catch(function () {
-      messageDiv.innerHTML =
-        "<div class='alert alert-danger'>❌ Sunucuya ulaşılamadı.</div>";
+          "<div class='alert alert-danger'>❌ Sunucuya ulaşılamadı.</div>";
+      });
     });
   });
-
-});
 </script>
 
-<style>
-@keyframes float1 {
-  0% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(100px,-80px) scale(1.1); }
-  100% { transform: translate(-80px,100px) scale(0.95); }
-}
-
-@keyframes float2 {
-  0% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(-120px,60px) scale(1.05); }
-  100% { transform: translate(80px,-100px) scale(1); }
-}
-
-@keyframes float3 {
-  0% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(60px,120px) scale(1.1); }
-  100% { transform: translate(-100px,-60px) scale(0.9); }
-}
-</style>
-<style>
-@keyframes float1 {
-  0% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(100px,-80px) scale(1.1); }
-  100% { transform: translate(-80px,100px) scale(0.95); }
-}
-
-@keyframes float2 {
-  0% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(-120px,60px) scale(1.05); }
-  100% { transform: translate(80px,-100px) scale(1); }
-}
-</style>
-
-  
 </body>
 </html>
