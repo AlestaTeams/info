@@ -141,7 +141,9 @@
         <li class="nav-item"><a class="nav-link" href="#sponsors" data-i18n="nav-sponsors">Sponsorlarımız</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav-contact">İletişim</a></li>
       </ul>
-      <button id="lang-btn" class="btn btn-sm btn-outline-light ms-lg-3 mt-2 mt-lg-0" style="border-radius: 20px; font-weight: 600;" onclick="toggleLanguage()">EN / TR</button>
+      <button id="lang-btn" class="btn btn-sm btn-outline-light ms-lg-3 mt-2 mt-lg-0" 
+              style="border-radius: 20px; font-weight: 600;" 
+              onclick="toggleLanguage()">EN</button>
     </div>
   </div>
   <div class="accent-bar"></div>
@@ -747,7 +749,7 @@
     },
 
     // Başarılar Genel
-    'awards-title': { tr: 'Başarılarımız', en: 'Our Achievements' },
+    'awards-title': { tr: 'Başarılarımız', en: 'Achievements' },
     'award-sauvc-name': { tr: 'Singapore Autonomous Underwater Vehicle Challenge (SAUVC)', en: 'Singapore Autonomous Underwater Vehicle Challenge (SAUVC)' },
     'award-idea-name': { tr: '1 Idea 1 World – Küresel İnovasyon Yarışması', en: '1 Idea 1 World – Global Innovation Competition' },
     'award-teknofest-name': { tr: 'TEKNOFEST Su Altı Sistemleri Yarışmaları', en: 'TEKNOFEST Underwater Systems Competitions' },
@@ -824,7 +826,22 @@
       if (translations[key] && translations[key][currentLang]) { el.innerHTML = translations[key][currentLang]; }
     });
   }
-
+  function toggleLanguage() {
+      const langBtn = document.getElementById('lang-btn');
+      
+      // Mevcut buton metnine göre değişim yap
+      if (langBtn.innerText === 'EN') {
+          // İNGİLİZCEYE GEÇİŞ İŞLEMLERİ
+          langBtn.innerText = 'TR';
+          // Burada i18next veya kendi çeviri mantığını çalıştırabilirsin
+          console.log("Dil İngilizceye çevrildi.");
+      } else {
+          // TÜRKÇEYE GEÇİŞ İŞLEMLERİ
+          langBtn.innerText = 'EN';
+          // Burada i18next veya kendi çeviri mantığını çalıştırabilirsin
+          console.log("Dil Türkçeye çevrildi.");
+      }
+  }
   // Form Gönderim
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("contact-form");
