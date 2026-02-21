@@ -134,32 +134,27 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top" style="padding-top:16px; padding-bottom:16px; position: relative;">
+<nav class="navbar navbar-expand-lg fixed-top" style="padding-top:16px; padding-bottom:16px;">
   <div class="container">
-    <a class="navbar-brand fw-bold d-flex align-items-center" href="#hero">
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="#hero" style="margin-left:24px;">
       <img src="alestalogo.png" alt="Alesta Logo" width="32" height="28" style="margin-right:8px;">
       <span style="color:#ffffff;">ALESTA TEAMS</span>
     </a>
-    
-    <div class="d-flex align-items-center order-lg-3">
-      <button id="lang-btn" class="btn btn-sm btn-outline-light me-3" style="border-radius: 20px; font-weight: 600; width: 45px;" onclick="toggleLanguage()">EN</button>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-
-    <div id="nav" class="collapse navbar-collapse order-lg-2">
-      <ul class="navbar-nav ms-auto pe-lg-4">
-        <li class="nav-item"><a class="nav-link" href="#about"><i class="fa-solid fa-address-card me-2 text-primary d-lg-none"></i><span data-i18n="nav-about">Hakkımızda</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="#awards"><i class="fa-solid fa-trophy me-2 text-warning d-lg-none"></i><span data-i18n="nav-awards">Başarılarımız</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="#vehicles"><i class="fa-solid fa-ship me-2 text-info d-lg-none"></i><span data-i18n="nav-vehicles">Araçlarımız</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="#members"><i class="fa-solid fa-users me-2 text-success d-lg-none"></i><span data-i18n="nav-members">Kadromuz</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="#sponsors"><i class="fa-solid fa-handshake me-2 text-danger d-lg-none"></i><span data-i18n="nav-sponsors">Sponsorlarımız</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact"><i class="fa-solid fa-envelope me-2 text-secondary d-lg-none"></i><span data-i18n="nav-contact">İletişim</span></a></li>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="nav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto" style="margin-right:16px;">
+        <li class="nav-item"><a class="nav-link" href="#about" data-i18n="nav-about">Hakkımızda</a></li>
+        <li class="nav-item"><a class="nav-link" href="#awards" data-i18n="nav-awards">Başarılarımız</a></li>
+        <li class="nav-item"><a class="nav-link" href="#vehicles" data-i18n="nav-vehicles">Araçlarımız</a></li>
+        <li class="nav-item"><a class="nav-link" href="#members" data-i18n="nav-members">Kadromuz</a></li>
+        <li class="nav-item"><a class="nav-link" href="#sponsors" data-i18n="nav-sponsors">Sponsorlarımız</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav-contact">İletişim</a></li>
       </ul>
+      <button id="lang-btn" class="btn btn-sm btn-outline-light ms-lg-3 mt-2 mt-lg-0" style="border-radius: 20px; font-weight: 600; min-width: 80px;" onclick="toggleLanguage()">EN / TR</button>
     </div>
   </div>
-  <div class="accent-bar"></div>
 </nav>
 
 <header id="hero" class="hero section text-center d-flex align-items-center justify-content-center">
@@ -670,30 +665,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Akıllı Navbar Mantığı (Erenovski için)
-  let lastScrollTop = 0;
-  const navbar = document.querySelector('.navbar');
-  const scrollThreshold = 10; // Küçük hareketlerde navbar'ın hemen tepki vermemesi için tolerans payı
-
-  window.addEventListener('scroll', function() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    // Eğer aşağı kaydırıyorsak ve belirli bir mesafeyi (100px) geçtiysek navbar'ı gizle
-    if (scrollTop > lastScrollTop && scrollTop > 100) {
-      navbar.classList.add('nav-hide');
-    } 
-    // Eğer yukarı kaydırıyorsak (threshold kadar) navbar'ı göster
-    else if (lastScrollTop - scrollTop > scrollThreshold) {
-      navbar.classList.remove('nav-hide');
+let currentLang = 'tr';
+  function toggleLanguage() {
+    currentLang = currentLang === 'tr' ? 'en' : 'tr';
+    const langBtn = document.getElementById('lang-btn');
+    if(langBtn) { 
+        // Buton üzerinde EN / TR yazısı sabit kalabilir veya EN / TR şeklinde dönebilir
+        langBtn.innerText = currentLang === 'tr' ? 'EN / TR' : 'TR / EN'; 
     }
-
-    // Scroll en üstteyse her zaman göster
-    if (scrollTop <= 0) {
-      navbar.classList.remove('nav-hide');
-    }
-
-    lastScrollTop = scrollTop;
-  });
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[key] && translations[key][currentLang]) { 
+          el.innerHTML = translations[key][currentLang]; 
+      }
+    });
+  }
   function openLightbox(src){
     document.getElementById('lightbox-img').src = src;
     document.getElementById('lightbox').style.display = 'flex';
