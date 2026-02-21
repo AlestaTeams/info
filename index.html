@@ -101,13 +101,13 @@
     }
     
     .marquee-item img { 
-      max-width: 150px !important; 
-      max-height: 75px !important; 
+      max-width: 160px !important; /* Çerçeve genişliğine göre ayarlanabilir */
+      max-height: 80px !important;  /* Çerçeve yüksekliğine göre ayarlanabilir */
       width: auto;
       height: auto;
-      object-fit: contain; 
-    }
-    
+      object-fit: contain; /* Logonun tamamını çerçeveye sığdırır */
+    }}
+        
     @keyframes scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
@@ -189,7 +189,7 @@
 
     <div class="mb-5 scroll-reveal reveal-fade">
       <h5 class="fw-bold text-primary mb-3">
-        <i class="fa-solid fa-rocket me-2"></i><span data-i18n="about-subtitle">ALESTA: Fikirden Gerçeğe, Su Altından Geleceğe</span>
+        <i class="fa-solid fa-rocket me-2"></i><span data-i18n="about-subtitle">ALESTA: Hazır ve Tetikte</span>
       </h5>
       <p style="color: rgba(255,255,255,0.85);" class="mb-3" data-i18n="about-p1">
         Hikayemiz 2019 yılında, Adana Fen Lisesi'nde su altı teknolojilerine duyduğumuz merakla başladı. Kurulduğumuz günden bu yana, sürdürülebilirlik temelli takım anlayışımızla her yıl kendimizi geliştiriyor; bilgi birikimimizi yeni nesil ekip üyelerine aktararak güçlü ve kalıcı bir yapı inşa ediyoruz. 
@@ -757,7 +757,7 @@
 
     // Hakkımızda
     'about-title': { tr: 'Hakkımızda', en: 'About Us' },
-    'about-subtitle': { tr: 'ALESTA: Fikirden Gerçeğe, Su Altından Geleceğe', en: 'ALESTA: From Idea to Reality, From Underwater to the Future' },
+    'about-subtitle': { tr: 'ALESTA: Hazır ve Tetikte', en: 'ALESTA: Ready and Alert' },
     'about-p1': { 
         tr: 'Hikayemiz 2019 yılında, Adana Fen Lisesi\'nde su altı teknolojilerine duyduğumuz merakla başladı. Kurulduğumuz günden bu yana, sürdürülebilirlik temelli takım anlayışımızla her yıl kendimizi geliştiriyor; bilgi birikimimizi yeni nesil ekip üyelerine aktararak güçlü ve kalıcı bir yapı inşa ediyoruz.', 
         en: 'Our story began in 2019 at Adana Science High School with a curiosity for underwater technologies. Since our inception, we have been improving ourselves every year with a sustainability-based team mentality; we build a strong and lasting structure by transferring our knowledge to the next generation of team members.' 
