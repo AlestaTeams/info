@@ -39,7 +39,10 @@
     .section-sub{color:var(--text-1); margin-bottom:32px;}
     .role{color:var(--accent); font-weight:600;}
     footer{border-top:1px solid rgba(255,255,255,0.12); padding:24px 0; color:var(--text-1);}
-    .accent-bar{height:2px; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:var(--shadow-neon);}
+    
+    /* Navbar Altındaki İnce Çizgi */
+    .accent-bar { height:2px; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:var(--shadow-neon); width: 100%; position: absolute; bottom: 0; left: 0; }
+    
     html{scroll-behavior:smooth;}
 
     /* Scroll Animasyonları */
@@ -51,7 +54,6 @@
     .scroll-reveal.active { opacity: 1; transform: translate(0, 0); }
 
     /* Sponsor Marquee (Kayan Şerit) */
-/* Sponsor Marquee (Kayan Şerit) */
     .marquee-wrapper {
       width: 100vw;
       max-width: 100%;
@@ -76,11 +78,11 @@
       align-items: center;
       justify-content: center;
       background: var(--card-glass);
-      border: 1.5px solid #ffc107 !important; /* Tüm logolara zorunlu sarı çerçeve */
+      border: 1.5px solid #ffc107 !important; 
       border-radius: 16px;
       padding: 20px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      flex-shrink: 0; /* KUTULARIN EZİLMESİNİ VE KAYMANIN DURMASINI ENGELLER */
+      flex-shrink: 0; 
     }
     .marquee-item:hover {
       transform: translateY(-5px);
@@ -88,7 +90,6 @@
       background: rgba(255,193,7,0.05);
     }
     
-    /* Logoların Dışarı Taşmasını Kesin Olarak Engelle */
     .marquee-item img { 
       max-width: 150px !important; 
       max-height: 75px !important; 
@@ -123,27 +124,29 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top" style="padding-top:16px; padding-bottom:16px;">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bold d-flex align-items-center" href="#hero" style="margin-left:24px;">
+<nav class="navbar navbar-expand-lg fixed-top" style="padding-top:16px; padding-bottom:16px; position: relative;">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="#hero">
       <img src="alestalogo.png" alt="Alesta Logo" width="32" height="28" style="margin-right:8px;">
       <span style="color:#ffffff;">ALESTA TEAMS</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="nav" class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto" style="margin-right:16px;">
-        <li class="nav-item"><a class="nav-link" href="#about" data-i18n="nav-about">Hakkımızda</a></li>
-        <li class="nav-item"><a class="nav-link" href="#awards" data-i18n="nav-awards">Başarılarımız</a></li>
-        <li class="nav-item"><a class="nav-link" href="#vehicles" data-i18n="nav-vehicles">Araçlarımız</a></li>
-        <li class="nav-item"><a class="nav-link" href="#members" data-i18n="nav-members">Kadromuz</a></li>
-        <li class="nav-item"><a class="nav-link" href="#sponsors" data-i18n="nav-sponsors">Sponsorlarımız</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav-contact">İletişim</a></li>
+    
+    <div class="d-flex align-items-center order-lg-3">
+      <button id="lang-btn" class="btn btn-sm btn-outline-light me-3" style="border-radius: 20px; font-weight: 600; width: 45px;" onclick="toggleLanguage()">EN</button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div id="nav" class="collapse navbar-collapse order-lg-2">
+      <ul class="navbar-nav ms-auto pe-lg-4">
+        <li class="nav-item"><a class="nav-link" href="#about"><i class="fa-solid fa-address-card me-2 text-primary d-lg-none"></i><span data-i18n="nav-about">Hakkımızda</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#awards"><i class="fa-solid fa-trophy me-2 text-warning d-lg-none"></i><span data-i18n="nav-awards">Başarılarımız</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#vehicles"><i class="fa-solid fa-ship me-2 text-info d-lg-none"></i><span data-i18n="nav-vehicles">Araçlarımız</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#members"><i class="fa-solid fa-users me-2 text-success d-lg-none"></i><span data-i18n="nav-members">Kadromuz</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#sponsors"><i class="fa-solid fa-handshake me-2 text-danger d-lg-none"></i><span data-i18n="nav-sponsors">Sponsorlarımız</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact"><i class="fa-solid fa-envelope me-2 text-secondary d-lg-none"></i><span data-i18n="nav-contact">İletişim</span></a></li>
       </ul>
-      <button id="lang-btn" class="btn btn-sm btn-outline-light ms-lg-3 mt-2 mt-lg-0" 
-              style="border-radius: 20px; font-weight: 600;" 
-              onclick="toggleLanguage()">EN</button>
     </div>
   </div>
   <div class="accent-bar"></div>
@@ -818,30 +821,24 @@
   };
 
   function toggleLanguage() {
+    // Önce dili değiştir
     currentLang = currentLang === 'tr' ? 'en' : 'tr';
+    
+    // Butonun üzerindeki yazıyı ayarla (İngilizceye geçtiksek geri dönmek için "TR" yazsın)
     const langBtn = document.getElementById('lang-btn');
-    if(langBtn) { langBtn.innerText = currentLang === 'tr' ? 'EN / TR' : 'TR / EN'; }
+    if(langBtn) { 
+        langBtn.innerText = currentLang === 'tr' ? 'EN' : 'TR'; 
+    }
+    
+    // Çevirileri uygula
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if (translations[key] && translations[key][currentLang]) { el.innerHTML = translations[key][currentLang]; }
+      if (translations[key] && translations[key][currentLang]) { 
+          el.innerHTML = translations[key][currentLang]; 
+      }
     });
   }
-  function toggleLanguage() {
-      const langBtn = document.getElementById('lang-btn');
-      
-      // Mevcut buton metnine göre değişim yap
-      if (langBtn.innerText === 'EN') {
-          // İNGİLİZCEYE GEÇİŞ İŞLEMLERİ
-          langBtn.innerText = 'TR';
-          // Burada i18next veya kendi çeviri mantığını çalıştırabilirsin
-          console.log("Dil İngilizceye çevrildi.");
-      } else {
-          // TÜRKÇEYE GEÇİŞ İŞLEMLERİ
-          langBtn.innerText = 'EN';
-          // Burada i18next veya kendi çeviri mantığını çalıştırabilirsin
-          console.log("Dil Türkçeye çevrildi.");
-      }
-  }
+
   // Form Gönderim
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("contact-form");
