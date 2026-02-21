@@ -25,11 +25,17 @@
       --shadow-neon:0 0 24px rgba(0,123,255,0.25);
     }
     html,body{background:radial-gradient(1200px 800px at 10% 10%, #0d141b 0%, var(--bg-0) 35%), linear-gradient(180deg, var(--bg-0), var(--bg-1)); color:var(--text-0); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
+    
+    /* Navbar ve Akıllı Kaydırma Stilleri */
     .navbar {
       backdrop-filter: saturate(140%) blur(8px);
       background-color: rgba(10, 14, 18, 0.6);
-      position: relative;
+      transition: transform 0.4s ease-in-out; 
     }
+    .nav-hide {
+      transform: translateY(-100%);
+    }
+    
     .nav-link{font-weight:600;}
     .nav-link.active{color:var(--accent) !important;}
     .section{padding:80px 0; overflow-x: hidden;}
@@ -44,7 +50,7 @@
     .role{color:var(--accent); font-weight:600;}
     footer{border-top:1px solid rgba(255,255,255,0.12); padding:24px 0; color:var(--text-1);}
     
-    /* Navbar Altındaki İnce Çizgi Geri Geldi */
+    /* Navbar Altındaki İnce Çizgi */
     .accent-bar { height:2px; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:var(--shadow-neon); width: 100%; position: absolute; bottom: 0; left: 0; }
     
     html{scroll-behavior:smooth;}
@@ -149,7 +155,8 @@
       <button id="lang-btn" class="btn btn-sm btn-outline-light ms-lg-3 mt-2 mt-lg-0" style="border-radius: 20px; font-weight: 600; min-width: 80px;" onclick="toggleLanguage()">EN / TR</button>
     </div>
   </div>
-  <div class="accent-bar"></div> </nav>
+  <div class="accent-bar"></div>
+</nav>
 
 <header id="hero" class="hero section text-center d-flex align-items-center justify-content-center">
   <div class="container">
@@ -349,7 +356,7 @@
       
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-left">
         <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
-          <img src="2.png" style="width: 140px; height: 110px; border-radius:8px; object-fit: cover; flex-shrink: 0;">
+          <img src="2.png" style="width: 140px; height: 110px; border-radius: 12px; object-fit: contain; background-color: rgba(0,0,0,0.3); padding: 4px; border: 3px solid #1a365d; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">ÇÖY</h6>
             <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-coy-desc">Üretim: 2025 | Günümüzde Aktif</p>
@@ -360,7 +367,7 @@
 
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-right">
         <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
-          <img src="3.png" style="width: 140px; height: 110px; border-radius:8px; object-fit: cover; flex-shrink: 0;">
+          <img src="3.png" style="width: 140px; height: 110px; border-radius: 12px; object-fit: contain; background-color: rgba(0,0,0,0.3); padding: 4px; border: 3px solid #1a365d; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">FIRTINA</h6>
             <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-firtina-desc">Üretim: 2024 | 2024-2025</p>
@@ -371,7 +378,7 @@
 
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-left">
         <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
-          <img src="4.png" style="width: 140px; height: 110px; border-radius:8px; object-fit: cover; flex-shrink: 0;">
+          <img src="4.png" style="width: 140px; height: 110px; border-radius: 12px; object-fit: contain; background-color: rgba(0,0,0,0.3); padding: 4px; border: 3px solid #1a365d; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">BİSKÜVİ</h6>
             <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-bisküvi-desc">Üretim: 2023 | 2023-2024</p>
@@ -382,7 +389,7 @@
 
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-right">
         <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
-          <img src="5.png" style="width: 140px; height: 110px; border-radius:8px; object-fit: cover; flex-shrink: 0;">
+          <img src="5.png" style="width: 140px; height: 110px; border-radius: 12px; object-fit: contain; background-color: rgba(0,0,0,0.3); padding: 4px; border: 3px solid #1a365d; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">GÜMEÇ</h6>
             <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-gumec-desc">Üretim: 2021 | 2022-2024</p>
@@ -393,7 +400,7 @@
 
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-left">
         <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
-          <img src="6.png" style="width: 140px; height: 110px; border-radius:8px; object-fit: cover; flex-shrink: 0;">
+          <img src="6.png" style="width: 140px; height: 110px; border-radius: 12px; object-fit: contain; background-color: rgba(0,0,0,0.3); padding: 4px; border: 3px solid #1a365d; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">ALESTAROV 2</h6>
             <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-alesta2-desc">Üretim: 2020 | 2020-2021</p>
@@ -404,7 +411,7 @@
 
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-right">
         <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
-          <img src="7.png" style="width: 140px; height: 110px; border-radius:8px; object-fit: cover; flex-shrink: 0;">
+          <img src="7.png" style="width: 140px; height: 110px; border-radius: 12px; object-fit: contain; background-color: rgba(0,0,0,0.3); padding: 4px; border: 3px solid #1a365d; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">ALESTAROV</h6>
             <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-alesta1-desc">Üretim: 2019 | 2019-2020</p>
@@ -692,6 +699,31 @@
       arrow.classList.add('rotate');
     }
   }
+
+  // Akıllı Navbar Mantığı
+  let lastScrollTop = 0;
+  const navbar = document.querySelector('.navbar');
+  const scrollThreshold = 10;
+
+  window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Aşağı kaydırırken ve belirli bir yüksekliği geçince gizle
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      navbar.classList.add('nav-hide');
+    } 
+    // Yukarı kaydırırken eşiği geçince göster
+    else if (lastScrollTop - scrollTop > scrollThreshold) {
+      navbar.classList.remove('nav-hide');
+    }
+
+    // En üstte hep göster
+    if (scrollTop <= 0) {
+      navbar.classList.remove('nav-hide');
+    }
+
+    lastScrollTop = scrollTop;
+  });
 
   // Animasyon Sistemi (Intersection Observer)
   document.addEventListener("DOMContentLoaded", function () {
