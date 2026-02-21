@@ -27,6 +27,7 @@
     }
     html,body{background:radial-gradient(1200px 800px at 10% 10%, #0d141b 0%, var(--bg-0) 35%), linear-gradient(180deg, var(--bg-0), var(--bg-1)); color:var(--text-0); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
     
+    /* Navbar ve Akıllı Kaydırma Stilleri */
     .navbar {
       backdrop-filter: saturate(140%) blur(8px);
       background-color: rgba(10, 14, 18, 0.6);
@@ -50,10 +51,12 @@
     .role{color:var(--accent); font-weight:600;}
     footer{border-top:1px solid rgba(255,255,255,0.12); padding:24px 0; color:var(--text-1);}
     
+    /* Navbar Altındaki İnce Çizgi */
     .accent-bar { height:2px; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:var(--shadow-neon); width: 100%; position: absolute; bottom: 0; left: 0; }
     
     html{scroll-behavior:smooth;}
 
+    /* Scroll Animasyonları */
     .scroll-reveal { opacity: 0; transition: all 0.9s cubic-bezier(0.25, 0.8, 0.25, 1); }
     .reveal-left { transform: translateX(-150px); }
     .reveal-right { transform: translateX(150px); }
@@ -61,6 +64,7 @@
     .reveal-drop { transform: translateY(-50px); transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .scroll-reveal.active { opacity: 1; transform: translate(0, 0); }
 
+    /* Sponsor Marquee (Kayan Şerit) */
     .marquee-wrapper {
       width: 100vw;
       max-width: 100%;
@@ -98,11 +102,11 @@
     }
     
     .marquee-item img { 
-      max-width: 160px !important;
-      max-height: 80px !important;
+      max-width: 160px !important; /* Çerçeve genişliğine göre ayarlanabilir */
+      max-height: 80px !important;  /* Çerçeve yüksekliğine göre ayarlanabilir */
       width: auto;
       height: auto;
-      object-fit: contain;
+      object-fit: contain; /* Logonun tamamını çerçeveye sığdırır */
     }
         
     @keyframes scroll {
@@ -110,6 +114,7 @@
       100% { transform: translateX(-50%); }
     }
 
+    /* Awards Styles */
     .awards-list { max-width: 1000px; margin: 0 auto; padding: 40px 16px; }
     .award-year-card {
       border-radius: 6px; cursor: pointer; margin-top: 15px; margin-bottom: 16px; padding: 16px 20px;
@@ -199,6 +204,7 @@
     </div>
 
     <div class="row g-4">
+      
       <div class="col-12 scroll-reveal reveal-fade">
         <div class="border border-primary rounded-4 p-4 shadow-sm h-100" style="background: rgba(255,255,255,0.03);">
           <h5 class="fw-bold text-primary mb-3">
@@ -245,6 +251,7 @@
           </p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -410,7 +417,9 @@
     <h2 class="section-title text-center mb-5 scroll-reveal reveal-fade">
       <i class="fa-solid fa-ship me-2 text-primary"></i><span data-i18n="vehicles-title">Araçlarımız</span>
     </h2>
+      
     <div class="row g-3 justify-content-center">
+      
       <div class="col-lg-5 col-md-6 scroll-reveal reveal-left">
         <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
           <img src="ÇÖYfoto.jpeg" style="width: 140px; height: 110px; border-radius: 12px; object-fit: cover; background-color: rgba(0,0,0,0.3); padding: 4px; border: 3px solid #1a365d; flex-shrink: 0;">
@@ -455,38 +464,41 @@
         </div>
       </div>
 
-      <div class="col-lg-5 col-md-6 scroll-reveal reveal-right">
+      <div class="col-lg-5 col-md-6 scroll-reveal reveal-left">
         <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
           <img src="ALSTROV2foto.jpg" style="width: 140px; height: 110px; border-radius: 12px; object-fit: cover; background-color: rgba(0,0,0,0.3); padding: 4px; border: 3px solid #1a365d; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">ALESTAROV 2</h6>
-            <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-alesta1-desc">Üretim: 2020 | 2021</p>
+            <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-alesta2-desc">Üretim: 2020 | 2021</p>
             <a href="https://alestateams.github.io/vehicles/#alestarov2" class="btn btn-sm btn-outline-light py-0 px-2" style="border-radius: 15px; font-size: 0.7rem;" data-i18n="btn-details">Detaylar</a>
           </div>
         </div>
       </div>
 
-      <div class="col-lg-5 col-md-6 scroll-reveal reveal-left">
+      <div class="col-lg-5 col-md-6 scroll-reveal reveal-right">
         <div class="p-3 d-flex gap-3 align-items-center card-glass h-100" style="background-color:#0d1b2a; border-radius:12px; border: 1px solid rgba(255,255,255,0.1);">
           <img src="ALSTROVfoto.jpg" style="width: 140px; height: 110px; border-radius: 12px; object-fit: cover; background-color: rgba(0,0,0,0.3); padding: 4px; border: 3px solid #1a365d; flex-shrink: 0;">
           <div class="flex-grow-1">
             <h6 class="fw-bold mb-1 text-white" translate="no">ALESTAROV</h6>
-            <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-alesta2-desc">Üretim: 2019 | 2020</p>
+            <p class="mb-2" style="color: rgba(255,255,255,0.7); font-size: 0.75rem;" data-i18n="vehicle-alesta1-desc">Üretim: 2019 | 2020</p>
             <a href="https://alestateams.github.io/vehicles/#alestarov" class="btn btn-sm btn-outline-light py-0 px-2" style="border-radius: 15px; font-size: 0.7rem;" data-i18n="btn-details">Detaylar</a>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <section id="members" class="section">
   <div class="container">
+    
     <div class="text-center mb-5 scroll-reveal reveal-fade">
       <h2 class="section-title d-inline-flex align-items-center justify-content-center">
         <i class="fa-solid fa-users-gear me-3 text-primary"></i>
         <span data-i18n="members-title">Kadromuz</span>
       </h2>
+      
       <div class="mt-2 mt-md-0 d-md-inline-block ms-md-3">
         <button class="btn btn-outline-light btn-sm" data-bs-toggle="collapse" data-bs-target="#danismanlarCollapse" style="border-radius: 20px; padding: 5px 15px; font-size: 0.85rem;">
           <i class="fa-solid fa-chalkboard-user me-2"></i><span data-i18n="role-advisors">Danışmanlar</span>
@@ -515,6 +527,7 @@
     </div>
 
     <div class="row g-4 justify-content-center">
+      
       <div class="col-xl-3 col-lg-4 col-md-6">
         <h5 style="color: #00e5ff;" class="fw-bold text-center mb-3"><i class="fa-solid fa-code me-2"></i><span data-i18n="role-software">Yazılım</span></h5>
         <div class="card-glass p-3 mb-2 text-center scroll-reveal reveal-fade" style="border: 1px solid #00e5ff; position: relative; z-index: 5;">
@@ -574,10 +587,8 @@
       </div>
       <div class="award-details text-start" id="m2024">
         <div class="card-glass p-4 mb-3">
-          <div class="mb-3 d-flex align-items-center flex-wrap"><span class="fw-bold text-primary me-2"><i class="fa-solid fa-chalkboard-user me-1"></i> <span data-i18n="role-founder">Takım Kurucusu / Danışmanı:</span></span><span class="fw-bold" translate="no" style="color: rgba(255,255,255,0.85);">İsmail Akdaş</span></div>
-          <hr style="opacity:0.1; border-color: white;">
-          <div class="mb-3 d-flex align-items-center flex-wrap"><span class="fw-bold text-primary me-2"><i class="fa-solid fa-chalkboard-user me-1"></i> <span data-i18n="role-2025-advisor">2025 Takım Danışmanı:</span></span><span class="fw-bold" translate="no" style="color: rgba(255,255,255,0.85);">İbrahim Tokgöz</span></div>
-          <hr style="opacity:0.1; border-color: white;">
+          <div class="mb-3 d-flex align-items-center flex-wrap"><span class="fw-bold text-primary me-2"><i class="fa-solid fa-chalkboard-user me-1"></i> <span data-i18n="role-founder">Takım Kurucusu / Danışmanı:</span></span><span class="fw-bold" translate="no" style="color: rgba(255,255,255,0.85);">İsmail Akdaş</span></div>          <hr style="opacity:0.1; border-color: white;">
+          <div class="mb-3 d-flex align-items-center flex-wrap"><span class="fw-bold text-primary me-2"><i class="fa-solid fa-chalkboard-user me-1"></i> <span data-i18n="role-2025-advisor">2025 Takım Danışmanı:</span></span><span class="fw-bold" translate="no" style="color: rgba(255,255,255,0.85);">İbrahim Tokgöz</span></div>          <hr style="opacity:0.1; border-color: white;">
           <div class="mb-4"><h6 class="fw-bold text-primary" translate="no">2025</h6><div>Eren Özcan, Eslem Sena Kanat, Hacer Şeker, Alya Erteni</div></div>
           <hr style="opacity:0.1; border-color: white;">
           <div class="mb-4"><h6 class="fw-bold text-primary" translate="no">2024</h6><div>Pelinsu Loğoğlu, Can Koç, Ömer Aybars Çelebi</div></div>
@@ -729,6 +740,7 @@
     if(langBtn) { 
         langBtn.innerText = currentLang === 'en' ? 'TR / EN' : 'EN / TR'; 
     }
+    
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (translations[key] && translations[key][currentLang]) { 
@@ -737,6 +749,11 @@
     });
   }
 
+  function openLightbox(src){
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+  
   function toggleAwards(id) {
     const details = document.getElementById(id);
     const arrow = document.getElementById('arrow-' + id);
@@ -749,74 +766,197 @@
     }
   }
 
+  // Akıllı Navbar Mantığı
   let lastScrollTop = 0;
   const navbar = document.querySelector('.navbar');
   const scrollThreshold = 10;
 
   window.addEventListener('scroll', function() {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Aşağı kaydırırken ve belirli bir yüksekliği geçince gizle
     if (scrollTop > lastScrollTop && scrollTop > 100) {
       navbar.classList.add('nav-hide');
     } 
+    // Yukarı kaydırırken eşiği geçince göster
     else if (lastScrollTop - scrollTop > scrollThreshold) {
       navbar.classList.remove('nav-hide');
     }
+
+    // En üstte hep göster
     if (scrollTop <= 0) {
       navbar.classList.remove('nav-hide');
     }
+
     lastScrollTop = scrollTop;
   });
 
+  // Animasyon Sistemi (Intersection Observer)
   document.addEventListener("DOMContentLoaded", function () {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
         } else {
-          entry.target.classList.remove('active');
+          entry.target.classList.remove('active'); // Aşağı yukarı her kaydırmada animasyonu tekrar oynatır
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1 }); // Ekranda %10'u göründüğünde başlar
+
     document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
   });
 
+  // Çeviri Sistemi
   const translations = {
+    // Navbar
     'nav-about': { tr: 'Hakkımızda', en: 'About Us' },
     'nav-awards': { tr: 'Başarılarımız', en: 'Achievements' },
     'nav-vehicles': { tr: 'Araçlarımız', en: 'Vehicles' },
     'nav-members': { tr: 'Kadromuz', en: 'Team' },
     'nav-sponsors': { tr: 'Sponsorlarımız', en: 'Sponsors' },
     'nav-contact': { tr: 'İletişim', en: 'Contact' },
+    
+    // Hero
     'hero-slogan': { tr: 'Ready and Alert', en: 'Ready and Alert' },
     'btn-who': { tr: 'Biz Kimiz?', en: 'Who Are We?' },
     'btn-contact': { tr: 'İletişime Geç', en: 'Get in Touch' },
+
+    // Hakkımızda
     'about-title': { tr: 'Hakkımızda', en: 'About Us' },
     'about-subtitle': { tr: 'ALESTA: Hazır ve Tetikte', en: 'ALESTA: Ready and Alert' },
-    'about-p1': { tr: '...', en: '...' }, // vs... (mevcut çeviriler)
+    'about-p1': { 
+        tr: 'Hikayemiz 2019 yılında, Adana Fen Lisesi\'nde su altı teknolojilerine duyduğumuz merakla başladı. Kurulduğumuz günden bu yana, sürdürülebilirlik temelli takım anlayışımızla her yıl kendimizi geliştiriyor; bilgi birikimimizi yeni nesil ekip üyelerine aktararak güçlü ve kalıcı bir yapı inşa ediyoruz.', 
+        en: 'Our story began in 2019 at Adana Science High School with a curiosity for underwater technologies. Since our inception, we have been improving ourselves every year with a sustainability-based team mentality; we build a strong and lasting structure by transferring our knowledge to the next generation of team members.' 
+    },
+    'about-p2': { 
+        tr: 'Adana Fen Lisesi ve Seyhan Gençlik Merkezi ile yürüttüğümüz ortak çalışmalar sayesinde birçok ulusal ve uluslararası arenada hem takımımızı hem de ülkemizi gururla temsil etmeyi hedefliyoruz. Takım çalışmalarımızı Mekanik, Elektronik, Yazılım ve Medya olmak üzere dört ana departman üzerinden, tam bir uyum içinde yürütüyoruz.', 
+        en: 'Thanks to our joint efforts with Adana Science High School and Seyhan Youth Center, we aim to proudly represent both our team and our country in many national and international arenas. We carry out our team operations in perfect harmony through four main departments: Mechanics, Electronics, Software, and Media.' 
+    },
+    'about-p3': { 
+        tr: 'Su altı kategorisinde başlayan bu yenilikçi yolculuğumuz, bugün vizyonumuzu daha da genişleterek Robolig ve Sanayide Dijital Teknolojiler gibi farklı alanlardaki projelerle hız kesmeden devam ediyor.', 
+        en: 'Our innovative journey, which started in the underwater category, continues today without slowing down by expanding our vision with projects in different fields such as Roboleague and digital technologies in industry.' 
+    },
+
+    // Akademi
+    'academy-title': { tr: 'ALESTA Akademi', en: 'ALESTA Academy' },
+    'academy-desc': { 
+        tr: 'ALESTA Akademi, sadece bir eğitim programı değil; takımın sürdürülebilirliğini sağlayan bir tecrübe aktarım merkezidir. Burası, teorik bilginin sahada gerçek projelere dönüştüğü ilk duraktır.', 
+        en: 'ALESTA Academy is not just a training program; it is an experience transfer center that ensures the sustainability of the team. This is the first stop where theoretical knowledge turns into real projects in the field.' 
+    },
+    'academy-li1': { 
+        tr: '<strong class="text-white">Eğitim Süreci:</strong> Takımımıza dahil olmak isteyen öğrenci arkadaşlarımız; temel elektronik, yazılım, mekanik tasarım ve proje yönetimi konularında kapsamlı bir hazırlık sürecinden geçer.', 
+        en: '<strong class="text-white">Training Process:</strong> Students who want to join our team go through a comprehensive preparation process covering basic electronics, software, mechanical design, and project management.' 
+    },
+    'academy-li2': { 
+        tr: '<strong class="text-white">Uygulamalı Mentörlük:</strong> Eğitimini başarıyla tamamlayan üyelerimiz, "usta-çırak" hiyerarşisi içinde aktif projelerde görev alarak ALESTA’nın teknik birikimine doğrudan katkı sağlamaya başlar.', 
+        en: '<strong class="text-white">Applied Mentorship:</strong> Members who successfully complete their training begin to contribute directly to ALESTA\'s technical knowledge by taking part in active projects within a "master-apprentice" hierarchy.' 
+    },
+
+    // Misyon Vizyon
+    'mission-title': { tr: 'Misyon', en: 'Mission' },
+    'mission-text': { 
+        tr: 'Milli Teknoloji Hamlesi hedefleri doğrultusunda; otonom sistemler, yapay zeka ve su altı teknolojileri alanlarında yerli mühendislik çözümleri geliştirmektir. Genç beyinlere üretim odaklı bir vizyon ve disiplinli çalışma kültürü kazandırarak, ülkemizin bilimsel kalkınmasına katkı sağlayacak teknik yetkinliği yüksek bireyler yetiştirmeyi temel görevimiz olarak benimsiyoruz. Takım ruhu ve milli teknoloji bilinciyle, mühendislik disiplinini her projemizin merkezine koyarak geleceğin teknolojilerini bugünden inşa etmeye odaklanıyoruz.', 
+        en: 'In line with the National Technology Move goals; to develop domestic engineering solutions in the fields of autonomous systems, artificial intelligence, and underwater technologies. We adopt it as our fundamental duty to raise individuals with high technical competence who will contribute to our country\'s scientific development by providing young minds with a production-oriented vision and a disciplined working culture. With team spirit and national technology awareness, we focus on building the technologies of the future today by putting engineering discipline at the center of every project.' 
+    },
+    'vision-title': { tr: 'Vizyon', en: 'Vision' },
+    'vision-text': { 
+        tr: 'Geliştirdiğimiz otonom teknolojilerle uluslararası arenada gençlerin mühendislik kapasitesini temsil eden ve küresel ölçekte referans alınan öncü bir teknoloji ekosistemi haline gelmektir. ALESTA’nın temelinde yatan AR-GE kültürü, mevcut sistemlerin her yıl yeniden masaya yatırılmasını zorunlu kılar. Gelişimi sürekliliği olan bir operasyon olarak tanımlıyor; her üretim döneminde sistemlerimizi en güncel teknolojilerle optimize ederek otonom dünyada standartları belirleyen ve sınırları zorlayan bir yapı olmayı hedefliyoruz.', 
+        en: 'To become a pioneering technology ecosystem that represents the engineering capacity of youth in the international arena with the autonomous technologies we develop and is taken as a reference on a global scale. The R&D culture underlying ALESTA necessitates the re-evaluation of existing systems every year. We define development as a continuous operation; we aim to be a structure that sets standards and pushes boundaries in the autonomous world by optimizing our systems with the latest technologies in every production period.' 
+    },
+
+    // Başarılar Genel
     'awards-title': { tr: 'Başarılarımız', en: 'Achievements' },
     'award-sauvc-name': { tr: 'Singapore Autonomous Underwater Vehicle Challenge (SAUVC)', en: 'Singapore Autonomous Underwater Vehicle Challenge (SAUVC)' },
+    'award-idea-name': { tr: '1 Idea 1 World – Küresel İnovasyon Yarışması', en: '1 Idea 1 World – Global Innovation Competition' },
     'award-teknofest-name': { tr: 'TEKNOFEST Su Altı Sistemleri Yarışmaları', en: 'TEKNOFEST Underwater Systems Competitions' },
     'award-saf-name': { tr: 'STEAM Azerbaijan Festival', en: 'STEAM Azerbaijan Festival' },
-    // Diğer çevirileri burada koruyun...
+  
+    // 2025 Detaylar
+    'award-2025-sauvc': { tr: '🏅 Finalistlik – Üniversiteler arasında yarışan tek Türk ve tek lise takımı', en: '🏅 Finalist – The only Turkish and the only high school team competing among universities' },
+    'award-2025-idea': { tr: '🥇 Altın Madalya', en: '🥇 Gold Medal' },
+    'award-2025-tekno-1': { tr: '🏅 Temel ve İleri kategori finalistliği', en: '🏅 Finalist in Basic and Advanced categories' },
+    'award-2025-tekno-2': { tr: '🎓 Üniversiteler arasında yarışan tek lise takımı', en: '🎓 The only high school team competing among universities' },
+    'award-2025-saf-1': { tr: '🥈 İki farklı kategoride Dünya 2.liği', en: '🥈 2nd Place Worldwide in two different categories' },
+    'award-2025-saf-2': { tr: '🏆 Best Engineering Solution Ödülü', en: '🏆 Best Engineering Solution Award' },
+  
+    // 2024 Detaylar
+    'award-2024-sauvc-1': { tr: '🏅 Dünya 4.lüğü – Tek Türk ve tek lise takımı', en: '🏅 World 4th Place – The only Turkish and only high school team' },
+    'award-2024-sauvc-2': { tr: '⚡ Dünyanın En Hızlı AUV Aracı Ödülü', en: '⚡ World\'s Fastest AUV Award' },
+    'award-2024-sauvc-3': { tr: '🌊 Breaking the Surface konferans daveti (Hırvatistan)', en: '🌊 Invitation to Breaking the Surface conference (Croatia)' },
+    'award-2024-tekno-1': { tr: '🏅 Lise kategorisi Türkiye 4.lüğü', en: '🏅 4th Place in Turkey (High School Category)' },
+    'award-2024-tekno-2': { tr: '🤝 En İyi Takım Ruhu Ödülü', en: '🤝 Best Team Spirit Award' },
+    'award-2024-tekno-3': { tr: '🎓 Üniversite kategorisi Türkiye 5.liği', en: '🎓 5th Place in Turkey (University Category)' },
+  
+    // 2023 & 2022 & Eski
+    'award-2023-tekno-1': { tr: '🥈 Türkiye 2.liği', en: '🥈 2nd Place in Turkey' },
+    'award-2023-tekno-2': { tr: '💻 En Özgün Yazılım Ödülü', en: '💻 Most Original Software Award' },
+    'award-2023-saf': { tr: '🥇 Deep Dive kategorisi Dünya 1.liği', en: '🥇 1st Place Worldwide in Deep Dive' },
+    'award-2022-tekno': { tr: '🥈 Türkiye 2.liği', en: '🥈 2nd Place in Turkey' },
+    'award-finalist': { tr: '🏅 2020 – 2021 | Her yıl finalistlik', en: '🏅 2020 – 2021 | Finalist every year' },
+  
+    // Vehicles
+    'vehicles-title': { tr: 'Araçlarımız', en: 'Vehicles' },
+    'vehicle-coy-desc': { tr: 'Üretim: 2025 | Günümüzde Aktif', en: 'Production: 2025 | Currently Active' },
+    'vehicle-firtina-desc': { tr: 'Üretim: 2024 | 2024-2025', en: 'Production: 2024 | 2024-2025' },
+    'vehicle-bisküvi-desc': { tr: 'Üretim: 2023 | 2023-2024', en: 'Production: 2023 | 2023-2024' },
+    'vehicle-gumec-desc': { tr: 'Üretim: 2021 | 2022-2024', en: 'Production: 2021 | 2022-2024' },
+    'vehicle-alesta2-desc': { tr: 'Üretim: 2020 | 2020-2021', en: 'Production: 2020 | 2020-2021' },
+    'vehicle-alesta1-desc': { tr: 'Üretim: 2020 | 2020-2020', en: 'Production: 2020 | 2020-2020' },
+    'btn-details': { tr: 'Detaylar', en: 'Details' },
+
+    // Members
+    'members-title': { tr: 'Kadromuz', en: 'Team' },
+    'role-advisors': { tr: 'Danışmanlar', en: 'Advisors' },
+    'role-advisor-afl': { tr: 'Takım Danışmanı (AFL)', en: 'Team Advisor (AFL)' },
+    'role-advisor-sgm': { tr: 'Takım Danışmanı (SGM)', en: 'Team Advisor (SGM)' },
+    'role-captain': { tr: 'Takım Kaptanı', en: 'Team Captain' },
+    'role-software': { tr: 'Yazılım', en: 'Software' },
+    'role-electronics': { tr: 'Elektronik', en: 'Electronics' },
+    'role-mechanics': { tr: 'Mekanik', en: 'Mechanics' },
+    'role-media': { tr: 'Medya', en: 'Media' },
+    'role-dept-captain': { tr: 'Departman Kaptanı', en: 'Department Lead' },
+    'role-alumni': { tr: 'Mezunlar', en: 'Graduates' },
+    'role-founder': { tr: 'Takım Kurucusu / Danışmanı:', en: 'Team Founder / Advisor:' },
+    'role-2025-advisor': { tr: '2025 Takım Danışmanı:', en: '2025 Team Advisor:' },
+
+    // Sponsors & Contact
+    'partners-title': { tr: 'Paydaşlarımız', en: 'Partners' },
+    'sponsors-title': { tr: 'Sponsorlarımız', en: 'Sponsors' },
     'contact-title': { tr: 'İletişim', en: 'Contact' },
-    'form-send': { tr: 'Gönder', en: 'Send' }
+    'form-name': { tr: 'Ad Soyad', en: 'Full Name' },
+    'form-email': { tr: 'E-posta', en: 'Email' },
+    'form-message': { tr: 'Mesaj', en: 'Message' },
+    'form-send': { tr: 'Gönder', en: 'Send' },
+    'contact-links': { tr: 'Bağlantılar', en: 'Links' },
+    'contact-address': { tr: 'Adres', en: 'Address' },
+    'contact-city': { tr: 'Adana, Türkiye', en: 'Adana, Turkey' },
+    'contact-maps': { tr: 'Google Maps\'te Görüntüle', en: 'View on Google Maps' }
   };
 
-  document.getElementById("contact-form").addEventListener("submit", function (e) {
-    e.preventDefault();
+  // Form Gönderim
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contact-form");
     const messageDiv = document.getElementById("form-message");
-    fetch("https://formspree.io/f/mzzzdnbo", {
-      method: "POST",
-      body: new FormData(this),
-      headers: { "Accept": "application/json" },
-    }).then(res => {
-      if (res.ok) {
-        messageDiv.innerHTML = "<div class='alert alert-success'>✅ Mesajınız başarıyla gönderildi!</div>";
-        this.reset();
-      } else {
-        messageDiv.innerHTML = "<div class='alert alert-danger'>❌ Bir hata oluştu.</div>";
-      }
-    });
+    if(form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        fetch("https://formspree.io/f/mzzzdnbo", {
+          method: "POST",
+          body: formData,
+          headers: { "Accept": "application/json" },
+        })
+        .then(function (response) {
+          if (response.ok) {
+            messageDiv.innerHTML = "<div class='alert alert-success'>✅ Mesajınız başarıyla gönderildi!</div>";
+            form.reset();
+          } else {
+            messageDiv.innerHTML = "<div class='alert alert-danger'>❌ Bir hata oluştu. Lütfen tekrar deneyin.</div>";
+          }
+        })
+        .catch(function () { messageDiv.innerHTML = "<div class='alert alert-danger'>❌ Sunucuya ulaşılamadı.</div>"; });
+      });
+    }
   });
 </script>
 </body>
