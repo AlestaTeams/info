@@ -28,13 +28,7 @@
     .navbar {
       backdrop-filter: saturate(140%) blur(8px);
       background-color: rgba(10, 14, 18, 0.6);
-      /* Aşağıdaki satırı ekledik: */
-      transition: transform 0.4s ease-in-out; 
-    }
-    
-    /* Navbar gizlendiğinde yukarı kayması için: */
-    .nav-hide {
-      transform: translateY(-100%);
+      position: relative;
     }
     .nav-link{font-weight:600;}
     .nav-link.active{color:var(--accent) !important;}
@@ -50,7 +44,7 @@
     .role{color:var(--accent); font-weight:600;}
     footer{border-top:1px solid rgba(255,255,255,0.12); padding:24px 0; color:var(--text-1);}
     
-    /* Navbar Altındaki İnce Çizgi */
+    /* Navbar Altındaki İnce Çizgi Geri Geldi */
     .accent-bar { height:2px; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:var(--shadow-neon); width: 100%; position: absolute; bottom: 0; left: 0; }
     
     html{scroll-behavior:smooth;}
@@ -155,7 +149,7 @@
       <button id="lang-btn" class="btn btn-sm btn-outline-light ms-lg-3 mt-2 mt-lg-0" style="border-radius: 20px; font-weight: 600; min-width: 80px;" onclick="toggleLanguage()">EN / TR</button>
     </div>
   </div>
-</nav>
+  <div class="accent-bar"></div> </nav>
 
 <header id="hero" class="hero section text-center d-flex align-items-center justify-content-center">
   <div class="container">
@@ -665,13 +659,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-let currentLang = 'tr';
+  let currentLang = 'tr';
+
   function toggleLanguage() {
     currentLang = currentLang === 'tr' ? 'en' : 'tr';
     const langBtn = document.getElementById('lang-btn');
     if(langBtn) { 
-        // Buton üzerinde EN / TR yazısı sabit kalabilir veya EN / TR şeklinde dönebilir
-        langBtn.innerText = currentLang === 'tr' ? 'EN / TR' : 'TR / EN'; 
+        langBtn.innerText = currentLang === 'en' ? 'TR / EN' : 'EN / TR'; 
     }
     
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -681,6 +675,7 @@ let currentLang = 'tr';
       }
     });
   }
+
   function openLightbox(src){
     document.getElementById('lightbox-img').src = src;
     document.getElementById('lightbox').style.display = 'flex';
@@ -714,7 +709,6 @@ let currentLang = 'tr';
   });
 
   // Çeviri Sistemi
-  let currentLang = 'tr';
   const translations = {
     // Navbar
     'nav-about': { tr: 'Hakkımızda', en: 'About Us' },
@@ -840,25 +834,6 @@ let currentLang = 'tr';
     'contact-city': { tr: 'Adana, Türkiye', en: 'Adana, Turkey' },
     'contact-maps': { tr: 'Google Maps\'te Görüntüle', en: 'View on Google Maps' }
   };
-
-  function toggleLanguage() {
-    // Önce dili değiştir
-    currentLang = currentLang === 'tr' ? 'en' : 'tr';
-    
-    // Butonun üzerindeki yazıyı ayarla (İngilizceye geçtiksek geri dönmek için "TR" yazsın)
-    const langBtn = document.getElementById('lang-btn');
-    if(langBtn) { 
-        langBtn.innerText = currentLang === 'tr' ? 'EN' : 'TR'; 
-    }
-    
-    // Çevirileri uygula
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (translations[key] && translations[key][currentLang]) { 
-          el.innerHTML = translations[key][currentLang]; 
-      }
-    });
-  }
 
   // Form Gönderim
   document.addEventListener("DOMContentLoaded", function () {
