@@ -133,6 +133,29 @@
     .award-details .card-glass { position: relative; background: rgba(0,123,255,0.05); border: 1px solid rgba(0,123,255,0.2); border-radius: 12px; padding: 16px 20px; margin-bottom: 14px; transition: all 0.25s ease; }
     .arrow { transition: transform 0.3s ease; }
     .arrow.rotate { transform: rotate(180deg); }
+    /* --- BİLGİSAYAR EKRANLARI İÇİN ARAÇ KARTLARINI BÜYÜTME --- */
+    @media (min-width: 992px) {
+      #vehicles .card-glass {
+        padding: 1.8rem !important; /* Kartın iç boşluğunu genişlet */
+      }
+      #vehicles .card-glass img {
+        width: 200px !important; /* Resim genişliği büyür */
+        height: 150px !important; /* Resim yüksekliği büyür */
+        border-width: 4px !important; /* Çerçeveyi de hafif kalınlaştırır */
+      }
+      #vehicles .card-glass h6 {
+        font-size: 1.4rem !important; /* Araç isimleri (ÇÖY vb.) büyür */
+        margin-bottom: 0.5rem !important;
+      }
+      #vehicles .card-glass p {
+        font-size: 0.95rem !important; /* Üretim yılı ve kullanım yazısı büyür */
+        margin-bottom: 1rem !important;
+      }
+      #vehicles .card-glass .btn {
+        font-size: 0.9rem !important; /* Detaylar butonu yazısı büyür */
+        padding: 0.3rem 1.2rem !important; /* Detaylar butonu genişler */
+      }
+    }
   </style>
 </head>
 <body>
