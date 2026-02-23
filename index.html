@@ -85,7 +85,8 @@
       width: max-content;
       /* Animasyon komutu tamamen kaldırıldı */
     }
-    .marquee-item {
+   .marquee-item {
+      /* Diğer stiller aynı kalacak, pointer-events: none; varsa SİL */
       width: 200px;
       height: 120px;
       margin: 0 15px;
@@ -98,20 +99,23 @@
       padding: 20px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       flex-shrink: 0; 
-      pointer-events: none; /* Sürüklerken resimlerin seçilmesini engeller */
     }
-    .marquee-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 25px rgba(255,193,7,0.4);
-      background: rgba(255,193,7,0.05);
-    }
+    
     .marquee-item img { 
       max-width: 160px !important;
       max-height: 80px !important;
       width: auto;
       height: auto;
       object-fit: contain;
+      pointer-events: none; /* BU EKLENDİ - Resmin hayalet gibi sürüklenmesini engeller */
     }
+    
+    .marquee-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(255,193,7,0.4);
+      background: rgba(255,193,7,0.05);
+    }
+  
     /* Awards Styles */
     .awards-list { max-width: 1000px; margin: 0 auto; padding: 40px 16px; }
     .award-year-card {
@@ -624,33 +628,33 @@
     <i class="fa-solid fa-handshake me-2 text-primary"></i><span data-i18n="sponsors-title">Sponsorlarımız</span>
   </h2>
   
- <div class="marquee-wrapper scroll-reveal reveal-fade" id="sponsorWrapper">
-    <div class="marquee-track" id="sponsorTrack">
-      <div class="marquee-item"><img src="dizmanlar.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="bacaksizlar.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="atimsan.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="teknik metal.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="adova.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="yepar.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="atologo.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="adaso.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="modsan.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="paşa.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="isken.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="kıvanç.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="dizmanlar.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="bacaksizlar.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="teknik metal.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="adova.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="yepar.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="atologo.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="adaso.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="modsan.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="paşa.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="isken.png" alt="Sponsor"></div>
-      <div class="marquee-item"><img src="kıvanç.png" alt="Sponsor"></div>
-    </div>
- </div>
+<div class="marquee-wrapper scroll-reveal reveal-fade" id="sponsorWrapper">
+  <div class="marquee-track" id="sponsorTrack">
+    <div class="marquee-item" data-link="https://www.dizmanlar.com" style="cursor: pointer;"><img src="dizmanlar.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.bacaksizlar.com" style="cursor: pointer;"><img src="bacaksizlar.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.teknikmetal.com" style="cursor: pointer;"><img src="teknik metal.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.adovayuzeyislem.com.tr/" style="cursor: pointer;"><img src="adova.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.yeparmakina.com.tr/" style="cursor: pointer;"><img src="yepar.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.adanato.org.tr/" style="cursor: pointer;"><img src="atologo.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.adaso.org.tr/" style="cursor: pointer;"><img src="adaso.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.modsan.com/" style="cursor: pointer;"><img src="modsan.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.pasareklam.com/" style="cursor: pointer;"><img src="paşa.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.isken.com.tr/" style="cursor: pointer;"><img src="isken.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.kivanctekstil.com.tr/" style="cursor: pointer;"><img src="kıvanç.png" alt="Sponsor"></div>
+    
+    <div class="marquee-item" data-link="https://www.dizmanlar.com" style="cursor: pointer;"><img src="dizmanlar.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.bacaksizlar.com" style="cursor: pointer;"><img src="bacaksizlar.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.teknikmetal.com" style="cursor: pointer;"><img src="teknik metal.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.adovayuzeyislem.com.tr/" style="cursor: pointer;"><img src="adova.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.yeparmakina.com.tr/" style="cursor: pointer;"><img src="yepar.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.adanato.org.tr/" style="cursor: pointer;"><img src="atologo.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.adaso.org.tr/" style="cursor: pointer;"><img src="adaso.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.modsan.com/" style="cursor: pointer;"><img src="modsan.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.pasareklam.com/" style="cursor: pointer;"><img src="paşa.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.isken.com.tr/" style="cursor: pointer;"><img src="isken.png" alt="Sponsor"></div>
+    <div class="marquee-item" data-link="https://www.kivanctekstil.com.tr/" style="cursor: pointer;"><img src="kıvanç.png" alt="Sponsor"></div>
+  </div>
+</div>
 </section>
 
 <section id="contact" class="section scroll-reveal reveal-fade">
@@ -956,42 +960,44 @@
       });
     }
   });
-  // --- Sponsor Kaydırma ve Sürükleme Sistemi ---
+// --- Sponsor Kaydırma, Sürükleme ve KESİN Tıklama Sistemi ---
   document.addEventListener("DOMContentLoaded", function () {
     const wrapper = document.getElementById('sponsorWrapper');
     const track = document.getElementById('sponsorTrack');
     
     let isDown = false;
-    let startX;
+    let startX, startY, startTime;
     let scrollLeft;
     let autoScrollTimer;
 
-    // Otomatik Kaydırma Fonksiyonu
+    // Otomatik Kaydırma
     function startAutoScroll() {
       autoScrollTimer = setInterval(() => {
         if (!isDown) {
-          wrapper.scrollLeft += 1; // Hızı artırmak istersen bu sayıyı büyüt (örn: 2)
-          
-          // Şerit yarıya geldiğinde çaktırmadan başa sar (Sonsuz Döngü)
+          wrapper.scrollLeft += 1; 
           if (wrapper.scrollLeft >= track.scrollWidth / 2) {
             wrapper.scrollLeft = 0;
           }
         }
-      }, 15); // Milisaniye (Akıcılık)
+      }, 15);
     }
 
     function stopAutoScroll() {
       clearInterval(autoScrollTimer);
     }
 
-    // Sistemi Başlat
     startAutoScroll();
 
-    // Mouse ile Sürükleme (Bilgisayar)
+    // ---- MOUSE (BİLGİSAYAR) KONTROLLERİ ----
     wrapper.addEventListener('mousedown', (e) => {
       isDown = true;
       stopAutoScroll();
-      startX = e.pageX - wrapper.offsetLeft;
+      
+      // Tıklamanın başladığı anı ve konumu kaydet
+      startX = e.pageX;
+      startY = e.pageY;
+      startTime = new Date().getTime();
+      
       scrollLeft = wrapper.scrollLeft;
     });
 
@@ -1002,39 +1008,79 @@
       }
     });
 
-    wrapper.addEventListener('mouseup', () => {
-      isDown = false;
-      startAutoScroll();
-    });
-
     wrapper.addEventListener('mousemove', (e) => {
       if (!isDown) return;
       e.preventDefault();
-      const x = e.pageX - wrapper.offsetLeft;
-      const walk = (x - startX) * 2; // Sürükleme hassasiyeti
+      
+      // Sürükleme işlemi
+      const walk = (e.pageX - startX) * 2;
       wrapper.scrollLeft = scrollLeft - walk;
     });
 
-    // Dokunmatik Sürükleme (Mobil)
+    // Fareden elini çektiği an (Tıklama vs Sürükleme Kararı)
+    wrapper.addEventListener('mouseup', (e) => {
+      isDown = false;
+      startAutoScroll();
+
+      // Bitiş konumunu ve zamanını ölç
+      const endX = e.pageX;
+      const endY = e.pageY;
+      const endTime = new Date().getTime();
+
+      // Ne kadar hareket etti ve ne kadar süre basılı tuttu?
+      const diffX = Math.abs(endX - startX);
+      const diffY = Math.abs(endY - startY);
+      const diffTime = endTime - startTime;
+
+      // Eğer 10 pikselden az oynadıysa ve 500 milisaniyeden kısa sürdüyse = BU BİR TIKLAMADIR!
+      if (diffX < 10 && diffY < 10 && diffTime < 500) {
+        const item = e.target.closest('.marquee-item');
+        if (item && item.dataset.link) {
+          window.open(item.dataset.link, '_blank');
+        }
+      }
+    });
+
+    // ---- DOKUNMATİK (MOBİL) KONTROLLERİ ----
     wrapper.addEventListener('touchstart', (e) => {
       isDown = true;
       stopAutoScroll();
-      startX = e.touches[0].pageX - wrapper.offsetLeft;
+      
+      startX = e.touches[0].pageX;
+      startY = e.touches[0].pageY;
+      startTime = new Date().getTime();
+      
       scrollLeft = wrapper.scrollLeft;
-    });
-    
-    wrapper.addEventListener('touchend', () => {
-      isDown = false;
-      startAutoScroll();
     });
     
     wrapper.addEventListener('touchmove', (e) => {
       if (!isDown) return;
-      const x = e.touches[0].pageX - wrapper.offsetLeft;
-      const walk = (x - startX) * 2;
+      const walk = (e.touches[0].pageX - startX) * 2;
       wrapper.scrollLeft = scrollLeft - walk;
     });
+
+    wrapper.addEventListener('touchend', (e) => {
+      isDown = false;
+      startAutoScroll();
+
+      const endX = e.changedTouches[0].pageX;
+      const endY = e.changedTouches[0].pageY;
+      const endTime = new Date().getTime();
+
+      const diffX = Math.abs(endX - startX);
+      const diffY = Math.abs(endY - startY);
+      const diffTime = endTime - startTime;
+
+      // Mobilde de aynı mantık: Kısa dokunuş = Tıklama
+      if (diffX < 10 && diffY < 10 && diffTime < 500) {
+        const item = e.target.closest('.marquee-item');
+        if (item && item.dataset.link) {
+          window.open(item.dataset.link, '_blank');
+        }
+      }
+    });
   });
+
 </script>
 </body>
 </html>
