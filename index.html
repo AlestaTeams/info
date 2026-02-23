@@ -13,6 +13,8 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="48x48" href="alesta.png">
   <link rel="apple-touch-icon" href="alesta.png">  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <style>
     :root{
       --bg-0:#0b0f14;
@@ -69,7 +71,7 @@
     .marquee-wrapper {
       width: 100vw;
       max-width: 100%;
-      overflow-x: hidden; /* Kaydırmayı JS yapacak, scrollbar gizli */
+      overflow-x: hidden;
       white-space: nowrap;
       position: relative;
       padding: 20px 0;
@@ -83,10 +85,8 @@
     .marquee-track {
       display: inline-flex;
       width: max-content;
-      /* Animasyon komutu tamamen kaldırıldı */
     }
    .marquee-item {
-      /* Diğer stiller aynı kalacak, pointer-events: none; varsa SİL */
       width: 200px;
       height: 120px;
       margin: 0 15px;
@@ -107,7 +107,7 @@
       width: auto;
       height: auto;
       object-fit: contain;
-      pointer-events: none; /* BU EKLENDİ - Resmin hayalet gibi sürüklenmesini engeller */
+      pointer-events: none;
     }
     
     .marquee-item:hover {
@@ -133,28 +133,142 @@
     .award-details .card-glass { position: relative; background: rgba(0,123,255,0.05); border: 1px solid rgba(0,123,255,0.2); border-radius: 12px; padding: 16px 20px; margin-bottom: 14px; transition: all 0.25s ease; }
     .arrow { transition: transform 0.3s ease; }
     .arrow.rotate { transform: rotate(180deg); }
+    
     /* --- BİLGİSAYAR EKRANLARI İÇİN ARAÇ KARTLARINI BÜYÜTME --- */
     @media (min-width: 992px) {
       #vehicles .card-glass {
-        padding: 1.8rem !important; /* Kartın iç boşluğunu genişlet */
+        padding: 1.8rem !important;
       }
       #vehicles .card-glass img {
-        width: 200px !important; /* Resim genişliği büyür */
-        height: 150px !important; /* Resim yüksekliği büyür */
-        border-width: 4px !important; /* Çerçeveyi de hafif kalınlaştırır */
+        width: 200px !important;
+        height: 150px !important;
+        border-width: 4px !important;
       }
       #vehicles .card-glass h6 {
-        font-size: 1.4rem !important; /* Araç isimleri (ÇÖY vb.) büyür */
+        font-size: 1.4rem !important;
         margin-bottom: 0.5rem !important;
       }
       #vehicles .card-glass p {
-        font-size: 0.95rem !important; /* Üretim yılı ve kullanım yazısı büyür */
+        font-size: 0.95rem !important;
         margin-bottom: 1rem !important;
       }
       #vehicles .card-glass .btn {
-        font-size: 0.9rem !important; /* Detaylar butonu yazısı büyür */
-        padding: 0.3rem 1.2rem !important; /* Detaylar butonu genişler */
+        font-size: 0.9rem !important;
+        padding: 0.3rem 1.2rem !important;
       }
+    }
+    .global-section {
+        padding: 100px 0;
+        /* background özelliği kaldırıldı, body'den şeffaf olarak alacak */
+        text-align: center;
+    }
+
+    .section-subtitle {
+        color: #94a3b8;
+        margin-bottom: 40px;
+    }
+
+    #map {
+        height: 500px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 0 40px rgba(0, 255, 255, 0.15);
+        background-color: #0b0f14; /* Boş alanları sitenin arka planı renginde tutalım */
+    }
+    .custom-marker {
+      background: transparent;
+    }
+
+    .pulse-marker {
+      width: 18px;
+      height: 18px;
+      background: #00f0ff;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 1; }
+      70% { transform: scale(1.6); opacity: 0.4; }
+      100% { transform: scale(0.9); opacity: 1; }
+    }
+    
+    /* Leaflet default beyaz arka planı kaldır */
+    .leaflet-popup-content-wrapper {
+      background: transparent;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    .leaflet-popup-content {
+      margin: 0;
+    }
+
+    .leaflet-popup-tip {
+      background: #0f172a;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+      border-left: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    /* Ana popup kartı */
+    .map-popup {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 18px;
+      color: #e2e8f0;
+      min-width: 220px;
+      font-family: 'Inter', sans-serif;
+      text-align: left;
+    }
+
+    /* Başlık */
+    .popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .popup-city {
+      font-size: 16px;
+      font-weight: 700;
+      color: #00f0ff;
+    }
+
+    .popup-count {
+      font-size: 12px;
+      background: rgba(0, 240, 255, 0.15);
+      padding: 4px 8px;
+      border-radius: 20px;
+      color: #00f0ff;
+    }
+
+    /* Ayırıcı */
+    .popup-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 12px 0;
+    }
+
+    /* Event listesi */
+    .popup-event {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .popup-dot {
+      width: 6px;
+      height: 6px;
+      background: #22c55e;
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
     }
   </style>
 </head>
@@ -218,14 +332,17 @@
         <i class="fa-solid fa-rocket me-2"></i><span data-i18n="about-subtitle">ALESTA: Hazır ve Tetikte</span>
       </h5>
       <p style="color: rgba(255,255,255,0.85);" class="mb-3" data-i18n="about-p1">
-        Hikayemiz 2019 yılında, Adana Fen Lisesinde su altı teknolojilerine duyduğumuz merakla başladı. Kurulduğumuz günden bu yana, sürdürülebilirlik temelli takım anlayışımızla her yıl kendimizi geliştiriyor; bilgi birikimimizi yeni nesil ekip üyelerine aktararak güçlü ve kalıcı bir yapı inşa ediyoruz. 
-      </p>
+        ALESTA, Adana Fen Lisesi öğrencileri tarafından kurulmuş, otonom sistemler ve su altı teknolojileri alanında çalışmalar yürüten yenilikçi bir teknoloji takımıdır. Takımımız yalnızca bir yarışma ekibi 
+    olmanın ötesinde, araştırma-geliştirme odaklı bir mühendislik kültürü oluşturmayı hedefliyor.Takımımızın hikayesi 2019'da, Adana Fen Lisesinde su altı teknolojilerine ilgi duymamızla başladı. Takımın kurulduğu günden
+    bu yana sürdürülebilirlik anlayışıyla çalışmalarımıza devam ediyor ve her sene kendimizi geliştiriyor ve takıma yenilikler getiriyoruz. Yeni nesil takım üyelerine
+    de kendi deneyimlerimizden edindiğimiz bilgi birikimini aktarıyor ve bu şekilde ALESTA'nın kalıcılığını ve etkinliğini sürdürüyoruz.
       <p style="color: rgba(255,255,255,0.85);" class="mb-3" data-i18n="about-p2">
-        Adana Fen Lisesi ve Seyhan Gençlik Merkezi ile yürüttüğümüz ortak çalışmalar sayesinde birçok ulusal ve uluslararası arenada hem takımımızı hem de ülkemizi gururla temsil etmeyi hedefliyoruz. Takım çalışmalarımızı Mekanik, Elektronik, Yazılım ve Medya olmak üzere dört ana departman üzerinden, tam bir uyum içinde yürütüyoruz. 
+        Adana Fen Lisesi ve Seyhan Gençlik Merkezi ile ortak yürüttüğümüz çalışmalarımız sayesinde birçok ulusal ve uluslararası arenada takımımızı ve ülkemizi gururla temsil etmeyi hedefliyoruz.
+Çalışmalarımızı mekanik, yazılım, elektronik ve medya olarak dört ana departman halinde iş birliği ve uyum içerisinde yürütüyoruz.
       </p>
       <p style="color: rgba(255,255,255,0.85);" class="mb-4" data-i18n="about-p3">
-        Su altı kategorisinde başlayan bu yenilikçi yolculuğumuz, bugün vizyonumuzu daha da genişleterek Robolig ve Sanayide Dijital Teknolojiler gibi farklı alanlardaki projelerle hız kesmeden devam ediyor.
-      </p>
+        Su altı kategorisinde başlayan bu yenilikçi yolculuğumuz, bugün vizyon ve misyonumuzu daha da genişleterek Robolig ve Sanayide Dijital Teknolojiler gibi farklı alanlardaki projelerle
+hız kesmeden devam ediyor.
     </div>
 
     <div class="row g-4">
@@ -236,21 +353,13 @@
             <i class="fa-solid fa-graduation-cap me-2"></i><span data-i18n="academy-title">ALESTA Akademi</span>
           </h5>
           <p style="color: rgba(255,255,255,0.85);" class="mb-4" data-i18n="academy-desc">
-            ALESTA Akademi, sadece bir eğitim programı değil; takımın sürdürülebilirliğini sağlayan bir tecrübe aktarım merkezidir. Burası, teorik bilginin sahada gerçek projelere dönüştüğü ilk duraktır.
+           Alesta Akademi 2023 yılında, takımımızın yıllar içinde biriktirdiği tecrübeyi kalıcı ve sürdürülebilir bir hale getirmek için kurulmuştur. Bizim için burası sadece bir eğitim programı değil; bilgi aktarımının sistemli şekilde
+yapıldığı, kültürümüzün ve çalışma disiplinimizin yeni üyelere geçtiği bir tecrübe eğitimidir.
+Bu sistemi kurarken amacımız, teorik bilginin sadece anlatıldığı değil, gerçek projeler üzerinde uygulanarak pekiştirildiği ve deneyimler ile bilgi birikiminin aktarıldığı bir eğitim süreci kurmaktı.Takımımıza katılmak isteyen
+öğrenci arkadaşlarımızı doğrudan projelere dahil etmek yerine, önce sağlam bir temel oluşturmalarını önemsiyoruz. Bu yüzden öğrencilere takımda yer almak istedikleri alanlara uygun olarak temel elektronik, yazılım, mekanik ve
+medya alanlarında kapsamlı bir hazırlık sürecine dahil ederek sisteme uyum sağlamalarını sağlıyoruz.
           </p>
           <ul class="list-unstyled mb-0" style="color: rgba(255,255,255,0.85);">
-            <li class="mb-3 d-flex align-items-start">
-              <i class="fa-solid fa-chevron-right text-primary me-2 mt-1" style="font-size: 0.8rem;"></i>
-              <span data-i18n="academy-li1">
-                <strong class="text-white">Eğitim Süreci:</strong> Takımımıza dahil olmak isteyen öğrenci arkadaşlarımız; temel elektronik, yazılım, mekanik tasarım ve proje yönetimi konularında kapsamlı bir hazırlık sürecinden geçer.
-              </span>
-            </li>
-            <li class="d-flex align-items-start">
-              <i class="fa-solid fa-chevron-right text-primary me-2 mt-1" style="font-size: 0.8rem;"></i>
-              <span data-i18n="academy-li2">
-                <strong class="text-white">Uygulamalı Mentörlük:</strong> Eğitimini başarıyla tamamlayan üyelerimiz, "usta-çırak" hiyerarşisi içinde aktif projelerde görev alarak ALESTA’nın teknik birikimine doğrudan katkı sağlamaya başlar.
-              </span>
-            </li>
           </ul>
         </div>
       </div>
@@ -258,24 +367,18 @@
       <div class="col-md-6 scroll-reveal reveal-left">
         <div class="border border-primary rounded-4 p-4 h-100" style="background: rgba(255,255,255,0.03);">
           <h5 class="fw-bold text-primary mb-3">
-            <i class="fa-solid fa-bullseye me-2"></i><span data-i18n="mission-title">Misyon</span>
+            <i class="fa-solid fa-bullseye me-2"></i><i class="fa-solid fa-eye me-2"></i><span data-i18n="mission-title">Vizyon & Misyon</span>
           </h5>
           <p class="mb-0" style="color: rgba(255,255,255,0.85);" data-i18n="mission-text">
-            Milli Teknoloji Hamlesi hedefleri doğrultusunda; otonom sistemler, yapay zeka ve su altı teknolojileri alanlarında yerli mühendislik çözümleri geliştirmektir. Genç beyinlere üretim odaklı bir vizyon ve disiplinli çalışma kültürü kazandırarak, ülkemizin bilimsel kalkınmasına katkı sağlayacak teknik yetkinliği yüksek bireyler yetiştirmeyi temel görevimiz olarak benimsiyoruz. Takım ruhu ve milli teknoloji bilinciyle, mühendislik disiplinini her projemizin merkezine koyarak geleceğin teknolojilerini bugünden inşa etmeye odaklanıyoruz.
+            Misyonumuz ve vizyonumuz; Milli Teknoloji Hamlesi doğrultusunda otonom sistemler, yapay zeka ve su altı teknolojileri alanlarında yerli ve yenilikçi çözümler üretmek üzerine kuruludur. 
+Kuruluş amacımız, teknolojiyi sadece kullanan değil aynı zamanda geliştiren, üretmeyi alışkanlık haline getiren ve ülkemizin kalkınmasına katkı sağlayan gençler yetiştirmektir. Bu süreçte disiplinli çalışmayı, 
+sorumluluk almayı ve takım ruhunu ön planda tutuyoruz. Birlikte öğrenen, deneyen ve gelişen bir ekip kültürü oluşturmayı önemsiyoruz. Gelecekte ise geliştirdiğimiz projelerle gençlerin mühendislik potansiyelini 
+ulusal ve uluslararası platformlarda güçlü şekilde temsil etmeyi hedefliyoruz. Her yıl kendimizi yenileyerek sistemlerimizi daha ileriye taşımayı, en güncel teknolojilerle çalışarak performans ve verimliliği arttırmayı
+planlıyoruz. Uzun vadede, araştırma ve geliştirmeye önem veren, sürdürülebilir projeler üreten ve otonom teknolojiler alanında örnek gösterilen bir ekip olmayı amaçlıyoruz.
           </p>
         </div>
       </div>
 
-      <div class="col-md-6 scroll-reveal reveal-right">
-        <div class="border border-primary rounded-4 p-4 h-100" style="background: rgba(255,255,255,0.03);">
-          <h5 class="fw-bold text-primary mb-3">
-            <i class="fa-solid fa-eye me-2"></i><span data-i18n="vision-title">Vizyon</span>
-          </h5>
-          <p class="mb-0" style="color: rgba(255,255,255,0.85);" data-i18n="vision-text">
-            Geliştirdiğimiz otonom teknolojilerle uluslararası arenada gençlerin mühendislik kapasitesini temsil eden ve küresel ölçekte referans alınan öncü bir teknoloji ekosistemi haline gelmektir. ALESTA’nın temelinde yatan AR-GE kültürü, mevcut sistemlerin her yıl yeniden masaya yatırılmasını zorunlu kılar. Gelişimi sürekliliği olan bir operasyon olarak tanımlıyor; her üretim döneminde sistemlerimizi en güncel teknolojilerle optimize ederek otonom dünyada standartları belirleyen ve sınırları zorlayan bir yapı olmayı hedefliyoruz.
-          </p>
-        </div>
-      </div>
 
     </div>
   </div>
@@ -744,6 +847,16 @@
     </div>
   </div>
 </section>
+<section id="global" class="global-section">
+  <div class="container">
+    <h2 class="section-title text-white">Global Competitions</h2>
+    <p class="section-subtitle">
+      ALESTA's international achievements across the world
+    </p>
+
+    <div id="map"></div>
+  </div>
+</section>
 
 <footer class="text-center small">
   <div class="container">
@@ -983,6 +1096,7 @@
       });
     }
   });
+
 // --- Sponsor Kaydırma, Sürükleme ve KESİN Tıklama Sistemi ---
   document.addEventListener("DOMContentLoaded", function () {
     const wrapper = document.getElementById('sponsorWrapper');
@@ -1104,6 +1218,102 @@
     });
   });
 
+// --- LEAFLET HARİTA SİSTEMİ EKLENTİSİ ---
+document.addEventListener("DOMContentLoaded", function () {
+  
+  // Harita sınırlarını belirle (Güneybatı ve Kuzeydoğu köşe koordinatları)
+  const worldBounds = [
+    [-90, -180],
+    [90, 180]
+  ];
+
+  // Haritayı başlat
+  const map = L.map('map', {
+    center: [30.0, 45.0], // Genel bir dünya görünümü
+    zoom: 2,
+    minZoom: 2, // Kullanıcının çok fazla uzaklaşıp gri alanı görmesini engeller
+    maxBounds: worldBounds, // Sınırları sabitle
+    maxBoundsViscosity: 1.0, // Haritayı sınır dışına sürüklemeyi tamamen engelle (sekme efekti olmaz)
+    zoomControl: false // İstersen sonradan açabilirsin
+  });
+
+  // Dark temalı CartoDB harita katmanı
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 20,
+    noWrap: true // Haritanın sağa/sola sonsuz döngüye girmesini (kendini tekrar etmesini) engeller
+  }).addTo(map);
+
+  // Mavi neon marker ikonumuz
+  const customIcon = L.divIcon({
+    className: 'custom-marker',
+    html: '<div class="pulse-marker"></div>',
+    iconSize: [18, 18],
+    iconAnchor: [9, 9] // Tam ortalanması için
+  });
+
+  // Yarışma Katıldığınız Lokasyonlar (Koordinatlar ve Detaylar)
+  const locations = [
+    { 
+      lat: 1.3521, lng: 103.8198, 
+      city: "Singapore", title: "SAUVC (2024 & 2025)", 
+      desc: "Dünya 4.lüğü, En Hızlı AUV Aracı & Finalistlik" 
+    },
+    { 
+      lat: 40.4093, lng: 49.8671, 
+      city: "Baku, Azerbaijan", title: "STEAM Azerbaijan Festival (2023 & 2025)", 
+      desc: "Dünya 1.liği & 2.liği, Best Eng. Solution" 
+    },
+    { 
+      lat: 37.0000, lng: 35.3213, 
+      city: "Adana, Türkiye", title: "Merkez & TEKNOFEST 2024-2025", 
+      desc: "Türkiye 4.lüğü, Takım Ruhu Ödülü & Finalistlik" 
+    },
+    { 
+      lat: 41.0082, lng: 28.9784, 
+      city: "Istanbul, Türkiye", title: "TEKNOFEST (2021 & 2023)", 
+      desc: "Türkiye 2.liği, En Özgün Yazılım & Finalistlik" 
+    },
+    { 
+      lat: 40.9128, lng: 38.3895, 
+      city: "Giresun, Türkiye", title: "TEKNOFEST 2022", 
+      desc: "Türkiye 2.liği" 
+    },
+    { 
+      lat: 37.0662, lng: 37.3833, 
+      city: "Gaziantep, Türkiye", title: "TEKNOFEST 2020", 
+      desc: "Türkiye Finalisti" 
+    }
+  ];
+
+  // Her lokasyon için haritaya pin ve popup ekle
+  locations.forEach(loc => {
+    const popupHtml = `
+      <div class="map-popup">
+        <div class="popup-header">
+          <span class="popup-city">${loc.city}</span>
+        </div>
+        <div class="popup-divider"></div>
+        <div class="popup-event">
+          <div class="popup-dot"></div>
+          <div>
+            <strong>${loc.title}</strong><br>
+            <span style="opacity: 0.8">${loc.desc}</span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    L.marker([loc.lat, loc.lng], { icon: customIcon })
+     .bindPopup(popupHtml, {
+       closeButton: false, // Çarpı butonunu kaldırdık daha şık dursun diye
+       minWidth: 220,
+       className: 'custom-popup-container'
+     })
+     .addTo(map);
+  });
+});
 </script>
 </body>
 </html>
