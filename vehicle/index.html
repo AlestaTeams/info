@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr" data-bs-theme="dark">
+<html lang="tr" data-bs-theme="dark" class="no-js">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -129,6 +129,10 @@
     .scroll-reveal.active { opacity: 1; transform: translate(0, 0); }
     
     footer{border-top:1px solid rgba(255,255,255,0.12); padding:24px 0; color:var(--text-1);}
+  
+    /* Güvenli görünürlük: JS hatası olsa bile içerik kaybolmasın */
+    .no-js .scroll-reveal { opacity: 1 !important; transform: none !important; }
+
   </style>
 </head>
 <body>
@@ -544,6 +548,18 @@
   </div>
 </footer>
 
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.documentElement.classList.remove('no-js');
+  document.querySelectorAll('.scroll-reveal').forEach(function (el) {
+    if (!('IntersectionObserver' in window)) {
+      el.classList.add('active');
+    }
+  });
+});
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   // --- Çeviri Sistemi ---
@@ -576,12 +592,12 @@
     'ada-li1': { tr: '🚀 <strong>TEKNOFEST 2026:</strong> ADA, TEKNOFEST 2026 için geliştirilmekte olan yeni nesil su altı aracımızdır.', en: '🚀 <strong>TEKNOFEST 2026:</strong> ADA is our next-generation underwater vehicle currently being developed for TEKNOFEST 2026.' },
     'ada-li2': { tr: '🛡️ <strong>Yeni Gövde Yaklaşımı:</strong> Önceki ALESTA araçlarından farklı olarak daha büyük ölçülerde ve dış kabukla çevrelenmiş bütüncül bir yapıda tasarlanmaktadır.', en: '🛡️ <strong>New Body Concept:</strong> Unlike previous ALESTA vehicles, ADA is being designed with larger dimensions and a fully enclosed outer-shell structure.' },
     'ada-li3': { tr: '🎯 <strong>Torpido Mekanizması:</strong> Yarışma görevlerine uygun bir torpido sistemi araç üzerine entegre edilecektir.', en: '🎯 <strong>Torpedo Mechanism:</strong> A torpedo mechanism designed for competition tasks will be integrated into the vehicle.' },
-    'ada-li4': { tr: '🤿 <strong>MiniROV:</strong> Ana araçtan bağımsız görevler gerçekleştirebilecek bir MiniROV sistemi ADA\\'nın görev mimarisine dahil edilecektir.', en: '🤿 <strong>MiniROV:</strong> A MiniROV capable of performing tasks independently from the main vehicle will be integrated into ADA\\'s mission architecture.' },
+    'ada-li4': { tr: '🤿 <strong>MiniROV:</strong> Ana araçtan bağımsız görevler gerçekleştirebilecek bir MiniROV sistemi ADA\'nın görev mimarisine dahil edilecektir.', en: '🤿 <strong>MiniROV:</strong> A MiniROV capable of performing tasks independently from the main vehicle will be integrated into ADA\'s mission architecture.' },
     'ada-li5': { tr: '🧪 <strong>Geliştirme Süreci:</strong> Mekanik ve elektronik tasarım çalışmaları devam etmekte olup sistem, görev gereksinimlerine göre geliştirilip test edilmektedir.', en: '🧪 <strong>Development Process:</strong> Mechanical and electronic development is ongoing, with the system being designed and tested according to mission requirements.' },
 
     // HURRICANE
     'hurricane-desc': { tr: '<strong>Geliştirme:</strong> 2026 | <strong>Kullanım:</strong> MATE ROV Egypt & Canada 2026', en: '<strong>Development:</strong> 2026 | <strong>Usage:</strong> MATE ROV Egypt & Canada 2026' },
-    'hurricane-li1': { tr: '🌪️ <strong>FIRTINA\\'dan HURRICANE\\'e:</strong> HURRICANE, FIRTINA platformunun görev ihtiyaçlarına göre kapsamlı biçimde modifiye edilmiş ve geliştirilmiş versiyonudur.', en: '🌪️ <strong>From FIRTINA to HURRICANE:</strong> HURRICANE is an extensively modified and upgraded version of the FIRTINA platform, adapted to new mission requirements.' },
+    'hurricane-li1': { tr: '🌪️ <strong>FIRTINA\'dan HURRICANE\'e:</strong> HURRICANE, FIRTINA platformunun görev ihtiyaçlarına göre kapsamlı biçimde modifiye edilmiş ve geliştirilmiş versiyonudur.', en: '🌪️ <strong>From FIRTINA to HURRICANE:</strong> HURRICANE is an extensively modified and upgraded version of the FIRTINA platform, adapted to new mission requirements.' },
     'hurricane-li2': { tr: '🦾 <strong>Görev Mekanizmaları:</strong> Araca dış kabuk, robot kol ve yarışma görevlerine göre farklı mekanik sistemler monte edilmiştir.', en: '🦾 <strong>Mission Mechanisms:</strong> An outer shell, robotic arm, and various mechanical systems designed for competition tasks were integrated into the vehicle.' },
     'hurricane-li3': { tr: '🏆 <strong>Yarışmalar:</strong> HURRICANE, 2026 yılında MATE ROV Egypt Regional ve MATE ROV World Championship Canada yarışmalarında kullanılmıştır.', en: '🏆 <strong>Competitions:</strong> HURRICANE was used at the MATE ROV Egypt Regional and MATE ROV World Championship Canada competitions in 2026.' },
     'hurricane-li4': { tr: '🔩 <strong>Sağlam Şase:</strong> Sigma profil tabanlı şase yapısı araca yüksek mekanik dayanım kazandırırken zorlu görevlerde güvenilir bir platform oluşturur.', en: '🔩 <strong>Robust Frame:</strong> Its aluminum extrusion frame provides high mechanical strength and creates a reliable platform for demanding missions.' },
