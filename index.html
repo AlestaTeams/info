@@ -270,111 +270,208 @@
       flex-shrink: 0;
     }
         /* =======================
-    MEDIA SECTION
-    ======================= */
-
-    .media-slider{
-    position:relative;
-    overflow:hidden;
-    width:100%;
-    margin:auto;
-}
-
-.media-track{
-    display:flex;
-    gap:20px;
-    overflow-x:hidden;
-    scroll-behavior:smooth;
-    padding:10px 55px;
-}
-
-.media-track img{
-    min-width:350px;
-    height:230px;
-    object-fit:cover;
-    border-radius:18px;
-    cursor:pointer;
-    transition:.35s;
-}
-
-.media-track img:hover{
-    transform:scale(1.03);
-}
-
-.media-btn{
-
-    position:absolute;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    width:48px;
-
-    height:48px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:rgba(13,110,253,.9);
-
-    color:white;
-
-    z-index:10;
-
-    transition:.3s;
-
-}
-
-.media-btn:hover{
-
-    transform:translateY(-50%) scale(1.1);
-
-}
-
-.media-btn.prev{
-
-    left:0;
-
-}
-
-.media-btn.next{
-
-    right:0;
-
-}
-
-    .media-video{
-    margin-top:45px;
+       MEDIA SECTION
+       ======================= */
+    #media {
+      position: relative;
     }
 
-    .media-video video{
-    width:100%;
-    border-radius:18px;
-    border:1px solid rgba(255,255,255,.15);
+    .media-carousel {
+      position: relative;
+      width: 100%;
+      max-width: 1180px;
+      height: 430px;
+      margin: 0 auto;
+      overflow: hidden;
+      perspective: 1200px;
+      touch-action: pan-y;
     }
 
-    #mediaLightbox{
-    display:none;
-    position:fixed;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.9);
-    z-index:999999;
-    justify-content:center;
-    align-items:center;
-    cursor:pointer;
+    .media-carousel::before,
+    .media-carousel::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 11%;
+      z-index: 7;
+      pointer-events: none;
     }
 
-    #mediaLightbox img{
-    max-width:90%;
-    max-height:90%;
-    border-radius:18px;
+    .media-carousel::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--bg-0), transparent);
     }
-    .card-glass:hover{
+
+    .media-carousel::after {
+      right: 0;
+      background: linear-gradient(270deg, var(--bg-0), transparent);
+    }
+
+    .media-card {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(560px, 62vw);
+      height: 355px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: rgba(13, 27, 42, .92);
+      border: 1px solid rgba(255, 255, 255, .14);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .38);
+      text-decoration: none;
+      color: #fff;
+      transform-origin: center center;
+      transition: transform .62s cubic-bezier(.22,.61,.36,1), opacity .5s ease, filter .5s ease, box-shadow .5s ease;
+      will-change: transform, opacity, filter;
+      cursor: pointer;
+    }
+
+    .media-card img {
+      display: block;
+      width: 100%;
+      height: 285px;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+
+    .media-card-title {
+      height: 70px;
+      padding: 0 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 1.08rem;
+      font-weight: 700;
+      letter-spacing: .15px;
+      background: linear-gradient(180deg, rgba(13,27,42,.94), rgba(8,18,31,.98));
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .media-card.is-active {
+      z-index: 6;
+      opacity: 1;
+      filter: brightness(1);
+      transform: translate(-50%, -50%) translateX(0) scale(1);
+      box-shadow: 0 22px 70px rgba(13,110,253,.24), 0 0 0 1px rgba(13,110,253,.22);
+    }
+
+    .media-card.is-active:hover img {
+      transform: scale(1.035);
+    }
+
+    .media-card.is-prev {
+      z-index: 4;
+      opacity: .58;
+      filter: brightness(.43) saturate(.75);
+      transform: translate(-50%, -50%) translateX(-430px) scale(.76);
+    }
+
+    .media-card.is-next {
+      z-index: 4;
+      opacity: .58;
+      filter: brightness(.43) saturate(.75);
+      transform: translate(-50%, -50%) translateX(430px) scale(.76);
+    }
+
+    .media-card.is-hidden-left {
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -50%) translateX(-760px) scale(.58);
+    }
+
+    .media-card.is-hidden-right {
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -50%) translateX(760px) scale(.58);
+    }
+
+    .media-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(10,18,30,.72);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      z-index: 10;
+      transition: .25s ease;
+    }
+
+    .media-arrow:hover {
+      background: #0d6efd;
+      border-color: #0d6efd;
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 0 24px rgba(13,110,253,.38);
+    }
+
+    .media-arrow.prev { left: 18px; }
+    .media-arrow.next { right: 18px; }
+
+    .media-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .media-dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      transition: .3s ease;
+    }
+
+    .media-dot.active {
+      width: 26px;
+      border-radius: 999px;
+      background: #0d6efd;
+      box-shadow: 0 0 12px rgba(13,110,253,.55);
+    }
+
+    .media-more-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    .media-more-btn {
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 991.98px) {
+      .media-carousel { height: 385px; }
+      .media-card { width: min(500px, 70vw); height: 320px; }
+      .media-card img { height: 255px; }
+      .media-card-title { height: 65px; font-size: .98rem; }
+      .media-card.is-prev { transform: translate(-50%, -50%) translateX(-315px) scale(.7); }
+      .media-card.is-next { transform: translate(-50%, -50%) translateX(315px) scale(.7); }
+    }
+
+    @media (max-width: 767.98px) {
+      .media-carousel { height: 330px; }
+      .media-card { width: 76vw; height: 275px; border-radius: 18px; }
+      .media-card img { height: 216px; }
+      .media-card-title { height: 59px; padding: 0 14px; font-size: .86rem; }
+      .media-card.is-prev { transform: translate(-50%, -50%) translateX(-65vw) scale(.68); opacity: .42; }
+      .media-card.is-next { transform: translate(-50%, -50%) translateX(65vw) scale(.68); opacity: .42; }
+      .media-arrow { width: 42px; height: 42px; }
+      .media-arrow.prev { left: 6px; }
+      .media-arrow.next { right: 6px; }
+    }
+
+.card-glass:hover{
 
 transform:translateY(-8px);
 
@@ -488,9 +585,7 @@ text-shadow:0 0 18px rgba(255,193,7,.35);
         <li class="nav-item"><a class="nav-link" href="#vehicles" data-i18n="nav-vehicles">Araçlarımız</a></li>
         <li class="nav-item"><a class="nav-link" href="#members" data-i18n="nav-members">Kadromuz</a></li>
         <li class="nav-item">
-            <a class="nav-link" href="#media">
-                Medya
-            </a>
+            <a class="nav-link" href="#media" data-i18n="nav-media">Medya</a>
         </li>
         <li class="nav-item"><a class="nav-link" href="#sponsors" data-i18n="nav-sponsors">Sponsorlarımız</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav-contact">İletişim</a></li>
@@ -854,51 +949,71 @@ text-shadow:0 0 18px rgba(255,193,7,.35);
   </div>
 </section>
 <section id="media" class="section">
+  <div class="container">
+    <h2 class="section-title text-center mb-4 scroll-reveal reveal-fade">
+      <i class="fa-solid fa-camera text-primary me-2"></i><span data-i18n="media-title">Medya</span>
+    </h2>
+    <p class="section-sub text-center mb-4" data-i18n="media-subtitle">Yarışmalardan ve uluslararası yolculuğumuzdan öne çıkan anlar.</p>
 
-<div class="container">
-
-<h2 class="section-title text-center mb-5">
-
-<i class="fa-solid fa-camera text-primary me-2"></i>
-
-Medya
-
-<div class="media-slider">
-
-    <button class="media-btn prev" onclick="moveMedia(-1)">
+    <div class="media-carousel scroll-reveal reveal-fade" id="mediaCarousel" aria-label="ALESTA medya galerisi">
+      <button class="media-arrow prev" type="button" aria-label="Önceki" onclick="moveMedia(-1)">
         <i class="fa-solid fa-chevron-left"></i>
-    </button>
+      </button>
 
-    <div class="media-track" id="mediaTrack">
+      <a class="media-card" href="/media/#mate-canada-2026" data-media-index="0">
+        <img src="medya1.jpeg" alt="MATE ROV World Championship Canada 2026" loading="lazy">
+        <div class="media-card-title">MATE ROV Canada 2026</div>
+      </a>
 
-        <img src="medya1.jpeg" onclick="openMedia(this.src)">
-        <img src="medya2.jpeg" onclick="openMedia(this.src)">
-        <img src="medya3.jpeg" onclick="openMedia(this.src)">
-        <img src="medya4.jpeg" onclick="openMedia(this.src)">
-        <img src="medya5.jpeg" onclick="openMedia(this.src)">
-        
+      <a class="media-card" href="/media/#mate-egypt-2026" data-media-index="1">
+        <img src="medya2.jpeg" alt="MATE ROV Egypt Regional 2026" loading="lazy">
+        <div class="media-card-title">MATE ROV Egypt 2026</div>
+      </a>
 
+      <a class="media-card" href="/media/#steam-azerbaijan-2025" data-media-index="2">
+        <img src="medya3.jpeg" alt="STEAM Azerbaijan Festival 2025" loading="lazy">
+        <div class="media-card-title">STEAM Azerbaijan 2025</div>
+      </a>
+
+      <a class="media-card" href="/media/#teknofest-2025" data-media-index="3">
+        <img src="medya4.jpeg" alt="TEKNOFEST 2025" loading="lazy">
+        <div class="media-card-title">TEKNOFEST 2025</div>
+      </a>
+
+      <a class="media-card" href="/media/#sauvc-2025" data-media-index="4">
+        <img src="medya5.jpeg" alt="SAUVC 2025" loading="lazy">
+        <div class="media-card-title">SAUVC 2025</div>
+      </a>
+
+      <a class="media-card" href="/media/#teknofest-2024" data-media-index="5">
+        <img src="medya6.jpeg" alt="TEKNOFEST 2024" loading="lazy">
+        <div class="media-card-title">TEKNOFEST 2024</div>
+      </a>
+
+      <a class="media-card" href="/media/#sauvc-2024" data-media-index="6">
+        <img src="medya7.jpeg" alt="SAUVC 2024" loading="lazy">
+        <div class="media-card-title">SAUVC 2024</div>
+      </a>
+
+      <a class="media-card" href="/media/#saf-2023" data-media-index="7">
+        <img src="medya8.jpeg" alt="STEAM Azerbaijan Festival 2023" loading="lazy">
+        <div class="media-card-title">SAF 2023</div>
+      </a>
+
+      <button class="media-arrow next" type="button" aria-label="Sonraki" onclick="moveMedia(1)">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
     </div>
 
-    <button class="media-btn next" onclick="moveMedia(1)">
-        <i class="fa-solid fa-chevron-right"></i>
-    </button>
+    <div class="media-dots" id="mediaDots" aria-label="Medya kartları"></div>
 
-</div>
-
-<div class="media-video">
-
-<h4 class="text-center mb-4">
-
-
-
-</h4>
-
-
-</div>
-
-</div>
-
+    <div class="media-more-wrap">
+      <a href="/media/" class="btn btn-neon media-more-btn">
+        <span data-i18n="media-more">Daha Fazlasını Gör</span>
+        <i class="fa-solid fa-arrow-right ms-2"></i>
+      </a>
+    </div>
+  </div>
 </section>
 <section id="members" class="section">
   <div class="container">
@@ -1347,9 +1462,15 @@ Ana Sponsor
     'nav-awards': { tr: 'Başarılarımız', en: 'Achievements' },
     'nav-vehicles': { tr: 'Araçlarımız', en: 'Vehicles' },
     'nav-members': { tr: 'Kadromuz', en: 'Team' },
+    'nav-media': { tr: 'Medya', en: 'Media' },
     'nav-sponsors': { tr: 'Sponsorlarımız', en: 'Sponsors' },
     'nav-contact': { tr: 'İletişim', en: 'Contact' },
     
+    // Medya
+    'media-title': { tr: 'Medya', en: 'Media' },
+    'media-subtitle': { tr: 'Yarışmalardan ve uluslararası yolculuğumuzdan öne çıkan anlar.', en: 'Highlights from our competitions and international journey.' },
+    'media-more': { tr: 'Daha Fazlasını Gör', en: 'See More' },
+
     // Hero
     'hero-slogan': { tr: 'Ready and Alert', en: 'Ready and Alert' },
     'btn-who': { tr: 'Biz Kimiz?', en: 'Dive In' },
@@ -1737,19 +1858,7 @@ document.addEventListener("DOMContentLoaded", function () {
      .addTo(map);
   });
 });
-function openMedia(src){
 
-document.getElementById("mediaLightbox").style.display="flex";
-
-document.getElementById("mediaImage").src=src;
-
-}
-
-function closeMedia(){
-
-document.getElementById("mediaLightbox").style.display="none";
-
-}
 const topBtn=document.getElementById("topBtn");
 
 window.addEventListener("scroll",()=>{
@@ -1777,22 +1886,112 @@ behavior:"smooth"
 });
 
 }
-function moveMedia(direction) {
+let mediaIndex = 0;
+let mediaAutoTimer = null;
+let mediaTouchStartX = 0;
+const MEDIA_INTERVAL = 2500;
 
-    const mediaTrack = document.getElementById("mediaTrack");
-
-    mediaTrack.scrollBy({
-        left: direction * 380,
-        behavior: "smooth"
-    });
-
+function getMediaCards() {
+  return Array.from(document.querySelectorAll('#mediaCarousel .media-card'));
 }
+
+function renderMediaCarousel() {
+  const cards = getMediaCards();
+  const dots = document.querySelectorAll('#mediaDots .media-dot');
+  const total = cards.length;
+  if (!total) return;
+
+  cards.forEach((card, index) => {
+    card.classList.remove('is-active', 'is-prev', 'is-next', 'is-hidden-left', 'is-hidden-right');
+
+    const prevIndex = (mediaIndex - 1 + total) % total;
+    const nextIndex = (mediaIndex + 1) % total;
+
+    if (index === mediaIndex) card.classList.add('is-active');
+    else if (index === prevIndex) card.classList.add('is-prev');
+    else if (index === nextIndex) card.classList.add('is-next');
+    else {
+      const forward = (index - mediaIndex + total) % total;
+      card.classList.add(forward > 0 && forward < total / 2 ? 'is-hidden-right' : 'is-hidden-left');
+    }
+
+    card.setAttribute('aria-hidden', index === mediaIndex ? 'false' : 'true');
+    card.tabIndex = index === mediaIndex ? 0 : -1;
+  });
+
+  dots.forEach((dot, index) => dot.classList.toggle('active', index === mediaIndex));
+}
+
+function moveMedia(direction, userInitiated = true) {
+  const cards = getMediaCards();
+  if (!cards.length) return;
+  mediaIndex = (mediaIndex + direction + cards.length) % cards.length;
+  renderMediaCarousel();
+  if (userInitiated) restartMediaAutoPlay();
+}
+
+function goToMedia(index) {
+  mediaIndex = index;
+  renderMediaCarousel();
+  restartMediaAutoPlay();
+}
+
+function startMediaAutoPlay() {
+  clearInterval(mediaAutoTimer);
+  mediaAutoTimer = setInterval(() => moveMedia(1, false), MEDIA_INTERVAL);
+}
+
+function restartMediaAutoPlay() {
+  startMediaAutoPlay();
+}
+
+function initMediaCarousel() {
+  const carousel = document.getElementById('mediaCarousel');
+  const cards = getMediaCards();
+  const dotsWrap = document.getElementById('mediaDots');
+  if (!carousel || !cards.length || !dotsWrap) return;
+
+  dotsWrap.innerHTML = '';
+  cards.forEach((card, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'media-dot';
+    dot.setAttribute('aria-label', `${index + 1}. medya kartına git`);
+    dot.addEventListener('click', () => goToMedia(index));
+    dotsWrap.appendChild(dot);
+
+    card.addEventListener('click', (event) => {
+      if (!card.classList.contains('is-active')) {
+        event.preventDefault();
+        mediaIndex = index;
+        renderMediaCarousel();
+        restartMediaAutoPlay();
+      }
+    });
+  });
+
+  carousel.addEventListener('mouseenter', () => clearInterval(mediaAutoTimer));
+  carousel.addEventListener('mouseleave', startMediaAutoPlay);
+  carousel.addEventListener('focusin', () => clearInterval(mediaAutoTimer));
+  carousel.addEventListener('focusout', startMediaAutoPlay);
+
+  carousel.addEventListener('touchstart', (event) => {
+    mediaTouchStartX = event.changedTouches[0].screenX;
+    clearInterval(mediaAutoTimer);
+  }, { passive: true });
+
+  carousel.addEventListener('touchend', (event) => {
+    const delta = event.changedTouches[0].screenX - mediaTouchStartX;
+    if (Math.abs(delta) > 45) moveMedia(delta < 0 ? 1 : -1);
+    else restartMediaAutoPlay();
+  }, { passive: true });
+
+  renderMediaCarousel();
+  startMediaAutoPlay();
+}
+
+document.addEventListener('DOMContentLoaded', initMediaCarousel);
 </script>
-<div id="mediaLightbox" onclick="closeMedia()">
-
-<img id="mediaImage">
-
-</div>
 <button id="topBtn">
     <i class="fa-solid fa-arrow-up"></i>
 </button>
