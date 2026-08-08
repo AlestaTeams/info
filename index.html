@@ -345,6 +345,32 @@
       color: rgba(255,255,255,.96);
     }
 
+
+    /* JS yüklenmeden önce de carousel görünür */
+    .media-carousel:not(.media-ready) .media-card:nth-child(1) {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      filter: brightness(1) saturate(1);
+      pointer-events: auto;
+      z-index: 5;
+    }
+
+    .media-carousel:not(.media-ready) .media-card:nth-child(8) {
+      transform: translate(-50%, -50%) translateX(-72%) scale(.72);
+      opacity: .58;
+      filter: brightness(.36) saturate(.75);
+      pointer-events: auto;
+      z-index: 3;
+    }
+
+    .media-carousel:not(.media-ready) .media-card:nth-child(2) {
+      transform: translate(-50%, -50%) translateX(72%) scale(.72);
+      opacity: .58;
+      filter: brightness(.36) saturate(.75);
+      pointer-events: auto;
+      z-index: 3;
+    }
+
     .media-card.is-active {
       transform: translate(-50%, -50%) translateX(0) scale(1);
       opacity: 1;
@@ -985,16 +1011,16 @@ text-shadow:0 0 18px rgba(255,193,7,.35);
 </section>
 <section id="media" class="section">
   <div class="container">
-    <h2 class="section-title text-center mb-2 scroll-reveal reveal-fade">
+    <h2 class="section-title text-center mb-2">
       <i class="fa-solid fa-camera text-primary me-2"></i>
       <span data-i18n="media-title">Medya</span>
     </h2>
 
-    <p class="section-sub text-center mb-4 scroll-reveal reveal-fade" data-i18n="media-subtitle">
+    <p class="section-sub text-center mb-4" data-i18n="media-subtitle">
       Yarışmalardan ve etkinliklerden öne çıkan anlarımız.
     </p>
 
-    <div class="media-carousel scroll-reveal reveal-fade" id="mediaCarousel" aria-label="ALESTA medya galerisi">
+    <div class="media-carousel" id="mediaCarousel" aria-label="ALESTA medya galerisi">
       <div class="media-carousel-stage" id="mediaCarouselStage">
 
         <a class="media-card" href="/media/#mate-canada-2026" data-media-index="0" aria-label="MATE ROV Canada 2026">
@@ -1013,7 +1039,7 @@ text-shadow:0 0 18px rgba(255,193,7,.35);
 
         <a class="media-card" href="/media/#steam-azerbaijan-2025" data-media-index="2" aria-label="STEAM Azerbaijan 2025">
           <div class="media-card-inner">
-            <img src="şaf1.jpeg" alt="STEAM Azerbaijan 2025">
+            <img src="medya3.jpeg" alt="STEAM Azerbaijan 2025">
             <div class="media-card-caption">STEAM Azerbaijan 2025</div>
           </div>
         </a>
@@ -1027,7 +1053,7 @@ text-shadow:0 0 18px rgba(255,193,7,.35);
 
         <a class="media-card" href="/media/#sauvc-2025" data-media-index="4" aria-label="SAUVC 2025">
           <div class="media-card-inner">
-            <img src="şauvc1.jpeg" alt="SAUVC 2025">
+            <img src="medya5.jpeg" alt="SAUVC 2025">
             <div class="media-card-caption">SAUVC 2025</div>
           </div>
         </a>
@@ -1942,145 +1968,162 @@ behavior:"smooth"
 });
 
 }
-// ==========================
-  // MEDIA CAROUSEL
-  // ==========================
-  (function initMediaCarousel() {
-    const carousel = document.getElementById('mediaCarousel');
-    if (!carousel) return;
 
-    const cards = Array.from(carousel.querySelectorAll('.media-card'));
+</script>
+
+<script>
+(function () {
+  function bootAlestaMedia() {
+    const carousel = document.getElementById('mediaCarousel');
     const prevBtn = document.getElementById('mediaPrev');
     const nextBtn = document.getElementById('mediaNext');
     const dotsWrap = document.getElementById('mediaDots');
 
-    if (!cards.length || !prevBtn || !nextBtn || !dotsWrap) return;
+    if (!carousel || !prevBtn || !nextBtn || !dotsWrap) return;
 
-    let activeIndex = 0;
-    let autoTimer = null;
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const AUTO_DELAY = 2500;
+    const cards = Array.from(carousel.querySelectorAll('.media-card'));
+    if (cards.length === 0) return;
 
-    cards.forEach((card, index) => {
+    let current = 0;
+    let timer = null;
+    let startX = null;
+    const delay = 2500;
+
+    dotsWrap.innerHTML = '';
+
+    const dots = cards.map((card, index) => {
       const dot = document.createElement('button');
       dot.type = 'button';
       dot.className = 'media-dot';
-      dot.setAttribute('aria-label', `${index + 1}. medya kartına git`);
-      dot.addEventListener('click', () => {
-        activeIndex = index;
-        renderMediaCarousel();
-        restartMediaAuto();
+      dot.setAttribute('aria-label', (index + 1) + '. medya kartı');
+      dot.addEventListener('click', function () {
+        current = index;
+        render();
+        restart();
       });
       dotsWrap.appendChild(dot);
 
-      card.addEventListener('click', (event) => {
-        if (!card.classList.contains('is-active')) {
+      card.addEventListener('click', function (event) {
+        if (index !== current) {
           event.preventDefault();
-          activeIndex = index;
-          renderMediaCarousel();
-          restartMediaAuto();
+          current = index;
+          render();
+          restart();
         }
       });
+
+      return dot;
     });
 
-    const dots = Array.from(dotsWrap.querySelectorAll('.media-dot'));
-
-    function circularDistance(index, active, total) {
-      let diff = index - active;
+    function relativePosition(index) {
+      const total = cards.length;
+      let diff = index - current;
       if (diff > total / 2) diff -= total;
       if (diff < -total / 2) diff += total;
       return diff;
     }
 
-    function renderMediaCarousel() {
-      const total = cards.length;
-
-      cards.forEach((card, index) => {
+    function render() {
+      cards.forEach(function (card, index) {
         card.classList.remove(
-          'is-active',
-          'is-prev',
-          'is-next',
-          'is-far-prev',
-          'is-far-next'
+          'is-active', 'is-prev', 'is-next',
+          'is-far-prev', 'is-far-next'
         );
 
-        const diff = circularDistance(index, activeIndex, total);
+        const pos = relativePosition(index);
 
-        if (diff === 0) card.classList.add('is-active');
-        else if (diff === -1) card.classList.add('is-prev');
-        else if (diff === 1) card.classList.add('is-next');
-        else if (diff < 0) card.classList.add('is-far-prev');
-        else card.classList.add('is-far-next');
-
-        card.setAttribute('aria-hidden', diff === 0 ? 'false' : 'true');
+        if (pos === 0) {
+          card.classList.add('is-active');
+        } else if (pos === -1) {
+          card.classList.add('is-prev');
+        } else if (pos === 1) {
+          card.classList.add('is-next');
+        } else if (pos < 0) {
+          card.classList.add('is-far-prev');
+        } else {
+          card.classList.add('is-far-next');
+        }
       });
 
-      dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === activeIndex);
+      dots.forEach(function (dot, index) {
+        dot.classList.toggle('active', index === current);
       });
+
+      carousel.classList.add('media-ready');
     }
 
-    function goMedia(direction) {
-      activeIndex = (activeIndex + direction + cards.length) % cards.length;
-      renderMediaCarousel();
+    function move(step) {
+      current = (current + step + cards.length) % cards.length;
+      render();
     }
 
-    function stopMediaAuto() {
-      if (autoTimer) {
-        clearInterval(autoTimer);
-        autoTimer = null;
+    function stop() {
+      if (timer !== null) {
+        clearInterval(timer);
+        timer = null;
       }
     }
 
-    function startMediaAuto() {
-      stopMediaAuto();
-      autoTimer = setInterval(() => {
-        goMedia(1);
-      }, AUTO_DELAY);
+    function start() {
+      stop();
+      timer = setInterval(function () {
+        move(1);
+      }, delay);
     }
 
-    function restartMediaAuto() {
-      startMediaAuto();
+    function restart() {
+      start();
     }
 
-    prevBtn.addEventListener('click', () => {
-      goMedia(-1);
-      restartMediaAuto();
-    });
+    prevBtn.onclick = function () {
+      move(-1);
+      restart();
+    };
 
-    nextBtn.addEventListener('click', () => {
-      goMedia(1);
-      restartMediaAuto();
-    });
+    nextBtn.onclick = function () {
+      move(1);
+      restart();
+    };
 
-    carousel.addEventListener('mouseenter', stopMediaAuto);
-    carousel.addEventListener('mouseleave', startMediaAuto);
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
 
-    carousel.addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-      stopMediaAuto();
-    }, { passive: true });
-
-    carousel.addEventListener('touchend', (event) => {
-      touchEndX = event.changedTouches[0].clientX;
-      const delta = touchEndX - touchStartX;
-
-      if (Math.abs(delta) > 45) {
-        goMedia(delta < 0 ? 1 : -1);
+    carousel.addEventListener('touchstart', function (event) {
+      if (event.changedTouches && event.changedTouches.length) {
+        startX = event.changedTouches[0].clientX;
+        stop();
       }
-      startMediaAuto();
     }, { passive: true });
 
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) stopMediaAuto();
-      else startMediaAuto();
-    });
+    carousel.addEventListener('touchend', function (event) {
+      if (startX === null || !event.changedTouches || !event.changedTouches.length) {
+        start();
+        return;
+      }
 
-    renderMediaCarousel();
-    startMediaAuto();
-  })();
+      const endX = event.changedTouches[0].clientX;
+      const delta = endX - startX;
+
+      if (Math.abs(delta) > 40) {
+        move(delta < 0 ? 1 : -1);
+      }
+
+      startX = null;
+      start();
+    }, { passive: true });
+
+    render();
+    start();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootAlestaMedia);
+  } else {
+    bootAlestaMedia();
+  }
+})();
 </script>
+
 <button id="topBtn">
     <i class="fa-solid fa-arrow-up"></i>
 </button>
