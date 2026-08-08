@@ -269,154 +269,156 @@
       margin-top: 6px;
       flex-shrink: 0;
     }
-        /* =======================
-       MEDIA SECTION
+    /* =======================
+       MEDIA SECTION - 3D CAROUSEL
        ======================= */
+
     #media {
-      position: relative;
+      overflow: hidden;
     }
 
     .media-carousel {
       position: relative;
       width: 100%;
-      max-width: 1180px;
+      max-width: 1120px;
       height: 430px;
       margin: 0 auto;
-      overflow: hidden;
       perspective: 1200px;
+      overflow: hidden;
       touch-action: pan-y;
     }
 
-    .media-carousel::before,
-    .media-carousel::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 11%;
-      z-index: 7;
-      pointer-events: none;
-    }
-
-    .media-carousel::before {
-      left: 0;
-      background: linear-gradient(90deg, var(--bg-0), transparent);
-    }
-
-    .media-carousel::after {
-      right: 0;
-      background: linear-gradient(270deg, var(--bg-0), transparent);
+    .media-carousel-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
     }
 
     .media-card {
       position: absolute;
-      left: 50%;
       top: 50%;
-      width: min(560px, 62vw);
-      height: 355px;
-      border-radius: 22px;
-      overflow: hidden;
-      background: rgba(13, 27, 42, .92);
-      border: 1px solid rgba(255, 255, 255, .14);
-      box-shadow: 0 18px 50px rgba(0, 0, 0, .38);
+      left: 50%;
+      width: min(520px, 68vw);
+      height: 350px;
+      transform: translate(-50%, -50%) scale(.64);
+      opacity: 0;
+      filter: brightness(.28) saturate(.75);
+      pointer-events: none;
+      transition:
+        transform .65s cubic-bezier(.22,.61,.36,1),
+        opacity .55s ease,
+        filter .55s ease;
+      z-index: 1;
       text-decoration: none;
       color: #fff;
-      transform-origin: center center;
-      transition: transform .62s cubic-bezier(.22,.61,.36,1), opacity .5s ease, filter .5s ease, box-shadow .5s ease;
-      will-change: transform, opacity, filter;
-      cursor: pointer;
+      will-change: transform, opacity;
+    }
+
+    .media-card-inner {
+      height: 100%;
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(13,27,42,.96);
+      box-shadow: 0 18px 55px rgba(0,0,0,.42);
+      transition: border-color .3s ease, box-shadow .3s ease;
     }
 
     .media-card img {
-      display: block;
       width: 100%;
-      height: 285px;
+      height: 275px;
+      display: block;
       object-fit: cover;
-      transition: transform .5s ease;
+      transform: none !important;
     }
 
-    .media-card-title {
-      height: 70px;
-      padding: 0 22px;
+    .media-card-caption {
+      height: 75px;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 10px 18px;
       text-align: center;
-      font-size: 1.08rem;
-      font-weight: 700;
-      letter-spacing: .15px;
-      background: linear-gradient(180deg, rgba(13,27,42,.94), rgba(8,18,31,.98));
-      border-top: 1px solid rgba(255,255,255,.08);
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: .2px;
+      color: rgba(255,255,255,.96);
     }
 
     .media-card.is-active {
-      z-index: 6;
-      opacity: 1;
-      filter: brightness(1);
       transform: translate(-50%, -50%) translateX(0) scale(1);
-      box-shadow: 0 22px 70px rgba(13,110,253,.24), 0 0 0 1px rgba(13,110,253,.22);
+      opacity: 1;
+      filter: brightness(1) saturate(1);
+      pointer-events: auto;
+      z-index: 5;
     }
 
-    .media-card.is-active:hover img {
-      transform: scale(1.035);
+    .media-card.is-active .media-card-inner {
+      border-color: rgba(13,110,253,.7);
+      box-shadow:
+        0 22px 70px rgba(0,0,0,.55),
+        0 0 38px rgba(13,110,253,.22);
     }
 
     .media-card.is-prev {
-      z-index: 4;
+      transform: translate(-50%, -50%) translateX(-72%) scale(.72);
       opacity: .58;
-      filter: brightness(.43) saturate(.75);
-      transform: translate(-50%, -50%) translateX(-430px) scale(.76);
+      filter: brightness(.36) saturate(.75);
+      pointer-events: auto;
+      z-index: 3;
+      cursor: pointer;
     }
 
     .media-card.is-next {
-      z-index: 4;
+      transform: translate(-50%, -50%) translateX(72%) scale(.72);
       opacity: .58;
-      filter: brightness(.43) saturate(.75);
-      transform: translate(-50%, -50%) translateX(430px) scale(.76);
+      filter: brightness(.36) saturate(.75);
+      pointer-events: auto;
+      z-index: 3;
+      cursor: pointer;
     }
 
-    .media-card.is-hidden-left {
-      z-index: 1;
+    .media-card.is-far-prev {
+      transform: translate(-50%, -50%) translateX(-125%) scale(.55);
       opacity: 0;
-      pointer-events: none;
-      transform: translate(-50%, -50%) translateX(-760px) scale(.58);
     }
 
-    .media-card.is-hidden-right {
-      z-index: 1;
+    .media-card.is-far-next {
+      transform: translate(-50%, -50%) translateX(125%) scale(.55);
       opacity: 0;
-      pointer-events: none;
-      transform: translate(-50%, -50%) translateX(760px) scale(.58);
     }
 
-    .media-arrow {
+    .media-nav-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.22);
-      background: rgba(10,18,30,.72);
-      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(8,15,24,.78);
+      backdrop-filter: blur(10px);
       color: #fff;
-      z-index: 10;
+      z-index: 20;
+      display: grid;
+      place-items: center;
       transition: .25s ease;
     }
 
-    .media-arrow:hover {
-      background: #0d6efd;
-      border-color: #0d6efd;
+    .media-nav-btn:hover {
       transform: translateY(-50%) scale(1.08);
-      box-shadow: 0 0 24px rgba(13,110,253,.38);
+      background: rgba(13,110,253,.9);
+      border-color: rgba(13,110,253,1);
+      box-shadow: 0 0 24px rgba(13,110,253,.35);
     }
 
-    .media-arrow.prev { left: 18px; }
-    .media-arrow.next { right: 18px; }
+    .media-nav-btn.prev { left: 12px; }
+    .media-nav-btn.next { right: 12px; }
 
     .media-dots {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 8px;
       margin-top: 10px;
     }
@@ -425,53 +427,68 @@
       width: 8px;
       height: 8px;
       padding: 0;
-      border: 0;
-      border-radius: 50%;
-      background: rgba(255,255,255,.25);
-      transition: .3s ease;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,.28);
+      transition: width .3s ease, background .3s ease, transform .3s ease;
     }
 
     .media-dot.active {
-      width: 26px;
-      border-radius: 999px;
+      width: 28px;
       background: #0d6efd;
-      box-shadow: 0 0 12px rgba(13,110,253,.55);
+      box-shadow: 0 0 14px rgba(13,110,253,.55);
     }
 
     .media-more-wrap {
-      display: flex;
-      justify-content: center;
-      margin-top: 24px;
+      text-align: center;
+      margin-top: 30px;
     }
 
     .media-more-btn {
       border-radius: 999px;
       padding: 10px 22px;
-      font-weight: 600;
+      font-weight: 700;
     }
 
-    @media (max-width: 991.98px) {
-      .media-carousel { height: 385px; }
-      .media-card { width: min(500px, 70vw); height: 320px; }
-      .media-card img { height: 255px; }
-      .media-card-title { height: 65px; font-size: .98rem; }
-      .media-card.is-prev { transform: translate(-50%, -50%) translateX(-315px) scale(.7); }
-      .media-card.is-next { transform: translate(-50%, -50%) translateX(315px) scale(.7); }
+    @media (max-width: 767px) {
+      .media-carousel {
+        height: 350px;
+      }
+
+      .media-card {
+        width: 76vw;
+        height: 285px;
+      }
+
+      .media-card img {
+        height: 220px;
+      }
+
+      .media-card-caption {
+        height: 65px;
+        font-size: .9rem;
+      }
+
+      .media-card.is-prev {
+        transform: translate(-50%, -50%) translateX(-67%) scale(.64);
+        opacity: .4;
+      }
+
+      .media-card.is-next {
+        transform: translate(-50%, -50%) translateX(67%) scale(.64);
+        opacity: .4;
+      }
+
+      .media-nav-btn {
+        width: 42px;
+        height: 42px;
+      }
+
+      .media-nav-btn.prev { left: 4px; }
+      .media-nav-btn.next { right: 4px; }
     }
 
-    @media (max-width: 767.98px) {
-      .media-carousel { height: 330px; }
-      .media-card { width: 76vw; height: 275px; border-radius: 18px; }
-      .media-card img { height: 216px; }
-      .media-card-title { height: 59px; padding: 0 14px; font-size: .86rem; }
-      .media-card.is-prev { transform: translate(-50%, -50%) translateX(-65vw) scale(.68); opacity: .42; }
-      .media-card.is-next { transform: translate(-50%, -50%) translateX(65vw) scale(.68); opacity: .42; }
-      .media-arrow { width: 42px; height: 42px; }
-      .media-arrow.prev { left: 6px; }
-      .media-arrow.next { right: 6px; }
-    }
-
-.card-glass:hover{
+    .card-glass:hover{
 
 transform:translateY(-8px);
 
@@ -585,7 +602,9 @@ text-shadow:0 0 18px rgba(255,193,7,.35);
         <li class="nav-item"><a class="nav-link" href="#vehicles" data-i18n="nav-vehicles">Araçlarımız</a></li>
         <li class="nav-item"><a class="nav-link" href="#members" data-i18n="nav-members">Kadromuz</a></li>
         <li class="nav-item">
-            <a class="nav-link" href="#media" data-i18n="nav-media">Medya</a>
+            <a class="nav-link" href="#media">
+                Medya
+            </a>
         </li>
         <li class="nav-item"><a class="nav-link" href="#sponsors" data-i18n="nav-sponsors">Sponsorlarımız</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav-contact">İletişim</a></li>
@@ -681,6 +700,22 @@ text-shadow:0 0 18px rgba(255,193,7,.35);
         </div>
       </div>
       <div class="award-details open" id="y2026">
+        <div class="card-glass p-4 mb-3">
+          <div class="row align-items-center">
+            <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+              <img src="teknofest.png" class="img-fluid" style="max-width:90px;" alt="TEKNOFEST">
+            </div>
+            <div class="col-12 col-md-9">
+              <h6 class="fw-bold">
+                🚀 <a href="https://www.teknofest.org/" target="_blank" class="text-decoration-none text-primary">TEKNOFEST 2026</a>
+              </h6>
+              <ul class="mb-0">
+                <li>🏅 Finalist</li>
+                <li>⏳ Yarışma yükleniyor...</li>
+              </ul>
+            </div>
+          </div>
+        </div>
         <div class="card-glass p-4 mb-3">
           <div class="row align-items-center">
             <div class="col-12 col-md-3 text-center mb-3 mb-md-0"><img src="mate.png" class="img-fluid" style="max-width:90px;"></div>
@@ -950,57 +985,80 @@ text-shadow:0 0 18px rgba(255,193,7,.35);
 </section>
 <section id="media" class="section">
   <div class="container">
-    <h2 class="section-title text-center mb-4 scroll-reveal reveal-fade">
-      <i class="fa-solid fa-camera text-primary me-2"></i><span data-i18n="media-title">Medya</span>
+    <h2 class="section-title text-center mb-2 scroll-reveal reveal-fade">
+      <i class="fa-solid fa-camera text-primary me-2"></i>
+      <span data-i18n="media-title">Medya</span>
     </h2>
-    <p class="section-sub text-center mb-4" data-i18n="media-subtitle">Yarışmalardan ve uluslararası yolculuğumuzdan öne çıkan anlar.</p>
+
+    <p class="section-sub text-center mb-4 scroll-reveal reveal-fade" data-i18n="media-subtitle">
+      Yarışmalardan ve etkinliklerden öne çıkan anlarımız.
+    </p>
 
     <div class="media-carousel scroll-reveal reveal-fade" id="mediaCarousel" aria-label="ALESTA medya galerisi">
-      <button class="media-arrow prev" type="button" aria-label="Önceki" onclick="moveMedia(-1)">
+      <div class="media-carousel-stage" id="mediaCarouselStage">
+
+        <a class="media-card" href="/media/#mate-canada-2026" data-media-index="0" aria-label="MATE ROV Canada 2026">
+          <div class="media-card-inner">
+            <img src="medya1.jpeg" alt="MATE ROV Canada 2026">
+            <div class="media-card-caption">MATE ROV Canada 2026</div>
+          </div>
+        </a>
+
+        <a class="media-card" href="/media/#mate-egypt-2026" data-media-index="1" aria-label="MATE ROV Egypt 2026">
+          <div class="media-card-inner">
+            <img src="medya2.jpeg" alt="MATE ROV Egypt 2026">
+            <div class="media-card-caption">MATE ROV Egypt 2026</div>
+          </div>
+        </a>
+
+        <a class="media-card" href="/media/#steam-azerbaijan-2025" data-media-index="2" aria-label="STEAM Azerbaijan 2025">
+          <div class="media-card-inner">
+            <img src="medya3.jpeg" alt="STEAM Azerbaijan 2025">
+            <div class="media-card-caption">STEAM Azerbaijan 2025</div>
+          </div>
+        </a>
+
+        <a class="media-card" href="/media/#teknofest-2025" data-media-index="3" aria-label="TEKNOFEST 2025">
+          <div class="media-card-inner">
+            <img src="medya4.jpeg" alt="TEKNOFEST 2025">
+            <div class="media-card-caption">TEKNOFEST 2025</div>
+          </div>
+        </a>
+
+        <a class="media-card" href="/media/#sauvc-2025" data-media-index="4" aria-label="SAUVC 2025">
+          <div class="media-card-inner">
+            <img src="medya5.jpeg" alt="SAUVC 2025">
+            <div class="media-card-caption">SAUVC 2025</div>
+          </div>
+        </a>
+
+        <a class="media-card" href="/media/#teknofest-2024" data-media-index="5" aria-label="TEKNOFEST 2024">
+          <div class="media-card-inner">
+            <img src="medya6.jpeg" alt="TEKNOFEST 2024">
+            <div class="media-card-caption">TEKNOFEST 2024</div>
+          </div>
+        </a>
+
+        <a class="media-card" href="/media/#sauvc-2024" data-media-index="6" aria-label="SAUVC 2024">
+          <div class="media-card-inner">
+            <img src="medya7.jpeg" alt="SAUVC 2024">
+            <div class="media-card-caption">SAUVC 2024</div>
+          </div>
+        </a>
+
+        <a class="media-card" href="/media/#saf-2023" data-media-index="7" aria-label="SAF 2023">
+          <div class="media-card-inner">
+            <img src="medya8.jpeg" alt="SAF 2023">
+            <div class="media-card-caption">SAF 2023</div>
+          </div>
+        </a>
+
+      </div>
+
+      <button class="media-nav-btn prev" id="mediaPrev" type="button" aria-label="Önceki medya kartı">
         <i class="fa-solid fa-chevron-left"></i>
       </button>
-
-      <a class="media-card" href="/media/#mate-canada-2026" data-media-index="0">
-        <img src="medya1.jpeg" alt="MATE ROV World Championship Canada 2026" loading="lazy">
-        <div class="media-card-title">MATE ROV Canada 2026</div>
-      </a>
-
-      <a class="media-card" href="/media/#mate-egypt-2026" data-media-index="1">
-        <img src="medya2.jpeg" alt="MATE ROV Egypt Regional 2026" loading="lazy">
-        <div class="media-card-title">MATE ROV Egypt 2026</div>
-      </a>
-
-      <a class="media-card" href="/media/#steam-azerbaijan-2025" data-media-index="2">
-        <img src="medya3.jpeg" alt="STEAM Azerbaijan Festival 2025" loading="lazy">
-        <div class="media-card-title">STEAM Azerbaijan 2025</div>
-      </a>
-
-      <a class="media-card" href="/media/#teknofest-2025" data-media-index="3">
-        <img src="medya4.jpeg" alt="TEKNOFEST 2025" loading="lazy">
-        <div class="media-card-title">TEKNOFEST 2025</div>
-      </a>
-
-      <a class="media-card" href="/media/#sauvc-2025" data-media-index="4">
-        <img src="medya5.jpeg" alt="SAUVC 2025" loading="lazy">
-        <div class="media-card-title">SAUVC 2025</div>
-      </a>
-
-      <a class="media-card" href="/media/#teknofest-2024" data-media-index="5">
-        <img src="medya6.jpeg" alt="TEKNOFEST 2024" loading="lazy">
-        <div class="media-card-title">TEKNOFEST 2024</div>
-      </a>
-
-      <a class="media-card" href="/media/#sauvc-2024" data-media-index="6">
-        <img src="medya7.jpeg" alt="SAUVC 2024" loading="lazy">
-        <div class="media-card-title">SAUVC 2024</div>
-      </a>
-
-      <a class="media-card" href="/media/#saf-2023" data-media-index="7">
-        <img src="medya8.jpeg" alt="STEAM Azerbaijan Festival 2023" loading="lazy">
-        <div class="media-card-title">SAF 2023</div>
-      </a>
-
-      <button class="media-arrow next" type="button" aria-label="Sonraki" onclick="moveMedia(1)">
+      <button class="media-nav-btn next" id="mediaNext" type="button" aria-label="Sonraki medya kartı">
         <i class="fa-solid fa-chevron-right"></i>
       </button>
     </div>
@@ -1008,13 +1066,14 @@ text-shadow:0 0 18px rgba(255,193,7,.35);
     <div class="media-dots" id="mediaDots" aria-label="Medya kartları"></div>
 
     <div class="media-more-wrap">
-      <a href="/media/" class="btn btn-neon media-more-btn">
+      <a href="/media/" class="btn btn-outline-primary media-more-btn">
         <span data-i18n="media-more">Daha Fazlasını Gör</span>
         <i class="fa-solid fa-arrow-right ms-2"></i>
       </a>
     </div>
   </div>
 </section>
+
 <section id="members" class="section">
   <div class="container">
     
@@ -1462,15 +1521,9 @@ Ana Sponsor
     'nav-awards': { tr: 'Başarılarımız', en: 'Achievements' },
     'nav-vehicles': { tr: 'Araçlarımız', en: 'Vehicles' },
     'nav-members': { tr: 'Kadromuz', en: 'Team' },
-    'nav-media': { tr: 'Medya', en: 'Media' },
     'nav-sponsors': { tr: 'Sponsorlarımız', en: 'Sponsors' },
     'nav-contact': { tr: 'İletişim', en: 'Contact' },
     
-    // Medya
-    'media-title': { tr: 'Medya', en: 'Media' },
-    'media-subtitle': { tr: 'Yarışmalardan ve uluslararası yolculuğumuzdan öne çıkan anlar.', en: 'Highlights from our competitions and international journey.' },
-    'media-more': { tr: 'Daha Fazlasını Gör', en: 'See More' },
-
     // Hero
     'hero-slogan': { tr: 'Ready and Alert', en: 'Ready and Alert' },
     'btn-who': { tr: 'Biz Kimiz?', en: 'Dive In' },
@@ -1562,6 +1615,10 @@ Ana Sponsor
     'btn-details': { tr: 'Detaylar', en: 'Details' },
 
     // Members
+    'media-title': { tr: 'Medya', en: 'Media' },
+    'media-subtitle': { tr: 'Yarışmalardan ve etkinliklerden öne çıkan anlarımız.', en: 'Highlights from our competitions and events.' },
+    'media-more': { tr: 'Daha Fazlasını Gör', en: 'See More' },
+
     'members-title': { tr: 'Kadromuz', en: 'Team' },
     'role-advisors': { tr: 'Danışmanlar', en: 'Advisors' },
     'role-advisor-afl': { tr: 'Takım Danışmanı (AFL)', en: 'Team Advisor (AFL)' },
@@ -1858,7 +1915,6 @@ document.addEventListener("DOMContentLoaded", function () {
      .addTo(map);
   });
 });
-
 const topBtn=document.getElementById("topBtn");
 
 window.addEventListener("scroll",()=>{
@@ -1886,111 +1942,144 @@ behavior:"smooth"
 });
 
 }
-let mediaIndex = 0;
-let mediaAutoTimer = null;
-let mediaTouchStartX = 0;
-const MEDIA_INTERVAL = 2500;
+// ==========================
+  // MEDIA CAROUSEL
+  // ==========================
+  (function initMediaCarousel() {
+    const carousel = document.getElementById('mediaCarousel');
+    if (!carousel) return;
 
-function getMediaCards() {
-  return Array.from(document.querySelectorAll('#mediaCarousel .media-card'));
-}
+    const cards = Array.from(carousel.querySelectorAll('.media-card'));
+    const prevBtn = document.getElementById('mediaPrev');
+    const nextBtn = document.getElementById('mediaNext');
+    const dotsWrap = document.getElementById('mediaDots');
 
-function renderMediaCarousel() {
-  const cards = getMediaCards();
-  const dots = document.querySelectorAll('#mediaDots .media-dot');
-  const total = cards.length;
-  if (!total) return;
+    if (!cards.length || !prevBtn || !nextBtn || !dotsWrap) return;
 
-  cards.forEach((card, index) => {
-    card.classList.remove('is-active', 'is-prev', 'is-next', 'is-hidden-left', 'is-hidden-right');
+    let activeIndex = 0;
+    let autoTimer = null;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const AUTO_DELAY = 2500;
 
-    const prevIndex = (mediaIndex - 1 + total) % total;
-    const nextIndex = (mediaIndex + 1) % total;
+    cards.forEach((card, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'media-dot';
+      dot.setAttribute('aria-label', `${index + 1}. medya kartına git`);
+      dot.addEventListener('click', () => {
+        activeIndex = index;
+        renderMediaCarousel();
+        restartMediaAuto();
+      });
+      dotsWrap.appendChild(dot);
 
-    if (index === mediaIndex) card.classList.add('is-active');
-    else if (index === prevIndex) card.classList.add('is-prev');
-    else if (index === nextIndex) card.classList.add('is-next');
-    else {
-      const forward = (index - mediaIndex + total) % total;
-      card.classList.add(forward > 0 && forward < total / 2 ? 'is-hidden-right' : 'is-hidden-left');
+      card.addEventListener('click', (event) => {
+        if (!card.classList.contains('is-active')) {
+          event.preventDefault();
+          activeIndex = index;
+          renderMediaCarousel();
+          restartMediaAuto();
+        }
+      });
+    });
+
+    const dots = Array.from(dotsWrap.querySelectorAll('.media-dot'));
+
+    function circularDistance(index, active, total) {
+      let diff = index - active;
+      if (diff > total / 2) diff -= total;
+      if (diff < -total / 2) diff += total;
+      return diff;
     }
 
-    card.setAttribute('aria-hidden', index === mediaIndex ? 'false' : 'true');
-    card.tabIndex = index === mediaIndex ? 0 : -1;
-  });
+    function renderMediaCarousel() {
+      const total = cards.length;
 
-  dots.forEach((dot, index) => dot.classList.toggle('active', index === mediaIndex));
-}
+      cards.forEach((card, index) => {
+        card.classList.remove(
+          'is-active',
+          'is-prev',
+          'is-next',
+          'is-far-prev',
+          'is-far-next'
+        );
 
-function moveMedia(direction, userInitiated = true) {
-  const cards = getMediaCards();
-  if (!cards.length) return;
-  mediaIndex = (mediaIndex + direction + cards.length) % cards.length;
-  renderMediaCarousel();
-  if (userInitiated) restartMediaAutoPlay();
-}
+        const diff = circularDistance(index, activeIndex, total);
 
-function goToMedia(index) {
-  mediaIndex = index;
-  renderMediaCarousel();
-  restartMediaAutoPlay();
-}
+        if (diff === 0) card.classList.add('is-active');
+        else if (diff === -1) card.classList.add('is-prev');
+        else if (diff === 1) card.classList.add('is-next');
+        else if (diff < 0) card.classList.add('is-far-prev');
+        else card.classList.add('is-far-next');
 
-function startMediaAutoPlay() {
-  clearInterval(mediaAutoTimer);
-  mediaAutoTimer = setInterval(() => moveMedia(1, false), MEDIA_INTERVAL);
-}
+        card.setAttribute('aria-hidden', diff === 0 ? 'false' : 'true');
+      });
 
-function restartMediaAutoPlay() {
-  startMediaAutoPlay();
-}
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === activeIndex);
+      });
+    }
 
-function initMediaCarousel() {
-  const carousel = document.getElementById('mediaCarousel');
-  const cards = getMediaCards();
-  const dotsWrap = document.getElementById('mediaDots');
-  if (!carousel || !cards.length || !dotsWrap) return;
+    function goMedia(direction) {
+      activeIndex = (activeIndex + direction + cards.length) % cards.length;
+      renderMediaCarousel();
+    }
 
-  dotsWrap.innerHTML = '';
-  cards.forEach((card, index) => {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.className = 'media-dot';
-    dot.setAttribute('aria-label', `${index + 1}. medya kartına git`);
-    dot.addEventListener('click', () => goToMedia(index));
-    dotsWrap.appendChild(dot);
-
-    card.addEventListener('click', (event) => {
-      if (!card.classList.contains('is-active')) {
-        event.preventDefault();
-        mediaIndex = index;
-        renderMediaCarousel();
-        restartMediaAutoPlay();
+    function stopMediaAuto() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
       }
+    }
+
+    function startMediaAuto() {
+      stopMediaAuto();
+      autoTimer = setInterval(() => {
+        goMedia(1);
+      }, AUTO_DELAY);
+    }
+
+    function restartMediaAuto() {
+      startMediaAuto();
+    }
+
+    prevBtn.addEventListener('click', () => {
+      goMedia(-1);
+      restartMediaAuto();
     });
-  });
 
-  carousel.addEventListener('mouseenter', () => clearInterval(mediaAutoTimer));
-  carousel.addEventListener('mouseleave', startMediaAutoPlay);
-  carousel.addEventListener('focusin', () => clearInterval(mediaAutoTimer));
-  carousel.addEventListener('focusout', startMediaAutoPlay);
+    nextBtn.addEventListener('click', () => {
+      goMedia(1);
+      restartMediaAuto();
+    });
 
-  carousel.addEventListener('touchstart', (event) => {
-    mediaTouchStartX = event.changedTouches[0].screenX;
-    clearInterval(mediaAutoTimer);
-  }, { passive: true });
+    carousel.addEventListener('mouseenter', stopMediaAuto);
+    carousel.addEventListener('mouseleave', startMediaAuto);
 
-  carousel.addEventListener('touchend', (event) => {
-    const delta = event.changedTouches[0].screenX - mediaTouchStartX;
-    if (Math.abs(delta) > 45) moveMedia(delta < 0 ? 1 : -1);
-    else restartMediaAutoPlay();
-  }, { passive: true });
+    carousel.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+      stopMediaAuto();
+    }, { passive: true });
 
-  renderMediaCarousel();
-  startMediaAutoPlay();
-}
+    carousel.addEventListener('touchend', (event) => {
+      touchEndX = event.changedTouches[0].clientX;
+      const delta = touchEndX - touchStartX;
 
-document.addEventListener('DOMContentLoaded', initMediaCarousel);
+      if (Math.abs(delta) > 45) {
+        goMedia(delta < 0 ? 1 : -1);
+      }
+      startMediaAuto();
+    }, { passive: true });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopMediaAuto();
+      else startMediaAuto();
+    });
+
+    renderMediaCarousel();
+    startMediaAuto();
+  })();
 </script>
 <button id="topBtn">
     <i class="fa-solid fa-arrow-up"></i>
