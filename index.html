@@ -514,6 +514,205 @@
       .media-nav-btn.next { right: 4px; }
     }
 
+
+    /* =======================
+       iPhone / iOS Safari Media Fix
+       ======================= */
+    @supports (-webkit-touch-callout: none) {
+      #media {
+        overflow: hidden !important;
+        -webkit-transform: translateZ(0);
+      }
+
+      .media-carousel {
+        -webkit-perspective: none !important;
+        perspective: none !important;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-overflow-scrolling: touch;
+        isolation: isolate;
+      }
+
+      .media-carousel-stage {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+      }
+
+      .media-card {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform-style: flat;
+        transform-style: flat;
+      }
+
+      .media-card-inner {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+      }
+
+      .media-card img {
+        -webkit-transform: translateZ(0) !important;
+        transform: translateZ(0) !important;
+      }
+    }
+
+    @media (max-width: 767px) {
+      #media {
+        overflow: hidden;
+      }
+
+      .media-carousel {
+        width: 100%;
+        max-width: 100%;
+        height: 330px;
+        overflow: hidden;
+        perspective: none;
+        -webkit-perspective: none;
+        touch-action: pan-y;
+      }
+
+      .media-carousel-stage {
+        overflow: visible;
+      }
+
+      .media-card {
+        top: 50%;
+        left: 50%;
+        width: 74vw;
+        max-width: 320px;
+        height: 270px;
+        opacity: 0;
+        filter: none;
+        -webkit-filter: none;
+        transition:
+          transform .45s cubic-bezier(.22,.61,.36,1),
+          opacity .35s ease;
+        -webkit-transition:
+          -webkit-transform .45s cubic-bezier(.22,.61,.36,1),
+          opacity .35s ease;
+        will-change: transform, opacity;
+      }
+
+      .media-card-inner {
+        border-radius: 18px;
+        box-shadow: 0 12px 32px rgba(0,0,0,.45);
+      }
+
+      .media-card img {
+        height: 210px;
+      }
+
+      .media-card-caption {
+        height: 60px;
+        font-size: .86rem;
+        line-height: 1.2;
+        padding: 8px 10px;
+      }
+
+      .media-card.is-active {
+        transform: translate3d(-50%, -50%, 0) scale(1);
+        -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
+        opacity: 1;
+        z-index: 5;
+        filter: none;
+        -webkit-filter: none;
+      }
+
+      .media-card.is-prev {
+        transform: translate3d(-105%, -50%, 0) scale(.72);
+        -webkit-transform: translate3d(-105%, -50%, 0) scale(.72);
+        opacity: .28;
+        z-index: 2;
+        filter: none;
+        -webkit-filter: none;
+      }
+
+      .media-card.is-next {
+        transform: translate3d(5%, -50%, 0) scale(.72);
+        -webkit-transform: translate3d(5%, -50%, 0) scale(.72);
+        opacity: .28;
+        z-index: 2;
+        filter: none;
+        -webkit-filter: none;
+      }
+
+      .media-card.is-far-prev,
+      .media-card.is-far-next {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .media-card.is-far-prev {
+        transform: translate3d(-150%, -50%, 0) scale(.6);
+        -webkit-transform: translate3d(-150%, -50%, 0) scale(.6);
+      }
+
+      .media-card.is-far-next {
+        transform: translate3d(50%, -50%, 0) scale(.6);
+        -webkit-transform: translate3d(50%, -50%, 0) scale(.6);
+      }
+
+      .media-carousel:not(.media-ready) .media-card:nth-child(1) {
+        transform: translate3d(-50%, -50%, 0) scale(1);
+        -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
+        opacity: 1;
+      }
+
+      .media-carousel:not(.media-ready) .media-card:nth-child(8) {
+        transform: translate3d(-105%, -50%, 0) scale(.72);
+        -webkit-transform: translate3d(-105%, -50%, 0) scale(.72);
+        opacity: .28;
+      }
+
+      .media-carousel:not(.media-ready) .media-card:nth-child(2) {
+        transform: translate3d(5%, -50%, 0) scale(.72);
+        -webkit-transform: translate3d(5%, -50%, 0) scale(.72);
+        opacity: .28;
+      }
+
+      .media-nav-btn {
+        width: 38px;
+        height: 38px;
+        top: 50%;
+        background: rgba(8,15,24,.88);
+      }
+
+      .media-nav-btn.prev { left: 2px; }
+      .media-nav-btn.next { right: 2px; }
+
+      .media-dots {
+        margin-top: 6px;
+        gap: 6px;
+      }
+
+      .media-more-wrap {
+        margin-top: 22px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .media-carousel {
+        height: 310px;
+      }
+
+      .media-card {
+        width: 76vw;
+        max-width: 290px;
+        height: 250px;
+      }
+
+      .media-card img {
+        height: 194px;
+      }
+
+      .media-card-caption {
+        height: 56px;
+        font-size: .8rem;
+      }
+    }
+
     .card-glass:hover{
 
 transform:translateY(-8px);
@@ -2021,6 +2220,7 @@ behavior:"smooth"
     let current = 0;
     let timer = null;
     let startX = null;
+    let didSwipe = false;
     const delay = 2500;
 
     dotsWrap.innerHTML = '';
@@ -2038,6 +2238,12 @@ behavior:"smooth"
       dotsWrap.appendChild(dot);
 
       card.addEventListener('click', function (event) {
+        if (didSwipe) {
+          event.preventDefault();
+          didSwipe = false;
+          return;
+        }
+
         if (index !== current) {
           event.preventDefault();
           current = index;
@@ -2125,6 +2331,7 @@ behavior:"smooth"
     carousel.addEventListener('touchstart', function (event) {
       if (event.changedTouches && event.changedTouches.length) {
         startX = event.changedTouches[0].clientX;
+        didSwipe = false;
         stop();
       }
     }, { passive: true });
@@ -2139,12 +2346,24 @@ behavior:"smooth"
       const delta = endX - startX;
 
       if (Math.abs(delta) > 40) {
+        didSwipe = true;
         move(delta < 0 ? 1 : -1);
+        window.setTimeout(function () {
+          didSwipe = false;
+        }, 350);
       }
 
       startX = null;
       start();
     }, { passive: true });
+
+    window.addEventListener('orientationchange', function () {
+      window.setTimeout(render, 200);
+    });
+
+    window.addEventListener('resize', function () {
+      render();
+    });
 
     render();
     start();
